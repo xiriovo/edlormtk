@@ -369,6 +369,39 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
 ---
 
+## 💖 Donate / 赞赏支持
+
+<p align="center">
+  <b>如果这个项目对你有帮助，欢迎赞赏支持！</b><br/>
+  <i>If this project helps you, consider buying me a coffee!</i>
+</p>
+
+<table align="center">
+<tr>
+<td align="center" width="300">
+
+### 💚 微信支付 / WeChat
+
+<img src="Assets/donate_wechat.png" width="200" alt="WeChat Pay"/>
+
+</td>
+<td align="center" width="300">
+
+### 💙 支付宝 / Alipay
+
+<img src="Assets/donate_alipay.png" width="200" alt="Alipay"/>
+
+</td>
+</tr>
+</table>
+
+<p align="center">
+  <i>您的支持是我持续开发的动力！</i><br/>
+  <i>Your support keeps this project alive!</i>
+</p>
+
+---
+
 ## 🙏 Acknowledgments / 致谢
 
 | Project | Description |
