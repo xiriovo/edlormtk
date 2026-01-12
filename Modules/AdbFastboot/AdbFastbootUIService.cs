@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - ADB/Fastboot UI Service
+// ADB/Fastboot UI 服务 | ADB/Fastboot UIサービス | ADB/Fastboot UI 서비스
+// ============================================================================
+// [EN] UI service layer for ADB and Fastboot operations
+//      Supports device detection, shell commands, partition flash
+// [中文] ADB 和 Fastboot 操作的 UI 服务层
+//       支持设备检测、Shell 命令、分区刷写
+// [日本語] ADBおよびFastboot操作用UIサービスレイヤー
+//         デバイス検出、シェルコマンド、パーティションフラッシュをサポート
+// [한국어] ADB 및 Fastboot 작업을 위한 UI 서비스 레이어
+//         장치 감지, 셸 명령, 파티션 플래시 지원
+// [Español] Capa de servicio UI para operaciones ADB y Fastboot
+//           Soporta detección de dispositivos, comandos shell, flash de particiones
+// [Русский] Уровень сервиса UI для операций ADB и Fastboot
+//           Поддержка обнаружения устройств, shell-команд, прошивки разделов
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +32,8 @@ using tools.Modules.Common;
 namespace tools.Modules.AdbFastboot
 {
     /// <summary>
-    /// ADB/Fastboot 分区信息
+    /// ADB/Fastboot Partition Info
+    /// ADB/Fastboot 分区信息 | パーティション情報 | 파티션 정보
     /// </summary>
     public class AdbFastbootPartitionInfo
     {

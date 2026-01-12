@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Fastboot Protocol Implementation
+// Fastboot 协议实现 | Fastbootプロトコル | Fastboot 프로토콜
+// ============================================================================
+// [EN] Fastboot protocol for Android bootloader operations
+//      Supports flash, erase, reboot, getvar, oem commands
+// [中文] Android Bootloader 操作的 Fastboot 协议
+//       支持刷写、擦除、重启、getvar、OEM 命令
+// [日本語] Android Bootloader操作用のFastbootプロトコル
+//         フラッシュ、消去、再起動、getvar、OEMコマンドをサポート
+// [한국어] 안드로이드 부트로더 작업을 위한 Fastboot 프로토콜
+//         플래시, 삭제, 재부팅, getvar, OEM 명령 지원
+// [Español] Protocolo Fastboot para operaciones de bootloader Android
+//           Soporta flash, borrado, reinicio, getvar, comandos OEM
+// [Русский] Протокол Fastboot для операций с загрузчиком Android
+//           Поддержка прошивки, очистки, перезагрузки, getvar, OEM-команд
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,13 +33,14 @@ using LibUsbDotNet.Main;
 namespace tools.Modules.AdbFastboot
 {
     /// <summary>
-    /// Fastboot 响应类型
+    /// Fastboot Response Type / Fastboot 响应类型
+    /// Fastboot応答タイプ / Fastboot 응답 유형
     /// </summary>
     public enum FastbootResponseType
     {
-        OKAY,   // 命令成功
-        FAIL,   // 命令失败
-        INFO,   // 信息消息
+        OKAY,   // Success / 成功 / 成功 / 성공
+        FAIL,   // Failed / 失败 / 失敗 / 실패
+        INFO,   // Info message / 信息 / 情報 / 정보
         DATA,   // 数据传输请求
         Unknown
     }

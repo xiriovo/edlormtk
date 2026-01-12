@@ -1,11 +1,34 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek DXCC Hardware Crypto Engine
+// 联发科 DXCC 硬件加密引擎 | MTK DXCCハードウェア暗号エンジン | MTK DXCC 하드웨어 암호화 엔진
+// ============================================================================
+// [EN] Discretix CryptoCell (DXCC) - Hardware crypto for newer MTK chipsets
+//      Key derivation, RPMB key generation, secure boot operations
+// [中文] Discretix CryptoCell (DXCC) - 新款联发科芯片硬件加密
+//       密钥派生、RPMB 密钥生成、安全启动操作
+// [日本語] Discretix CryptoCell (DXCC) - 新型MTKチップセット用ハードウェア暗号
+//         キー導出、RPMBキー生成、セキュアブート操作
+// [한국어] Discretix CryptoCell (DXCC) - 최신 MTK 칩셋용 하드웨어 암호화
+//         키 파생, RPMB 키 생성, 보안 부팅 작업
+// [Español] Discretix CryptoCell (DXCC) - Crypto hardware para chipsets MTK nuevos
+//           Derivación de claves, generación de claves RPMB, operaciones de arranque seguro
+// [Русский] Discretix CryptoCell (DXCC) - Аппаратная криптография для новых чипсетов MTK
+//           Получение ключей, генерация ключей RPMB, операции безопасной загрузки
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Security.Cryptography;
 
 namespace tools.Modules.MTK.Hardware
 {
     /// <summary>
-    /// DXCC (Discretix CryptoCell) 硬件加密引擎
-    /// 用于密钥派生、RPMB 密钥生成等
+    /// DXCC (Discretix CryptoCell) Hardware Crypto Engine
+    /// DXCC 硬件加密引擎 | DXCCハードウェア暗号エンジン | DXCC 하드웨어 암호화 엔진
+    /// Key derivation, RPMB key generation
     /// </summary>
     public class DxccEngine
     {

@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Cloud Loader Dialog
+// 云端 Loader 对话框 | クラウドローダーダイアログ | 클라우드 로더 대화상자
+// ============================================================================
+// [EN] Cloud-based Qualcomm programmer loader selection dialog
+//      Connects to MultiFlash Cloud API for automatic loader matching
+// [中文] 基于云端的高通 Programmer Loader 选择对话框
+//       连接 MultiFlash Cloud API 自动匹配 Loader
+// [日本語] クラウドベースのQualcommプログラマーローダー選択ダイアログ
+//         MultiFlash Cloud APIに接続してローダーを自動マッチング
+// [한국어] 클라우드 기반 퀄컴 프로그래머 로더 선택 대화상자
+//         MultiFlash Cloud API에 연결하여 자동 로더 매칭
+// [Español] Diálogo de selección de loader programador Qualcomm basado en la nube
+//           Conecta con la API MultiFlash Cloud para coincidencia automática
+// [Русский] Диалог выбора загрузчика программатора Qualcomm на основе облака
+//           Подключение к MultiFlash Cloud API для автоматического подбора
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +33,8 @@ using tools.Modules.Qualcomm.Services;
 namespace tools.Dialogs
 {
     /// <summary>
-    /// 云端 Loader 选择对话框
-    /// 对接 MultiFlash Cloud API v2.0
+    /// Cloud Loader Selection Dialog - MultiFlash Cloud API v2.0
+    /// 云端 Loader 选择对话框 | クラウドローダーダイアログ | 클라우드 로더 대화상자
     /// </summary>
     public partial class CloudLoaderDialog : Window
     {

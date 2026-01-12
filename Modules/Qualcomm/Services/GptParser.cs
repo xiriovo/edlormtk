@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - GPT Partition Table Parser
+// GPT 分区表解析器 | GPTパーティションテーブルパーサー | GPT 파티션 테이블 파서
+// ============================================================================
+// [EN] GUID Partition Table (GPT) parser for Qualcomm devices
+//      Compatible with edl-master/gpt.py format
+// [中文] 高通设备 GUID 分区表 (GPT) 解析器
+//       兼容 edl-master/gpt.py 格式
+// [日本語] Qualcommデバイス用GUIDパーティションテーブル（GPT）パーサー
+//         edl-master/gpt.py形式と互換
+// [한국어] 퀄컴 장치용 GUID 파티션 테이블(GPT) 파서
+//         edl-master/gpt.py 형식과 호환
+// [Español] Analizador de tabla de particiones GUID (GPT) para dispositivos Qualcomm
+//           Compatible con el formato edl-master/gpt.py
+// [Русский] Парсер таблицы разделов GUID (GPT) для устройств Qualcomm
+//           Совместим с форматом edl-master/gpt.py
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,7 +27,8 @@ using System.Text;
 namespace tools.Modules.Qualcomm.Services
 {
     /// <summary>
-    /// GPT 分区表解析器 (参考 edl-master/gpt.py)
+    /// GPT Partition Table Parser (edl-master compatible)
+    /// GPT 分区表解析器 | GPTパーサー | GPT 파서
     /// </summary>
     public static class GptParser
     {

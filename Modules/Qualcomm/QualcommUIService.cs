@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Qualcomm UI Service
+// 高通 UI 服务 | Qualcomm UIサービス | 퀄컴 UI 서비스
+// ============================================================================
+// [EN] UI service layer for Qualcomm EDL flash operations
+//      Connects WPF interface with Sahara/Firehose protocols
+// [中文] 高通 EDL 刷机操作的 UI 服务层
+//       连接 WPF 界面与 Sahara/Firehose 协议
+// [日本語] Qualcomm EDLフラッシュ操作用UIサービスレイヤー
+//         WPFインターフェースとSahara/Firehoseプロトコルを接続
+// [한국어] 퀄컴 EDL 플래시 작업을 위한 UI 서비스 레이어
+//         WPF 인터페이스와 Sahara/Firehose 프로토콜 연결
+// [Español] Capa de servicio UI para operaciones de flash Qualcomm EDL
+//           Conecta la interfaz WPF con protocolos Sahara/Firehose
+// [Русский] Уровень сервиса UI для операций прошивки Qualcomm EDL
+//           Соединяет интерфейс WPF с протоколами Sahara/Firehose
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +38,8 @@ using tools.Utils;
 namespace tools.Modules.Qualcomm
 {
     /// <summary>
-    /// 认证类型枚举
+    /// Authentication Type Enumeration
+    /// 认证类型枚举 | 認証タイプ列挙 | 인증 유형 열거
     /// </summary>
     public enum AuthType
     {

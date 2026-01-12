@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Flash Task Executor
+// 刷机任务执行器 | フラッシュタスク実行器 | 플래시 작업 실행기
+// ============================================================================
+// [EN] Orchestrates flash operations with progress tracking and retry logic
+//      Supports parallel/sequential flashing, error recovery, status reporting
+// [中文] 协调刷机操作，支持进度跟踪和重试逻辑
+//       支持并行/顺序刷写、错误恢复、状态报告
+// [日本語] 進捗追跡とリトライロジックでフラッシュ操作を調整
+//         並列/順次フラッシュ、エラーリカバリ、ステータスレポートをサポート
+// [한국어] 진행 추적 및 재시도 로직으로 플래시 작업 조정
+//         병렬/순차 플래시, 오류 복구, 상태 보고 지원
+// [Español] Orquesta operaciones de flash con seguimiento de progreso y lógica de reintento
+//           Soporta flash paralelo/secuencial, recuperación de errores, informe de estado
+// [Русский] Оркестрирует операции прошивки с отслеживанием прогресса и логикой повторов
+//           Поддержка параллельной/последовательной прошивки, восстановления после ошибок
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +33,8 @@ using tools.Modules.Common;
 namespace tools.Modules.Qualcomm.Services
 {
     /// <summary>
-    /// 刷机任务执行器
+    /// Flash Task Executor - Orchestrates flash operations
+    /// 刷机任务执行器 | フラッシュタスク実行器 | 플래시 작업 실행기
     /// </summary>
     public class FlashTaskExecutor
     {

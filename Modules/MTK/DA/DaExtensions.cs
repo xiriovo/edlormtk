@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek DA Extensions
+// 联发科 DA 扩展 | MTK DA拡張機能 | MTK DA 확장
+// ============================================================================
+// [EN] Extended DA commands for advanced MTK operations
+//      Memory R/W, RPMB access, SecCfg, Bootloader unlock
+// [中文] 高级 MTK 操作的扩展 DA 命令
+//       内存读写、RPMB 访问、SecCfg、Bootloader 解锁
+// [日本語] 高度なMTK操作用の拡張DAコマンド
+//         メモリR/W、RPMBアクセス、SecCfg、Bootloaderアンロック
+// [한국어] 고급 MTK 작업을 위한 확장 DA 명령
+//         메모리 R/W, RPMB 액세스, SecCfg, 부트로더 잠금 해제
+// [Español] Comandos DA extendidos para operaciones MTK avanzadas
+//           Lectura/escritura de memoria, acceso RPMB, SecCfg, desbloqueo Bootloader
+// [Русский] Расширенные команды DA для продвинутых операций MTK
+//           Чтение/запись памяти, доступ к RPMB, SecCfg, разблокировка Bootloader
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.IO;
 using System.Text;
@@ -9,10 +31,11 @@ using tools.Modules.MTK.Security;
 
 namespace tools.Modules.MTK.DA
 {
-    #region XFlash 扩展命令
+    #region XFlash Extended Commands / XFlash 扩展命令 / XFlash拡張コマンド / XFlash 확장 명령
 
     /// <summary>
-    /// XFlash 扩展命令
+    /// XFlash Extended Commands
+    /// XFlash 扩展命令 | XFlash拡張コマンド | XFlash 확장 명령
     /// </summary>
     public static class XFlashExtCmd
     {

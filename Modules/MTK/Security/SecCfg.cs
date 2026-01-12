@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek Security Configuration (SecCfg)
+// 联发科安全配置 | MTKセキュリティ設定 | MTK 보안 구성
+// ============================================================================
+// [EN] Security Configuration parser for MTK bootloader lock state
+//      Read/Write/Modify seccfg partition for bootloader unlock
+// [中文] MTK Bootloader 锁定状态的安全配置解析器
+//       读写修改 seccfg 分区以解锁 Bootloader
+// [日本語] MTKブートローダーロック状態用セキュリティ設定パーサー
+//         ブートローダーアンロック用seccfgパーティションの読み書き変更
+// [한국어] MTK 부트로더 잠금 상태용 보안 구성 파서
+//         부트로더 잠금 해제를 위한 seccfg 파티션 읽기/쓰기/수정
+// [Español] Analizador de configuración de seguridad para estado de bloqueo MTK
+//           Leer/escribir/modificar partición seccfg para desbloqueo del bootloader
+// [Русский] Парсер конфигурации безопасности для состояния блокировки MTK
+//           Чтение/запись/изменение раздела seccfg для разблокировки загрузчика
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -6,7 +28,8 @@ using tools.Modules.MTK.Hardware;
 namespace tools.Modules.MTK.Security
 {
     /// <summary>
-    /// 锁定状态枚举
+    /// Lock State Enumeration
+    /// 锁定状态枚举 | ロック状態列挙 | 잠금 상태 열거
     /// </summary>
     public enum LockState : uint
     {

@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek CQDMA Controller
+// 联发科 CQDMA 控制器 | MTK CQDMAコントローラー | MTK CQDMA 컨트롤러
+// ============================================================================
+// [EN] Crypto Queue DMA (CQDMA) controller for MTK devices
+//      Arbitrary memory R/W via DMA operations (Hashimoto exploit)
+// [中文] 联发科设备加密队列 DMA (CQDMA) 控制器
+//       通过 DMA 操作进行任意内存读写 (Hashimoto 漏洞利用)
+// [日本語] MTKデバイス用暗号キューDMA（CQDMA）コントローラー
+//         DMA操作による任意メモリR/W（Hashimotoエクスプロイト）
+// [한국어] MTK 장치용 암호화 큐 DMA(CQDMA) 컨트롤러
+//         DMA 작업을 통한 임의 메모리 R/W(Hashimoto 익스플로잇)
+// [Español] Controlador de cola DMA criptográfica (CQDMA) para dispositivos MTK
+//           Lectura/escritura de memoria arbitraria via operaciones DMA (exploit Hashimoto)
+// [Русский] Контроллер криптографической очереди DMA (CQDMA) для устройств MTK
+//           Произвольное чтение/запись памяти через операции DMA (эксплойт Hashimoto)
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using tools.Modules.MTK.Protocol;
@@ -6,8 +28,9 @@ using tools.Modules.MTK.Models;
 namespace tools.Modules.MTK.Hardware
 {
     /// <summary>
-    /// CQDMA (Crypto Queue DMA) 控制器
-    /// 用于通过 DMA 操作进行任意内存读写 (Hashimoto 漏洞利用)
+    /// CQDMA (Crypto Queue DMA) Controller
+    /// CQDMA 控制器 | CQDMAコントローラー | CQDMA 컨트롤러
+    /// Arbitrary memory R/W via DMA (Hashimoto exploit)
     /// </summary>
     public class CqdmaEngine
     {

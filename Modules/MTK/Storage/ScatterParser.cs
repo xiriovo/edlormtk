@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek Scatter File Parser
+// 联发科 Scatter 文件解析器 | MTK Scatterパーサー | MTK Scatter 파서
+// ============================================================================
+// [EN] Parse MTK scatter files for partition layout information
+//      Supports legacy text format and modern YAML format
+// [中文] 解析 MTK Scatter 文件获取分区布局信息
+//       支持传统文本格式和现代 YAML 格式
+// [日本語] パーティションレイアウト情報用のMTK Scatterファイル解析
+//         レガシーテキスト形式と最新のYAML形式をサポート
+// [한국어] 파티션 레이아웃 정보를 위한 MTK Scatter 파일 파싱
+//         레거시 텍스트 형식 및 최신 YAML 형식 지원
+// [Español] Analizar archivos scatter de MTK para información de layout de particiones
+//           Soporta formato de texto legacy y formato YAML moderno
+// [Русский] Парсинг scatter-файлов MTK для информации о разметке разделов
+//           Поддержка устаревшего текстового формата и современного YAML формата
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +30,8 @@ using System.Xml.Linq;
 namespace tools.Modules.MTK.Storage
 {
     /// <summary>
-    /// MTK Scatter 分区信息
+    /// MTK Scatter Partition Info / MTK Scatter 分区信息
+    /// Scatterパーティション情報 / Scatter 파티션 정보
     /// </summary>
     public class ScatterPartition
     {

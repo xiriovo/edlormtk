@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Cloud Loader Service
+// 云端 Loader 服务 | クラウドローダーサービス | 클라우드 로더 서비스
+// ============================================================================
+// [EN] Cloud-based Qualcomm programmer loader service
+//      Connects to MultiFlash Cloud API v2.0 for automatic loader matching
+// [中文] 基于云端的高通 Programmer Loader 服务
+//       连接 MultiFlash Cloud API v2.0 自动匹配 Loader
+// [日本語] クラウドベースのQualcommプログラマーローダーサービス
+//         MultiFlash Cloud API v2.0に接続してローダーを自動マッチング
+// [한국어] 클라우드 기반 퀄컴 프로그래머 로더 서비스
+//         MultiFlash Cloud API v2.0에 연결하여 자동 로더 매칭
+// [Español] Servicio de loader programador Qualcomm basado en la nube
+//           Conecta con MultiFlash Cloud API v2.0 para coincidencia automática
+// [Русский] Облачный сервис загрузчика программатора Qualcomm
+//           Подключение к MultiFlash Cloud API v2.0 для автоматического подбора
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +34,8 @@ using System.Threading.Tasks;
 namespace tools.Modules.Qualcomm.Services
 {
     /// <summary>
-    /// 云端 Loader 服务 - 对接 MultiFlash Cloud API v2.0
+    /// Cloud Loader Service - MultiFlash Cloud API v2.0
+    /// 云端 Loader 服务 | クラウドローダーサービス | 클라우드 로더 서비스
     /// </summary>
     public class CloudLoaderService : IDisposable
     {

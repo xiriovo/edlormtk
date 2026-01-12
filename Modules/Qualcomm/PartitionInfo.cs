@@ -1,10 +1,33 @@
+// ============================================================================
+// MultiFlash TOOL - Partition Information Model
+// 分区信息模型 | パーティション情報モデル | 파티션 정보 모델
+// ============================================================================
+// [EN] Data model for partition information with WPF binding support
+//      Contains LUN, name, size, sectors, file path for flash operations
+// [中文] 分区信息数据模型，支持 WPF 绑定
+//       包含 LUN、名称、大小、扇区、文件路径用于刷机操作
+// [日本語] WPFバインディングサポート付きパーティション情報データモデル
+//         LUN、名前、サイズ、セクター、フラッシュ操作用ファイルパスを含む
+// [한국어] WPF 바인딩 지원이 있는 파티션 정보 데이터 모델
+//         LUN, 이름, 크기, 섹터, 플래시 작업용 파일 경로 포함
+// [Español] Modelo de datos de información de partición con soporte de enlace WPF
+//           Contiene LUN, nombre, tamaño, sectores, ruta de archivo para operaciones flash
+// [Русский] Модель данных информации о разделе с поддержкой привязки WPF
+//           Содержит LUN, имя, размер, секторы, путь к файлу для операций прошивки
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.ComponentModel;
 
 namespace tools.Modules.Qualcomm
 {
     /// <summary>
-    /// 分区信息
+    /// Partition Info Model / 分区信息模型
+    /// パーティション情報 / 파티션 정보
     /// </summary>
     public class PartitionInfo : INotifyPropertyChanged
     {

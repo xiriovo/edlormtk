@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek Legacy DA Protocol
+// 联发科 Legacy DA 协议 | MTK Legacy DAプロトコル | MTK Legacy DA 프로토콜
+// ============================================================================
+// [EN] Legacy Download Agent protocol for older MediaTek chipsets
+//      Compatible with older DA files (DAMode = Legacy)
+// [中文] 旧款联发科芯片的 Legacy DA 协议
+//       兼容旧版 DA 文件 (DAMode = Legacy)
+// [日本語] 旧型MediaTekチップセット用Legacy DAプロトコル
+//         旧型DAファイル（DAMode = Legacy）と互換
+// [한국어] 구형 MediaTek 칩셋용 Legacy DA 프로토콜
+//         구형 DA 파일과 호환 (DAMode = Legacy)
+// [Español] Protocolo Legacy DA para chipsets MediaTek más antiguos
+//           Compatible con archivos DA antiguos (DAMode = Legacy)
+// [Русский] Протокол Legacy DA для старых чипсетов MediaTek
+//           Совместим со старыми файлами DA (DAMode = Legacy)
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.IO;
 using System.IO.Ports;
@@ -8,8 +30,8 @@ using tools.Modules.MTK.Models;
 namespace tools.Modules.MTK.Protocol
 {
     /// <summary>
-    /// MTK Legacy DA 协议实现
-    /// 用于旧版 DA (DAMode = Legacy)
+    /// MTK Legacy DA Protocol Implementation
+    /// Legacy DA 协议实现 | Legacy DAプロトコル実装 | Legacy DA 프로토콜 구현
     /// </summary>
     public class LegacyProtocol : IDisposable
     {

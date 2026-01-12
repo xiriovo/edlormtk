@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek SLA Authentication
+// 联发科 SLA 认证 | MTK SLA認証 | MTK SLA 인증
+// ============================================================================
+// [EN] Serial Link Authorization (SLA) bypass for MTK BROM/Preloader
+//      RSA signature verification with multiple key support
+// [中文] 联发科 BROM/Preloader 串口链路授权 (SLA) 绕过
+//       多密钥支持的 RSA 签名验证
+// [日本語] MTK BROM/Preloader用シリアルリンク認証（SLA）バイパス
+//         複数キーサポートによるRSA署名検証
+// [한국어] MTK BROM/Preloader용 시리얼 링크 인증(SLA) 우회
+//         다중 키 지원 RSA 서명 검증
+// [Español] Bypass de autorización de enlace serial (SLA) para MTK BROM/Preloader
+//           Verificación de firma RSA con soporte de múltiples claves
+// [Русский] Обход авторизации последовательного канала (SLA) для MTK BROM/Preloader
+//           Проверка подписи RSA с поддержкой нескольких ключей
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -6,18 +28,19 @@ using System.Security.Cryptography;
 namespace tools.Modules.MTK.Authentication
 {
     /// <summary>
-    /// SLA 密钥
+    /// SLA Key / SLA 密钥 / SLAキー / SLA 키
     /// </summary>
     public class SlaKey
     {
         public string Name { get; set; } = "";
-        public BigInteger N { get; set; }  // 模数
-        public BigInteger E { get; set; }  // 公钥指数
-        public BigInteger D { get; set; }  // 私钥指数
+        public BigInteger N { get; set; }  // Modulus / 模数
+        public BigInteger E { get; set; }  // Public exponent / 公钥指数
+        public BigInteger D { get; set; }  // Private exponent / 私钥指数
     }
 
     /// <summary>
-    /// SLA 认证模块
+    /// SLA Authentication Module / SLA 认证模块
+    /// SLA認証モジュール / SLA 인증 모듈
     /// </summary>
     public class SlaAuth
     {

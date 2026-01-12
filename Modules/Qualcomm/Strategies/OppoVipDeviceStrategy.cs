@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - OPPO/Realme VIP Device Strategy
+// OPPO/Realme VIP 设备策略 | VIPデバイス戦略 | VIP 장치 전략
+// ============================================================================
+// [EN] VIP authentication and spoof read/write strategy for OPPO/Realme
+//      Bypasses firewall restrictions using backup GPT spoofing
+// [中文] OPPO/Realme VIP 认证和伪装读写策略
+//       使用备份 GPT 伪装绕过防火墙限制
+// [日本語] OPPO/Realme用VIP認証とスプーフィング読み書き戦略
+//         バックアップGPTスプーフィングでファイアウォール制限をバイパス
+// [한국어] OPPO/Realme용 VIP 인증 및 스푸핑 읽기/쓰기 전략
+//         백업 GPT 스푸핑으로 방화벽 제한 우회
+// [Español] Estrategia VIP de autenticación y lectura/escritura spoof para OPPO/Realme
+//           Bypass de restricciones de firewall usando GPT backup spoofing
+// [Русский] Стратегия VIP-аутентификации и спуфинга чтения/записи для OPPO/Realme
+//           Обход ограничений брандмауэра с помощью спуфинга резервной GPT
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +32,10 @@ using tools.Modules.Qualcomm.Services;
 namespace tools.Modules.Qualcomm.Strategies
 {
     /// <summary>
-    /// OPPO/Realme VIP 设备策略
-    /// 支持伪装读写绕过防火墙限制
+    /// OPPO/Realme VIP Device Strategy - Spoof R/W bypass firewall
+    /// OPPO/Realme VIP 设备策略 - 伪装读写绕过防火墙
+    /// VIPデバイス戦略 - スプーフィングR/Wでファイアウォールをバイパス
+    /// VIP 장치 전략 - 스푸핑 R/W로 방화벽 우회
     /// </summary>
     public class OppoVipDeviceStrategy : StandardDeviceStrategy
     {

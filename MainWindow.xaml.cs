@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Main Window
+// 主窗口 | メインウィンドウ | 메인 윈도우 | Ventana Principal | Главное окно
+// ============================================================================
+// [EN] Main application window with multi-platform flash support
+//      Qualcomm EDL / MediaTek BROM / Unisoc SPRD / ADB Fastboot
+// [中文] 主应用程序窗口，支持多平台刷机
+//       高通 EDL / 联发科 BROM / 展讯 SPRD / ADB Fastboot
+// [日本語] マルチプラットフォームフラッシュをサポートするメインアプリケーションウィンドウ
+//         Qualcomm EDL / MediaTek BROM / Unisoc SPRD / ADB Fastboot
+// [한국어] 멀티 플랫폼 플래시를 지원하는 메인 애플리케이션 창
+//         퀄컴 EDL / 미디어텍 BROM / 유니속 SPRD / ADB Fastboot
+// [Español] Ventana principal de la aplicación con soporte multi-plataforma
+//           Qualcomm EDL / MediaTek BROM / Unisoc SPRD / ADB Fastboot
+// [Русский] Главное окно приложения с поддержкой мульти-платформы
+//           Qualcomm EDL / MediaTek BROM / Unisoc SPRD / ADB Fastboot
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
@@ -16,8 +38,10 @@ using tools.Modules.Unisoc.Models;
 namespace tools
 {
     /// <summary>
-    /// 透明主题窗口 - 支持自定义拖拽和窗口控制
-    /// 背景图片来源: 随机API加载
+    /// Main Window - Transparent themed with custom drag support
+    /// 主窗口 - 透明主题，支持自定义拖拽
+    /// メインウィンドウ - 透明テーマ、カスタムドラッグサポート
+    /// 메인 윈도우 - 투명 테마, 커스텀 드래그 지원
     /// </summary>
     public partial class MainWindow : Window
     {

@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Serial Port Manager
+// 串口管理器 | シリアルポートマネージャー | 시리얼 포트 관리자
+// ============================================================================
+// [EN] Serial port resource manager with thread-safe operations
+//      Handles port opening, closing, and error recovery
+// [中文] 线程安全的串口资源管理器
+//       处理端口打开、关闭和错误恢复
+// [日本語] スレッドセーフなシリアルポートリソースマネージャー
+//         ポートのオープン、クローズ、エラーリカバリを処理
+// [한국어] 스레드 안전 시리얼 포트 리소스 관리자
+//         포트 열기, 닫기 및 오류 복구 처리
+// [Español] Gestor de recursos de puerto serie thread-safe
+//           Maneja apertura, cierre de puertos y recuperación de errores
+// [Русский] Потокобезопасный менеджер ресурсов последовательного порта
+//           Обработка открытия, закрытия портов и восстановления после ошибок
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,8 +30,10 @@ using System.Threading.Tasks;
 namespace tools.Modules.Common
 {
     /// <summary>
-    /// 串口管理器 - 解决端口占用问题
-    /// 使用单例模式确保串口资源正确管理
+    /// Serial Port Manager - Thread-safe resource management
+    /// 串口管理器 - 线程安全资源管理
+    /// シリアルポートマネージャー - スレッドセーフリソース管理
+    /// 시리얼 포트 관리자 - 스레드 안전 리소스 관리
     /// </summary>
     public class SerialPortManager : IDisposable
     {

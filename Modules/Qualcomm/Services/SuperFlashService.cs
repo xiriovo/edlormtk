@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Super Partition Direct Flash Service
+// Super 分区直刷服务 | Superパーティション直接フラッシュ | Super 파티션 직접 플래시
+// ============================================================================
+// [EN] Direct flash service for Android Super partition sub-partitions
+//      No repackaging needed - flash system/vendor/product directly
+// [中文] Android Super 分区子分区直刷服务
+//       无需重新打包 - 直接刷写 system/vendor/product
+// [日本語] Android Superパーティションサブパーティション直接フラッシュサービス
+//         再パッケージ不要 - system/vendor/productを直接フラッシュ
+// [한국어] 안드로이드 Super 파티션 서브 파티션 직접 플래시 서비스
+//         재패키징 불필요 - system/vendor/product 직접 플래시
+// [Español] Servicio de flash directo para sub-particiones Super de Android
+//           Sin necesidad de reempaquetado - flash system/vendor/product directamente
+// [Русский] Сервис прямой прошивки для подразделов Super раздела Android
+//           Без перепаковки - прошивка system/vendor/product напрямую
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +32,8 @@ using tools.Modules.Common;
 namespace tools.Modules.Qualcomm.Services
 {
     /// <summary>
-    /// Super 直刷服务 - 无需打包直接刷写子分区
+    /// Super Partition Direct Flash Service
+    /// Super 分区直刷服务 | Superパーティション直接フラッシュサービス | Super 파티션 직접 플래시 서비스
     /// </summary>
     public class SuperFlashService
     {

@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek GCPU Crypto Engine
+// 联发科 GCPU 加密引擎 | MTK GCPU暗号エンジン | MTK GCPU 암호화 엔진
+// ============================================================================
+// [EN] Graphics Crypto Processing Unit (GCPU) for MTK devices
+//      Memory read via AES-CBC decryption (Amonet exploit)
+// [中文] 联发科设备图形加密处理单元 (GCPU)
+//       通过 AES-CBC 解密读取内存 (Amonet 漏洞利用)
+// [日本語] MTKデバイス用グラフィックス暗号処理ユニット（GCPU）
+//         AES-CBC復号化によるメモリ読み取り（Amonetエクスプロイト）
+// [한국어] MTK 장치용 그래픽 암호화 처리 장치(GCPU)
+//         AES-CBC 복호화를 통한 메모리 읽기(Amonet 익스플로잇)
+// [Español] Unidad de procesamiento criptográfico de gráficos (GCPU) para MTK
+//           Lectura de memoria via descifrado AES-CBC (exploit Amonet)
+// [Русский] Графический криптографический процессор (GCPU) для устройств MTK
+//           Чтение памяти через дешифрование AES-CBC (эксплойт Amonet)
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using tools.Modules.MTK.Protocol;
@@ -6,8 +28,9 @@ using tools.Modules.MTK.Models;
 namespace tools.Modules.MTK.Hardware
 {
     /// <summary>
-    /// GCPU (Graphics Crypto Processing Unit) 加密引擎
-    /// 用于通过 AES-CBC 解密功能读取任意内存 (Amonet 漏洞利用)
+    /// GCPU (Graphics Crypto Processing Unit) Engine
+    /// GCPU 加密引擎 | GCPU暗号エンジン | GCPU 암호화 엔진
+    /// Memory read via AES-CBC (Amonet exploit)
     /// </summary>
     public class GcpuEngine
     {

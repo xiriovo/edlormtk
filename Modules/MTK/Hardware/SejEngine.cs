@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek SEJ Hardware Crypto Engine
+// 联发科 SEJ 硬件加密引擎 | MTK SEJハードウェア暗号エンジン | MTK SEJ 하드웨어 암호화 엔진
+// ============================================================================
+// [EN] Security Engine for JTAG (SEJ) - Hardware crypto for MTK devices
+//      AES encryption/decryption, RPMB key generation, secure operations
+// [中文] JTAG 安全引擎 (SEJ) - 联发科设备硬件加密
+//       AES 加解密、RPMB 密钥生成、安全操作
+// [日本語] JTAG用セキュリティエンジン（SEJ）- MTKデバイス用ハードウェア暗号
+//         AES暗号化/復号化、RPMBキー生成、セキュア操作
+// [한국어] JTAG용 보안 엔진(SEJ) - MTK 장치용 하드웨어 암호화
+//         AES 암호화/복호화, RPMB 키 생성, 보안 작업
+// [Español] Motor de seguridad para JTAG (SEJ) - Crypto hardware para dispositivos MTK
+//           Cifrado/descifrado AES, generación de claves RPMB, operaciones seguras
+// [Русский] Движок безопасности для JTAG (SEJ) - Аппаратная криптография для MTK
+//           Шифрование/дешифрование AES, генерация ключей RPMB, безопасные операции
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using tools.Modules.MTK.Protocol;
 using tools.Modules.MTK.Models;
@@ -5,8 +27,9 @@ using tools.Modules.MTK.Models;
 namespace tools.Modules.MTK.Hardware
 {
     /// <summary>
-    /// SEJ (Security Engine for JTAG protection) 硬件加密引擎
-    /// 用于 AES 加密/解密、RPMB 密钥生成等
+    /// SEJ (Security Engine for JTAG) Hardware Crypto Engine
+    /// SEJ 硬件加密引擎 | SEJハードウェア暗号エンジン | SEJ 하드웨어 암호화 엔진
+    /// AES encryption/decryption, RPMB key generation
     /// </summary>
     public class SejEngine
     {

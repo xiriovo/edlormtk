@@ -1,15 +1,38 @@
+// ============================================================================
+// MultiFlash TOOL - Unisoc/Spreadtrum Chipset Database
+// 展讯芯片数据库 | Unisocチップセットデータベース | Unisoc 칩셋 데이터베이스
+// ============================================================================
+// [EN] Database of Unisoc/Spreadtrum chipset information
+//      Contains chip IDs, names, and hardware specifications
+// [中文] 展讯芯片信息数据库
+//       包含芯片 ID、名称和硬件规格
+// [日本語] Unisoc/Spreadtrumチップセット情報データベース
+//         チップID、名前、ハードウェア仕様を含む
+// [한국어] Unisoc/Spreadtrum 칩셋 정보 데이터베이스
+//         칩 ID, 이름, 하드웨어 사양 포함
+// [Español] Base de datos de información de chipsets Unisoc/Spreadtrum
+//           Contiene IDs de chips, nombres y especificaciones de hardware
+// [Русский] База данных информации о чипсетах Unisoc/Spreadtrum
+//           Содержит ID чипов, названия и характеристики оборудования
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 
 namespace tools.Modules.Unisoc
 {
     /// <summary>
-    /// Unisoc (展讯) 芯片数据库
+    /// Unisoc (Spreadtrum) Chipset Database
+    /// 展讯芯片数据库 | Unisocチップセットデータベース | Unisoc 칩셋 데이터베이스
     /// </summary>
     public static class UnisocDatabase
     {
         /// <summary>
-        /// 芯片信息
+        /// Chip Information / 芯片信息 / チップ情報 / 칩 정보
         /// </summary>
         public class ChipInfo
         {

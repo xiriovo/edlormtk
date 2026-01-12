@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - MediaTek XFlash Protocol
+// 联发科 XFlash 协议 | MTK XFlashプロトコル | MTK XFlash 프로토콜
+// ============================================================================
+// [EN] XFlash DA protocol for newer MediaTek chipsets
+//      Supports high-speed transfers, custom commands, RPMB operations
+// [中文] 新款联发科芯片的 XFlash DA 协议
+//       支持高速传输、自定义命令、RPMB 操作
+// [日本語] 新型MediaTekチップセット用XFlash DAプロトコル
+//         高速転送、カスタムコマンド、RPMB操作をサポート
+// [한국어] 최신 MediaTek 칩셋용 XFlash DA 프로토콜
+//         고속 전송, 커스텀 명령, RPMB 작업 지원
+// [Español] Protocolo XFlash DA para chipsets MediaTek más nuevos
+//           Soporta transferencias de alta velocidad, comandos personalizados, operaciones RPMB
+// [Русский] Протокол XFlash DA для новых чипсетов MediaTek
+//           Поддержка высокоскоростных передач, пользовательских команд, операций RPMB
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.IO;
 using System.IO.Ports;
@@ -8,10 +30,10 @@ using System.Collections.Generic;
 
 namespace tools.Modules.MTK.Protocol
 {
-    #region 数据模型
+    #region Data Models / 数据模型 / データモデル / 데이터 모델
 
     /// <summary>
-    /// RAM 信息
+    /// RAM Information / RAM 信息 / RAM情報 / RAM 정보
     /// </summary>
     public class RamInfo
     {

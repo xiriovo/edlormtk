@@ -1,9 +1,35 @@
+// ============================================================================
+// MultiFlash TOOL - Qualcomm Chipset Database
+// 高通芯片数据库 | Qualcommチップセットデータベース | 퀄컴 칩셋 데이터베이스
+// ============================================================================
+// [EN] Database of Qualcomm chipset information for device identification
+//      Contains MSM IDs, chip names, and hardware specifications
+// [中文] 用于设备识别的高通芯片信息数据库
+//       包含 MSM ID、芯片名称和硬件规格
+// [日本語] デバイス識別用のQualcommチップセット情報データベース
+//         MSM ID、チップ名、ハードウェア仕様を含む
+// [한국어] 장치 식별을 위한 퀄컴 칩셋 정보 데이터베이스
+//         MSM ID, 칩 이름, 하드웨어 사양 포함
+// [Español] Base de datos de información de chipsets Qualcomm para identificación de dispositivos
+//           Contiene IDs MSM, nombres de chips y especificaciones de hardware
+// [Русский] База данных информации о чипсетах Qualcomm для идентификации устройств
+//           Содержит MSM ID, названия чипов и характеристики оборудования
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace tools.Modules.Qualcomm
 {
+    /// <summary>
+    /// Memory Type Enumeration
+    /// 存储类型枚举 | メモリタイプ列挙 | 메모리 유형 열거
+    /// </summary>
     public enum MemoryType
     {
         Unknown = -1,

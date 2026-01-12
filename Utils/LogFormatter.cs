@@ -1,3 +1,25 @@
+// ============================================================================
+// MultiFlash TOOL - Log Formatter Utilities
+// 日志格式化工具 | ログフォーマッタ | 로그 포매터
+// ============================================================================
+// [EN] Formatted logging utilities for consistent UI output
+//      Color-coded messages, progress indicators, structured output
+// [中文] 格式化日志工具，用于一致的 UI 输出
+//       颜色编码消息、进度指示器、结构化输出
+// [日本語] 一貫したUI出力用のフォーマット済みログユーティリティ
+//         カラーコードメッセージ、進行状況インジケーター、構造化出力
+// [한국어] 일관된 UI 출력을 위한 포맷된 로깅 유틸리티
+//         색상 코드 메시지, 진행률 표시기, 구조화된 출력
+// [Español] Utilidades de registro formateadas para salida UI consistente
+//           Mensajes codificados por color, indicadores de progreso, salida estructurada
+// [Русский] Утилиты форматированного логирования для согласованного вывода UI
+//           Цветовые сообщения, индикаторы прогресса, структурированный вывод
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,7 +27,8 @@ using System.Text;
 namespace tools.Utils
 {
     /// <summary>
-    /// 日志颜色定义
+    /// Log Color Definitions
+    /// 日志颜色定义 | ログカラー定義 | 로그 색상 정의
     /// </summary>
     public static class LogColors
     {
