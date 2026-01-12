@@ -761,21 +761,435 @@ dotnet build -c Release
 MultiFlash-TOOL/
 ├── 📂 Modules/
 │   ├── 📂 Common/           # 🔧 Common / 公共组件 / 共通
-│   ├── 📂 Qualcomm/         # 📱 Qualcomm EDL / 高通 / クアルコム
-│   │   ├── SaharaProtocol   #    Sahara protocol / 协议 / プロトコル
-│   │   ├── FirehoseClient   #    Firehose client / 客户端 / クライアント
-│   │   └── Services/        #    Services / 服务层 / サービス
-│   ├── 📂 MTK/              # 📱 MediaTek / 联发科 / メディアテック
-│   ├── 📂 Unisoc/           # 📱 Unisoc / 展讯 / ユニソック
-│   │   ├── Protocol/        #    SPRD protocol / 协议 / プロトコル
-│   │   ├── Firmware/        #    PAC/Sparse / 固件解析 / ファームウェア
-│   │   └── Exploit/         #    RSA bypass / 绕过 / バイパス
-│   └── 📂 AdbFastboot/      # 📲 ADB/Fastboot / 调试 / デバッグ
-├── 📂 Dialogs/              # 💬 Dialogs / 对话框 / ダイアログ
-├── 📂 Utils/                # 🛠️ Utilities / 工具类 / ユーティリティ
-├── 📄 MainWindow.xaml       # 🖼️ Main UI / 主界面 / メインUI
-└── 📄 App.xaml              # 🚀 App entry / 应用入口 / アプリエントリ
+│   │   ├── DeviceWatcher    #    USB device monitor / 设备监听
+│   │   └── SerialPortManager#    Serial port management / 串口管理
+│   ├── 📂 Qualcomm/         # 📱 Qualcomm EDL / 高通 ✅ STABLE
+│   │   ├── SaharaProtocol   #    Sahara protocol / 握手协议
+│   │   ├── FirehoseClient   #    Firehose XML protocol / XML协议
+│   │   ├── GptParser        #    GPT partition parser / 分区表解析
+│   │   ├── Authentication/  #    VIP/Xiaomi auth / 认证策略
+│   │   ├── Strategies/      #    Device strategies / 设备策略
+│   │   └── Services/        #    Cloud loader, Super flash / 云服务
+│   ├── 📂 MTK/              # 📱 MediaTek / 联发科 ✅ STABLE
+│   │   ├── Protocol/        #    Preloader, XFlash, Legacy DA
+│   │   ├── Authentication/  #    SLA/DAA bypass / 认证绕过
+│   │   ├── Hardware/        #    SEJ, DXCC, GCPU, CQDMA engines
+│   │   ├── Security/        #    SecCfg bootloader unlock
+│   │   ├── Storage/         #    Scatter parser / 配置解析
+│   │   └── Exploit/         #    Kamakiri exploit
+│   ├── 📂 Unisoc/           # 📱 Unisoc / 展讯 ⚠️ WIP
+│   │   ├── Protocol/        #    SPRD download protocol
+│   │   ├── Diag/            #    Diagnostic protocol / IMEI
+│   │   ├── Firmware/        #    PAC extractor / 固件解析
+│   │   └── Exploit/         #    RSA signature bypass
+│   └── 📂 AdbFastboot/      # 📲 ADB/Fastboot ⚠️ WIP
+│       ├── AdbProtocol      #    ADB over USB/TCP
+│       └── FastbootProtocol #    Fastboot commands
+├── 📂 Dialogs/              # 💬 Dialogs / 对话框
+├── 📂 Utils/                # 🛠️ Log formatter, helpers
+├── 📂 Localization/         # 🌐 Multi-language support
+├── 📄 MainWindow.xaml       # 🖼️ Main UI (WPF)
+└── 📄 App.xaml              # 🚀 Application entry
 ```
+
+---
+
+## 🔬 Technical Documentation / 技术文档 / 技術ドキュメント
+
+<details>
+<summary><b>🏗️ Architecture Overview / 架构概述 (Click to expand)</b></summary>
+
+### System Architecture / 系统架构
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        WPF UI Layer                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────┐ │
+│  │  Qualcomm   │  │     MTK     │  │   Unisoc    │  │   ADB   │ │
+│  │    Panel    │  │    Panel    │  │    Panel    │  │  Panel  │ │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └────┬────┘ │
+└─────────┼────────────────┼────────────────┼──────────────┼──────┘
+          │                │                │              │
+┌─────────▼────────────────▼────────────────▼──────────────▼──────┐
+│                      UI Service Layer                            │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────┐ │
+│  │ Qualcomm    │  │    MTK      │  │   Unisoc    │  │   ADB   │ │
+│  │ UIService   │  │  UIService  │  │  UIService  │  │UIService│ │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └────┬────┘ │
+└─────────┼────────────────┼────────────────┼──────────────┼──────┘
+          │                │                │              │
+┌─────────▼────────────────▼────────────────▼──────────────▼──────┐
+│                     Protocol Layer                               │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────┐ │
+│  │   Sahara    │  │  Preloader  │  │    SPRD     │  │Fastboot │ │
+│  │  Firehose   │  │XFlash/Legacy│  │    Diag     │  │   ADB   │ │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └────┬────┘ │
+└─────────┼────────────────┼────────────────┼──────────────┼──────┘
+          │                │                │              │
+┌─────────▼────────────────▼────────────────▼──────────────▼──────┐
+│                    Hardware Layer                                │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │    SerialPortManager  |  DeviceWatcher  |  USB HID/Serial   │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+</details>
+
+<details>
+<summary><b>📱 Qualcomm EDL Protocol / 高通 EDL 协议 (Click to expand)</b></summary>
+
+### Protocol Flow / 协议流程
+
+```
+Device (EDL 9008) ◄──────────► Host (MultiFlash TOOL)
+        │                              │
+        │  ◄─── Sahara Hello ────────  │  Step 1: Handshake
+        │  ────► Sahara Hello Resp ──► │  
+        │                              │
+        │  ◄─── Read Data ──────────   │  Step 2: Transfer Programmer
+        │  ────► Data Packet ────────► │  
+        │  ────► End of Image ───────► │
+        │                              │
+        │  ◄─── Sahara Done ─────────  │  Step 3: Execute Programmer
+        │  ────► Done Response ──────► │
+        │                              │
+        │  ════ Firehose XML ════════  │  Step 4: Firehose Operations
+        │  <configure>, <read>, <program>, <erase>
+        │                              │
+```
+
+### Sahara Protocol Commands / Sahara 命令
+
+| Command | Value | Description |
+|:--------|:-----:|:------------|
+| `SAHARA_HELLO` | 0x01 | Initial handshake from device |
+| `SAHARA_HELLO_RESP` | 0x02 | Host response with mode selection |
+| `SAHARA_READ_DATA` | 0x03 | Device requests programmer data |
+| `SAHARA_END_OF_IMAGE` | 0x04 | Transfer complete |
+| `SAHARA_DONE` | 0x05 | Session complete |
+| `SAHARA_EXECUTE` | 0x0D | Execute loaded image |
+| `SAHARA_CMD_READY` | 0x0B | Device ready for commands |
+
+### Firehose XML Commands / Firehose XML 命令
+
+```xml
+<!-- Configure Firehose -->
+<configure MemoryName="ufs" MaxPayloadSizeToTargetInBytes="1048576"/>
+
+<!-- Read GPT -->
+<read SECTOR_SIZE_IN_BYTES="4096" num_partition_sectors="6" 
+      physical_partition_number="0" start_sector="0"/>
+
+<!-- Program Partition -->
+<program SECTOR_SIZE_IN_BYTES="4096" filename="boot.img"
+         num_partition_sectors="65536" physical_partition_number="0"
+         start_sector="131072"/>
+
+<!-- Erase Partition -->
+<erase SECTOR_SIZE_IN_BYTES="4096" num_partition_sectors="65536"
+       physical_partition_number="0" start_sector="131072"/>
+```
+
+### VIP Authentication (OPPO/Realme) / VIP 认证
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                  VIP 6-Step Authentication                      │
+├────────────────────────────────────────────────────────────────┤
+│  Step 1: Digest      - Send hash algorithm configuration       │
+│  Step 2: TransferCfg - Transfer device-specific config         │
+│  Step 3: Verify      - Verify device credentials               │
+│  Step 4: Signature   - RSA signature validation                │
+│  Step 5: SHA256Init  - Initialize secure hash                  │
+│  Step 6: Configure   - Apply final configuration               │
+├────────────────────────────────────────────────────────────────┤
+│  Spoof Strategy: gpt_backup > gpt_main > ssd > buffer          │
+│  ⚠️ Backup GPT spoofing prioritized for better compatibility   │
+└────────────────────────────────────────────────────────────────┘
+```
+
+</details>
+
+<details>
+<summary><b>📱 MediaTek BROM Protocol / 联发科 BROM 协议 (Click to expand)</b></summary>
+
+### Protocol Flow / 协议流程
+
+```
+Device (BROM/Preloader) ◄──────────► Host (MultiFlash TOOL)
+        │                                    │
+        │  ◄─── 0xA0 (Sync) ──────────────   │  Step 1: BROM Handshake
+        │  ────► 0x5F (ACK) ────────────────► │
+        │                                    │
+        │  ◄─── DA Address ─────────────────  │  Step 2: Send DA
+        │  ────► DA Binary ─────────────────► │
+        │  ────► Jump to DA ────────────────► │
+        │                                    │
+        │  ════ DA Protocol ════════════════  │  Step 3: DA Operations
+        │  (XFlash or Legacy mode)           │
+        │                                    │
+```
+
+### DA Modes / DA 模式
+
+| Mode | Description | Use Case |
+|:-----|:------------|:---------|
+| **XFlash** | Modern DA protocol | MT6765, MT6768, MT6785+ |
+| **Legacy** | Classic DA protocol | MT6580, MT6735, MT6737 |
+
+### Hardware Crypto Engines / 硬件加密引擎
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    MTK Security Engines                       │
+├──────────────────────────────────────────────────────────────┤
+│  SEJ (Security Engine for JTAG)                               │
+│  ├── AES-128/256 encryption                                  │
+│  ├── RPMB key generation                                     │
+│  └── Secure boot verification                                │
+├──────────────────────────────────────────────────────────────┤
+│  DXCC (Discretix CryptoCell)                                 │
+│  ├── Key derivation (KDF)                                    │
+│  ├── Secure storage keys                                     │
+│  └── Newer chipsets (MT6785+)                                │
+├──────────────────────────────────────────────────────────────┤
+│  GCPU (Graphics Crypto Processing Unit)                      │
+│  ├── AES-CBC decryption                                      │
+│  ├── Memory read via decrypt (Amonet)                        │
+│  └── Exploit target                                          │
+├──────────────────────────────────────────────────────────────┤
+│  CQDMA (Crypto Queue DMA)                                    │
+│  ├── Arbitrary memory R/W                                    │
+│  ├── DMA-based operations                                    │
+│  └── Exploit target (Hashimoto)                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### SLA/DAA Authentication / SLA/DAA 认证
+
+```
+SLA (Serial Link Authorization)
+├── RSA-2048 signature verification
+├── Multiple key support (MTK keys, OEM keys)
+└── Bypass: Key leaks, exploit chains
+
+DAA (Download Agent Authorization)
+├── Challenge-response authentication
+├── Device-specific tokens
+└── Bypass: Auth file injection
+```
+
+</details>
+
+<details>
+<summary><b>📱 Unisoc SPRD Protocol / 展讯 SPRD 协议 (Click to expand)</b></summary>
+
+### ⚠️ Status: Work In Progress / 开发中
+
+### Protocol Flow / 协议流程
+
+```
+Device (Download Mode) ◄──────────► Host (MultiFlash TOOL)
+        │                                    │
+        │  ◄─── Handshake ─────────────────  │  Step 1: Connection
+        │  ────► Version Check ─────────────► │
+        │                                    │
+        │  ◄─── FDL1 Address ──────────────  │  Step 2: Send FDL1
+        │  ────► FDL1 Binary ──────────────► │
+        │  ────► Execute ──────────────────► │
+        │                                    │
+        │  ◄─── FDL2 Address ──────────────  │  Step 3: Send FDL2
+        │  ────► FDL2 Binary ──────────────► │
+        │  ────► Execute ──────────────────► │
+        │                                    │
+        │  ════ FDL2 Protocol ═════════════  │  Step 4: Flash Operations
+        │  (Read/Write/Erase partitions)     │
+        │                                    │
+```
+
+### Chipset Support / 芯片支持
+
+| Series | Chipsets | FDL1 Address | Exploit |
+|:-------|:---------|:-------------|:--------|
+| **SC (Legacy)** | SC7731, SC9832E | `0x5000` | ✅ BROM |
+| **Tiger** | T310, T606, T610, T618 | `0x65000800` | ✅ BootROM |
+| **T7xx** | T700, T760, T770, T820 | `0x9efffe00` | ⚠️ Limited |
+
+### RSA Bypass Exploit / RSA 绕过
+
+```c
+// Legacy Platform (SC7731/SC9832E)
+// Target: 0x4ee8 - RSA_Verify return value
+// Effect: Force return 1 (success)
+
+// ARM Thumb Instructions:
+MOV R0, #1    // 0x2001
+BX LR         // 0x4770
+
+// Modern Platform (SC9863A/T618)
+// Target: 0x65015f08 - Secure boot verification
+// Effect: Stack overflow -> ROP chain -> Bypass
+```
+
+### PAC Firmware Format / PAC 固件格式
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                    PAC File Structure                       │
+├────────────────────────────────────────────────────────────┤
+│  Header (512 bytes)                                        │
+│  ├── Magic: "BP_R1.0.0" or "BP_R2.0.1"                    │
+│  ├── File count                                           │
+│  └── CRC32 checksum                                       │
+├────────────────────────────────────────────────────────────┤
+│  File Table                                                │
+│  ├── File name (Unicode)                                  │
+│  ├── File offset                                          │
+│  ├── File size                                            │
+│  └── Partition type                                       │
+├────────────────────────────────────────────────────────────┤
+│  File Data                                                 │
+│  └── [FDL1] [FDL2] [boot] [system] [vendor] ...          │
+└────────────────────────────────────────────────────────────┘
+```
+
+</details>
+
+<details>
+<summary><b>📲 ADB/Fastboot Protocol / ADB/Fastboot 协议 (Click to expand)</b></summary>
+
+### ⚠️ Status: Work In Progress / 开发中
+
+### ADB Protocol Layers / ADB 协议层
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      Application Layer                       │
+│              shell, push, pull, install, logcat              │
+├─────────────────────────────────────────────────────────────┤
+│                       Service Layer                          │
+│     shell:, sync:, reverse:, jdwp:, exec:, reboot:          │
+├─────────────────────────────────────────────────────────────┤
+│                      Transport Layer                         │
+│              OPEN, READY, WRITE, CLOSE, AUTH                │
+├─────────────────────────────────────────────────────────────┤
+│                       Link Layer                             │
+│               USB (bulk transfers) / TCP (5555)              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Fastboot Commands / Fastboot 命令
+
+| Command | Description |
+|:--------|:------------|
+| `getvar:xxx` | Get device variable |
+| `flash:partition` | Flash partition |
+| `erase:partition` | Erase partition |
+| `reboot` | Reboot device |
+| `reboot-bootloader` | Reboot to bootloader |
+| `oem xxx` | OEM-specific commands |
+| `flashing unlock` | Unlock bootloader |
+
+</details>
+
+---
+
+## 📊 Implementation Status / 实现状态 / 実装状況
+
+| Module | Status | Completion | Notes |
+|:-------|:------:|:----------:|:------|
+| **Qualcomm EDL** | ✅ Stable | 90% | VIP spoof, cloud loader working |
+| **MTK BROM** | ✅ Stable | 85% | XFlash/Legacy, SLA bypass |
+| **MTK Hardware** | ✅ Stable | 80% | SEJ, DXCC, GCPU, CQDMA |
+| **Unisoc SPRD** | ⚠️ WIP | 60% | Basic flash, RSA bypass |
+| **Unisoc Diag** | ⚠️ WIP | 40% | IMEI read partial |
+| **ADB** | ⚠️ WIP | 50% | Shell, file transfer |
+| **Fastboot** | ⚠️ WIP | 50% | Flash, getvar |
+
+### Legend / 图例
+- ✅ **Stable** - Production ready / 生产就绪
+- ⚠️ **WIP** - Work in progress / 开发中
+- ❌ **TODO** - Not implemented / 未实现
+
+---
+
+## 🧑‍💻 Developer Guide / 开发者指南 / 開発者ガイド
+
+### Adding New Protocol Support / 添加新协议支持
+
+```csharp
+// 1. Create Protocol Class / 创建协议类
+public class NewProtocol : IDisposable
+{
+    public event Action<string>? OnLog;
+    public event Action<int, int>? OnProgress;
+    
+    public async Task<bool> ConnectAsync(CancellationToken ct) { ... }
+    public async Task<bool> FlashAsync(string partition, byte[] data, CancellationToken ct) { ... }
+}
+
+// 2. Create UI Service / 创建 UI 服务
+public class NewUIService
+{
+    private readonly Dispatcher _dispatcher;
+    public ObservableCollection<PartitionInfo> Partitions { get; }
+    
+    public async Task StartFlashAsync() { ... }
+}
+
+// 3. Add to MainWindow.xaml / 添加到主窗口
+<TabItem Header="New Platform">
+    <!-- Panel content -->
+</TabItem>
+```
+
+### Code Style / 代码风格
+
+```csharp
+// ============================================================================
+// MultiFlash TOOL - [Component Name]
+// [中文名] | [日本語名] | [한국어명]
+// ============================================================================
+// [EN] English description
+// [中文] 中文描述
+// [日本語] 日本語説明
+// [한국어] 한국어 설명
+// ============================================================================
+// ⚠️ STATUS: WORK IN PROGRESS (optional)
+// TODO List: (optional)
+// - [ ] Task 1
+// - [ ] Task 2
+// ============================================================================
+// GitHub: https://github.com/xiriovo/edlormtk
+// Contact: QQ 1708298587 | Email: 1708298587@qq.com
+// License: MIT
+// ============================================================================
+```
+
+### Running Tests / 运行测试
+
+```bash
+# Build debug version
+dotnet build -c Debug
+
+# Run with logging
+dotnet run --project tools.csproj -- --verbose
+
+# Check for issues
+dotnet build -warnaserror
+```
+
+---
+
+## 📚 References / 参考资料 / 参考文献
+
+| Resource | Description |
+|:---------|:------------|
+| [Qualcomm EDL Wiki](https://github.com/bkerler/edl/wiki) | EDL protocol documentation |
+| [MTKClient Wiki](https://github.com/bkerler/mtkclient/wiki) | MTK protocol documentation |
+| [Unisoc Research](https://research.nccgroup.com/) | Unisoc security research |
+| [Android Open Source](https://source.android.com/) | Official Android documentation |
 
 ---
 
