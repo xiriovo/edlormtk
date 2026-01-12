@@ -1,0 +1,149 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ============================================ -->
+    <!-- Русский / Russian / 俄语 -->
+    <!-- ============================================ -->
+    
+    <!-- Главное окно / Main Window -->
+    <sys:String x:Key="App.Title">MultiFlash TOOL</sys:String>
+    <sys:String x:Key="App.Subtitle">Мультиплатформенный инструмент прошивки Android</sys:String>
+    
+    <!-- Боковая панель / Sidebar Navigation -->
+    <sys:String x:Key="Nav.Qualcomm">Qualcomm</sys:String>
+    <sys:String x:Key="Nav.MTK">MediaTek</sys:String>
+    <sys:String x:Key="Nav.Unisoc">Unisoc</sys:String>
+    <sys:String x:Key="Nav.AdbFastboot">ADB/Fastboot</sys:String>
+    <sys:String x:Key="Nav.Resources">Ресурсы</sys:String>
+    <sys:String x:Key="Nav.Settings">Настройки</sys:String>
+    <sys:String x:Key="Nav.About">О программе</sys:String>
+    
+    <!-- Общие кнопки / Common Buttons -->
+    <sys:String x:Key="Btn.Start">Старт</sys:String>
+    <sys:String x:Key="Btn.Stop">Стоп</sys:String>
+    <sys:String x:Key="Btn.Cancel">Отмена</sys:String>
+    <sys:String x:Key="Btn.OK">ОК</sys:String>
+    <sys:String x:Key="Btn.Close">Закрыть</sys:String>
+    <sys:String x:Key="Btn.Browse">Обзор...</sys:String>
+    <sys:String x:Key="Btn.Refresh">Обновить</sys:String>
+    <sys:String x:Key="Btn.Clear">Очистить</sys:String>
+    <sys:String x:Key="Btn.Copy">Копировать</sys:String>
+    <sys:String x:Key="Btn.Save">Сохранить</sys:String>
+    <sys:String x:Key="Btn.Load">Загрузить</sys:String>
+    <sys:String x:Key="Btn.Connect">Подключить</sys:String>
+    <sys:String x:Key="Btn.Disconnect">Отключить</sys:String>
+    <sys:String x:Key="Btn.Flash">Прошить</sys:String>
+    <sys:String x:Key="Btn.Erase">Стереть</sys:String>
+    <sys:String x:Key="Btn.Reset">Сброс</sys:String>
+    <sys:String x:Key="Btn.Reboot">Перезагрузка</sys:String>
+    <sys:String x:Key="Btn.SelectFile">Выбрать файл</sys:String>
+    <sys:String x:Key="Btn.SelectFolder">Выбрать папку</sys:String>
+    
+    <!-- Статус устройства / Device Status -->
+    <sys:String x:Key="Device.Connected">Подключено</sys:String>
+    <sys:String x:Key="Device.Disconnected">Отключено</sys:String>
+    <sys:String x:Key="Device.Waiting">Ожидание устройства...</sys:String>
+    <sys:String x:Key="Device.NotFound">Устройство не найдено</sys:String>
+    <sys:String x:Key="Device.Detecting">Обнаружение...</sys:String>
+    
+    <!-- Qualcomm EDL -->
+    <sys:String x:Key="Qcom.Title">Режим Qualcomm EDL</sys:String>
+    <sys:String x:Key="Qcom.Loader">Загрузчик Firehose</sys:String>
+    <sys:String x:Key="Qcom.SelectLoader">Выбрать загрузчик</sys:String>
+    <sys:String x:Key="Qcom.AutoDetect">Автоопределение</sys:String>
+    <sys:String x:Key="Qcom.Partitions">Список разделов</sys:String>
+    <sys:String x:Key="Qcom.ReadPartition">Чтение раздела</sys:String>
+    <sys:String x:Key="Qcom.WritePartition">Запись раздела</sys:String>
+    <sys:String x:Key="Qcom.ErasePartition">Стереть раздел</sys:String>
+    
+    <!-- MediaTek MTK -->
+    <sys:String x:Key="MTK.Title">Режим MediaTek BROM</sys:String>
+    <sys:String x:Key="MTK.AuthFile">Файл авторизации</sys:String>
+    <sys:String x:Key="MTK.ScatterFile">Scatter файл</sys:String>
+    <sys:String x:Key="MTK.SelectScatter">Выбрать Scatter</sys:String>
+    <sys:String x:Key="MTK.Download">Загрузка прошивки</sys:String>
+    <sys:String x:Key="MTK.FormatAll">Полное форматирование</sys:String>
+    <sys:String x:Key="MTK.ReadBack">Чтение</sys:String>
+    
+    <!-- Unisoc SPRD -->
+    <sys:String x:Key="Unisoc.Title">Режим Unisoc SPRD</sys:String>
+    <sys:String x:Key="Unisoc.PacFile">Прошивка PAC</sys:String>
+    <sys:String x:Key="Unisoc.SelectPac">Выбрать PAC файл</sys:String>
+    <sys:String x:Key="Unisoc.Download">Загрузка прошивки</sys:String>
+    <sys:String x:Key="Unisoc.ReadFlash">Чтение Flash</sys:String>
+    
+    <!-- ADB/Fastboot -->
+    <sys:String x:Key="Adb.Title">Инструменты ADB / Fastboot</sys:String>
+    <sys:String x:Key="Adb.Devices">Список устройств</sys:String>
+    <sys:String x:Key="Adb.Shell">Команда Shell</sys:String>
+    <sys:String x:Key="Adb.Install">Установить APK</sys:String>
+    <sys:String x:Key="Adb.Push">Отправить файл</sys:String>
+    <sys:String x:Key="Adb.Pull">Получить файл</sys:String>
+    <sys:String x:Key="Adb.Reboot">Перезагрузить</sys:String>
+    <sys:String x:Key="Adb.RebootBootloader">В Bootloader</sys:String>
+    <sys:String x:Key="Adb.RebootRecovery">В Recovery</sys:String>
+    <sys:String x:Key="Fastboot.Unlock">Разблокировать Bootloader</sys:String>
+    <sys:String x:Key="Fastboot.Lock">Заблокировать Bootloader</sys:String>
+    <sys:String x:Key="Fastboot.FlashBoot">Прошить Boot</sys:String>
+    <sys:String x:Key="Fastboot.FlashRecovery">Прошить Recovery</sys:String>
+    
+    <!-- Настройки / Settings -->
+    <sys:String x:Key="Settings.Title">Настройки</sys:String>
+    <sys:String x:Key="Settings.Language">Язык</sys:String>
+    <sys:String x:Key="Settings.Theme">Тема</sys:String>
+    <sys:String x:Key="Settings.ThemeLight">Светлая</sys:String>
+    <sys:String x:Key="Settings.ThemeDark">Тёмная</sys:String>
+    <sys:String x:Key="Settings.ThemeAuto">Системная</sys:String>
+    <sys:String x:Key="Settings.LogLevel">Уровень логов</sys:String>
+    <sys:String x:Key="Settings.AutoUpdate">Проверка обновлений</sys:String>
+    <sys:String x:Key="Settings.SaveLogs">Сохранять логи</sys:String>
+    
+    <!-- О программе / About Dialog -->
+    <sys:String x:Key="About.Title">О MultiFlash TOOL</sys:String>
+    <sys:String x:Key="About.Description">Мультиплатформенный инструмент прошивки Android</sys:String>
+    <sys:String x:Key="About.Developer">Разработчик</sys:String>
+    <sys:String x:Key="About.Contact">Контакты</sys:String>
+    <sys:String x:Key="About.Donate">Поддержка</sys:String>
+    <sys:String x:Key="About.DonateText">Если инструмент полезен, угостите меня кофе</sys:String>
+    <sys:String x:Key="About.DonateButton">💝 Поддержать</sys:String>
+    <sys:String x:Key="About.License">Лицензия</sys:String>
+    <sys:String x:Key="About.LicenseText">Свободно использовать, изменять и распространять</sys:String>
+    <sys:String x:Key="About.Copyright">© 2024-2026 xiriovo. Все права защищены.</sys:String>
+    
+    <!-- Диалог пожертвований / Donate Dialog -->
+    <sys:String x:Key="Donate.Title">Поддержка</sys:String>
+    <sys:String x:Key="Donate.ThankYou">Спасибо за поддержку! Ваш вклад мотивирует развивать проект</sys:String>
+    <sys:String x:Key="Donate.WeChat">WeChat Pay</sys:String>
+    <sys:String x:Key="Donate.Alipay">Alipay</sys:String>
+    <sys:String x:Key="Donate.ScanToPay">Сканировать для оплаты</sys:String>
+    <sys:String x:Key="Donate.WalletAddress">Адрес кошелька</sys:String>
+    <sys:String x:Key="Donate.CopyAddress">Копировать адрес</sys:String>
+    <sys:String x:Key="Donate.Copied">Скопировано!</sys:String>
+    <sys:String x:Key="Donate.ConfirmNetwork">Подтвердите сеть</sys:String>
+    <sys:String x:Key="Donate.Footer">Ваша поддержка помогает развивать open source!</sys:String>
+    
+    <!-- Сообщения логов / Log Messages -->
+    <sys:String x:Key="Log.Ready">Готово</sys:String>
+    <sys:String x:Key="Log.Starting">Запуск...</sys:String>
+    <sys:String x:Key="Log.Completed">Завершено</sys:String>
+    <sys:String x:Key="Log.Failed">Ошибка</sys:String>
+    <sys:String x:Key="Log.Error">Ошибка</sys:String>
+    <sys:String x:Key="Log.Warning">Предупреждение</sys:String>
+    <sys:String x:Key="Log.Info">Информация</sys:String>
+    
+    <!-- Прогресс / Progress -->
+    <sys:String x:Key="Progress.Preparing">Подготовка...</sys:String>
+    <sys:String x:Key="Progress.Downloading">Загрузка...</sys:String>
+    <sys:String x:Key="Progress.Flashing">Прошивка...</sys:String>
+    <sys:String x:Key="Progress.Verifying">Проверка...</sys:String>
+    <sys:String x:Key="Progress.Complete">Завершено</sys:String>
+    
+    <!-- Сообщения об ошибках / Error Messages -->
+    <sys:String x:Key="Error.NoDevice">Устройство не обнаружено</sys:String>
+    <sys:String x:Key="Error.NoFile">Выберите файл</sys:String>
+    <sys:String x:Key="Error.InvalidFile">Неверный формат файла</sys:String>
+    <sys:String x:Key="Error.ConnectionFailed">Ошибка подключения</sys:String>
+    <sys:String x:Key="Error.OperationFailed">Операция не выполнена</sys:String>
+    
+</ResourceDictionary>

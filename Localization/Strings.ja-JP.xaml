@@ -1,0 +1,149 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ============================================ -->
+    <!-- 日本語 / Japanese / 日语 -->
+    <!-- ============================================ -->
+    
+    <!-- メインウィンドウ / Main Window -->
+    <sys:String x:Key="App.Title">MultiFlash TOOL</sys:String>
+    <sys:String x:Key="App.Subtitle">マルチプラットフォームAndroidフラッシュツール</sys:String>
+    
+    <!-- サイドバーナビゲーション / Sidebar Navigation -->
+    <sys:String x:Key="Nav.Qualcomm">Qualcomm</sys:String>
+    <sys:String x:Key="Nav.MTK">MediaTek</sys:String>
+    <sys:String x:Key="Nav.Unisoc">Unisoc</sys:String>
+    <sys:String x:Key="Nav.AdbFastboot">ADB/Fastboot</sys:String>
+    <sys:String x:Key="Nav.Resources">リソース</sys:String>
+    <sys:String x:Key="Nav.Settings">設定</sys:String>
+    <sys:String x:Key="Nav.About">情報</sys:String>
+    
+    <!-- 共通ボタン / Common Buttons -->
+    <sys:String x:Key="Btn.Start">開始</sys:String>
+    <sys:String x:Key="Btn.Stop">停止</sys:String>
+    <sys:String x:Key="Btn.Cancel">キャンセル</sys:String>
+    <sys:String x:Key="Btn.OK">OK</sys:String>
+    <sys:String x:Key="Btn.Close">閉じる</sys:String>
+    <sys:String x:Key="Btn.Browse">参照...</sys:String>
+    <sys:String x:Key="Btn.Refresh">更新</sys:String>
+    <sys:String x:Key="Btn.Clear">クリア</sys:String>
+    <sys:String x:Key="Btn.Copy">コピー</sys:String>
+    <sys:String x:Key="Btn.Save">保存</sys:String>
+    <sys:String x:Key="Btn.Load">読込</sys:String>
+    <sys:String x:Key="Btn.Connect">接続</sys:String>
+    <sys:String x:Key="Btn.Disconnect">切断</sys:String>
+    <sys:String x:Key="Btn.Flash">書込</sys:String>
+    <sys:String x:Key="Btn.Erase">消去</sys:String>
+    <sys:String x:Key="Btn.Reset">リセット</sys:String>
+    <sys:String x:Key="Btn.Reboot">再起動</sys:String>
+    <sys:String x:Key="Btn.SelectFile">ファイル選択</sys:String>
+    <sys:String x:Key="Btn.SelectFolder">フォルダ選択</sys:String>
+    
+    <!-- デバイス状態 / Device Status -->
+    <sys:String x:Key="Device.Connected">接続済み</sys:String>
+    <sys:String x:Key="Device.Disconnected">未接続</sys:String>
+    <sys:String x:Key="Device.Waiting">デバイス待機中...</sys:String>
+    <sys:String x:Key="Device.NotFound">デバイスが見つかりません</sys:String>
+    <sys:String x:Key="Device.Detecting">検出中...</sys:String>
+    
+    <!-- Qualcomm EDL -->
+    <sys:String x:Key="Qcom.Title">Qualcomm EDL モード</sys:String>
+    <sys:String x:Key="Qcom.Loader">Firehose ローダー</sys:String>
+    <sys:String x:Key="Qcom.SelectLoader">ローダー選択</sys:String>
+    <sys:String x:Key="Qcom.AutoDetect">自動検出</sys:String>
+    <sys:String x:Key="Qcom.Partitions">パーティション一覧</sys:String>
+    <sys:String x:Key="Qcom.ReadPartition">パーティション読込</sys:String>
+    <sys:String x:Key="Qcom.WritePartition">パーティション書込</sys:String>
+    <sys:String x:Key="Qcom.ErasePartition">パーティション消去</sys:String>
+    
+    <!-- MediaTek MTK -->
+    <sys:String x:Key="MTK.Title">MediaTek BROM モード</sys:String>
+    <sys:String x:Key="MTK.AuthFile">認証ファイル</sys:String>
+    <sys:String x:Key="MTK.ScatterFile">Scatter ファイル</sys:String>
+    <sys:String x:Key="MTK.SelectScatter">Scatter 選択</sys:String>
+    <sys:String x:Key="MTK.Download">ファームウェアダウンロード</sys:String>
+    <sys:String x:Key="MTK.FormatAll">全フォーマット</sys:String>
+    <sys:String x:Key="MTK.ReadBack">リードバック</sys:String>
+    
+    <!-- Unisoc SPRD -->
+    <sys:String x:Key="Unisoc.Title">Unisoc SPRD モード</sys:String>
+    <sys:String x:Key="Unisoc.PacFile">PAC ファームウェア</sys:String>
+    <sys:String x:Key="Unisoc.SelectPac">PAC ファイル選択</sys:String>
+    <sys:String x:Key="Unisoc.Download">ファームウェアダウンロード</sys:String>
+    <sys:String x:Key="Unisoc.ReadFlash">Flash 読込</sys:String>
+    
+    <!-- ADB/Fastboot -->
+    <sys:String x:Key="Adb.Title">ADB / Fastboot ツール</sys:String>
+    <sys:String x:Key="Adb.Devices">デバイス一覧</sys:String>
+    <sys:String x:Key="Adb.Shell">Shell コマンド</sys:String>
+    <sys:String x:Key="Adb.Install">APK インストール</sys:String>
+    <sys:String x:Key="Adb.Push">ファイル送信</sys:String>
+    <sys:String x:Key="Adb.Pull">ファイル取得</sys:String>
+    <sys:String x:Key="Adb.Reboot">デバイス再起動</sys:String>
+    <sys:String x:Key="Adb.RebootBootloader">Bootloader へ再起動</sys:String>
+    <sys:String x:Key="Adb.RebootRecovery">Recovery へ再起動</sys:String>
+    <sys:String x:Key="Fastboot.Unlock">Bootloader ロック解除</sys:String>
+    <sys:String x:Key="Fastboot.Lock">Bootloader ロック</sys:String>
+    <sys:String x:Key="Fastboot.FlashBoot">Boot 書込</sys:String>
+    <sys:String x:Key="Fastboot.FlashRecovery">Recovery 書込</sys:String>
+    
+    <!-- 設定 / Settings -->
+    <sys:String x:Key="Settings.Title">設定</sys:String>
+    <sys:String x:Key="Settings.Language">言語</sys:String>
+    <sys:String x:Key="Settings.Theme">テーマ</sys:String>
+    <sys:String x:Key="Settings.ThemeLight">ライト</sys:String>
+    <sys:String x:Key="Settings.ThemeDark">ダーク</sys:String>
+    <sys:String x:Key="Settings.ThemeAuto">システムに従う</sys:String>
+    <sys:String x:Key="Settings.LogLevel">ログレベル</sys:String>
+    <sys:String x:Key="Settings.AutoUpdate">自動更新確認</sys:String>
+    <sys:String x:Key="Settings.SaveLogs">ログ保存</sys:String>
+    
+    <!-- バージョン情報 / About Dialog -->
+    <sys:String x:Key="About.Title">MultiFlash TOOL について</sys:String>
+    <sys:String x:Key="About.Description">マルチプラットフォームAndroidフラッシュツール</sys:String>
+    <sys:String x:Key="About.Developer">開発者</sys:String>
+    <sys:String x:Key="About.Contact">連絡先</sys:String>
+    <sys:String x:Key="About.Donate">寄付</sys:String>
+    <sys:String x:Key="About.DonateText">このツールが役立ったら、コーヒーをおごってください</sys:String>
+    <sys:String x:Key="About.DonateButton">💝 寄付</sys:String>
+    <sys:String x:Key="About.License">ライセンス</sys:String>
+    <sys:String x:Key="About.LicenseText">自由に使用、変更、配布できます</sys:String>
+    <sys:String x:Key="About.Copyright">© 2024-2026 xiriovo. All rights reserved.</sys:String>
+    
+    <!-- 寄付ダイアログ / Donate Dialog -->
+    <sys:String x:Key="Donate.Title">寄付</sys:String>
+    <sys:String x:Key="Donate.ThankYou">ご支援ありがとうございます！皆様のご支援が開発の励みになります</sys:String>
+    <sys:String x:Key="Donate.WeChat">WeChat Pay</sys:String>
+    <sys:String x:Key="Donate.Alipay">Alipay</sys:String>
+    <sys:String x:Key="Donate.ScanToPay">QRコードをスキャン</sys:String>
+    <sys:String x:Key="Donate.WalletAddress">ウォレットアドレス</sys:String>
+    <sys:String x:Key="Donate.CopyAddress">アドレスをコピー</sys:String>
+    <sys:String x:Key="Donate.Copied">コピーしました！</sys:String>
+    <sys:String x:Key="Donate.ConfirmNetwork">ネットワークを確認してください</sys:String>
+    <sys:String x:Key="Donate.Footer">ご支援がオープンソースプロジェクトの発展を支えます！</sys:String>
+    
+    <!-- ログメッセージ / Log Messages -->
+    <sys:String x:Key="Log.Ready">準備完了</sys:String>
+    <sys:String x:Key="Log.Starting">開始中...</sys:String>
+    <sys:String x:Key="Log.Completed">完了</sys:String>
+    <sys:String x:Key="Log.Failed">失敗</sys:String>
+    <sys:String x:Key="Log.Error">エラー</sys:String>
+    <sys:String x:Key="Log.Warning">警告</sys:String>
+    <sys:String x:Key="Log.Info">情報</sys:String>
+    
+    <!-- 進行状況 / Progress -->
+    <sys:String x:Key="Progress.Preparing">準備中...</sys:String>
+    <sys:String x:Key="Progress.Downloading">ダウンロード中...</sys:String>
+    <sys:String x:Key="Progress.Flashing">書込中...</sys:String>
+    <sys:String x:Key="Progress.Verifying">検証中...</sys:String>
+    <sys:String x:Key="Progress.Complete">完了</sys:String>
+    
+    <!-- エラーメッセージ / Error Messages -->
+    <sys:String x:Key="Error.NoDevice">デバイスが検出されません</sys:String>
+    <sys:String x:Key="Error.NoFile">ファイルを選択してください</sys:String>
+    <sys:String x:Key="Error.InvalidFile">無効なファイル形式</sys:String>
+    <sys:String x:Key="Error.ConnectionFailed">接続に失敗しました</sys:String>
+    <sys:String x:Key="Error.OperationFailed">操作に失敗しました</sys:String>
+    
+</ResourceDictionary>

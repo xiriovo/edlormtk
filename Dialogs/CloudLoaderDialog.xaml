@@ -1,0 +1,409 @@
+<Window x:Class="tools.Dialogs.CloudLoaderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="☁️ 云端 Loader" Height="650" Width="950"
+        WindowStartupLocation="CenterOwner"
+        Background="#FAFBFC"
+        ResizeMode="CanResizeWithGrip">
+    
+    <Window.Resources>
+        <!-- 浅色主题色 -->
+        <SolidColorBrush x:Key="AccentBrush" Color="#0969DA"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#0550AE"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="#1A7F37"/>
+        <SolidColorBrush x:Key="WarningBrush" Color="#9A6700"/>
+        <SolidColorBrush x:Key="VipBrush" Color="#BC4C00"/>
+        <SolidColorBrush x:Key="XiaomiBrush" Color="#CF222E"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#24292F"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#57606A"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#D0D7DE"/>
+        <SolidColorBrush x:Key="BgCard" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BgHover" Color="#F6F8FA"/>
+        
+        <!-- 通用按钮样式 -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#1F883D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bg" Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#1A7F37"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bg" Property="Background" Value="#D0D7DE"/>
+                                <Setter Property="Foreground" Value="#8C959F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- 筛选按钮样式 -->
+        <Style x:Key="FilterButton" TargetType="ToggleButton">
+            <Setter Property="Background" Value="#F6F8FA"/>
+            <Setter Property="Foreground" Value="#57606A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#D0D7DE"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="bg" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#DDF4FF"/>
+                                <Setter TargetName="bg" Property="BorderBrush" Value="#0969DA"/>
+                                <Setter Property="Foreground" Value="#0969DA"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- VIP 标签样式 -->
+        <Style x:Key="VipTagButton" TargetType="ToggleButton" BasedOn="{StaticResource FilterButton}">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#FFF1E5"/>
+                    <Setter Property="BorderBrush" Value="#BC4C00"/>
+                    <Setter Property="Foreground" Value="#BC4C00"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 搜索栏 -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border Background="White" CornerRadius="6" Padding="12,0" BorderBrush="#D0D7DE" BorderThickness="1">
+                <Grid>
+                    <TextBlock x:Name="TxtSearchPlaceholder" Text="🔍 搜索 Loader (厂商、芯片、型号...)" 
+                               Foreground="#8C959F" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                    <TextBox x:Name="TxtSearch" Background="Transparent" BorderThickness="0" 
+                             Foreground="#24292F" Height="36" VerticalContentAlignment="Center"
+                             TextChanged="TxtSearch_TextChanged" KeyDown="TxtSearch_KeyDown"
+                             CaretBrush="#0969DA"/>
+                </Grid>
+            </Border>
+            
+            <Button Grid.Column="1" x:Name="BtnSearch" Content="搜索" Width="70" Height="36" Margin="10,0,0,0"
+                    Style="{StaticResource PrimaryButton}" Click="BtnSearch_Click"/>
+        </Grid>
+        
+        <!-- 筛选区域 -->
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 厂商下拉框 -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="厂商" Foreground="#57606A" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <ComboBox x:Name="CmbVendor" Width="140" Height="32" 
+                          SelectionChanged="CmbVendor_SelectionChanged"
+                          Background="White" Foreground="#24292F" BorderBrush="#D0D7DE"/>
+            </StackPanel>
+            
+            <!-- 芯片下拉框 -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="16,0,0,0">
+                <TextBlock Text="芯片" Foreground="#57606A" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <ComboBox x:Name="CmbChip" Width="160" Height="32" 
+                          SelectionChanged="CmbChip_SelectionChanged" IsEditable="True"
+                          Background="White" Foreground="#24292F" BorderBrush="#D0D7DE"/>
+            </StackPanel>
+            
+            <!-- 快速筛选标签 -->
+            <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="20,0,0,0">
+                <ToggleButton x:Name="TglVipOnly" Content="🔐 VIP" Style="{StaticResource VipTagButton}" 
+                              Checked="Filter_Changed" Unchecked="Filter_Changed" Margin="0,0,6,0"
+                              ToolTip="筛选需要VIP验证的Loader"/>
+                <ToggleButton x:Name="TglHasDigest" Content="📄 Digest" Style="{StaticResource FilterButton}" 
+                              Checked="Filter_Changed" Unchecked="Filter_Changed" Margin="0,0,6,0"
+                              ToolTip="筛选带有Digest文件的Loader"/>
+                <ToggleButton x:Name="TglHasSign" Content="✍️ Sign" Style="{StaticResource FilterButton}" 
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"
+                              ToolTip="筛选带有签名文件的Loader"/>
+            </StackPanel>
+            
+            <Button x:Name="BtnRefresh" Grid.Column="5" Content="🔄" Width="36" Height="32"
+                    Click="BtnRefresh_Click" ToolTip="刷新列表">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#F6F8FA"/>
+                        <Setter Property="Foreground" Value="#57606A"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="#D0D7DE"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="bg" Background="{TemplateBinding Background}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        
+        <!-- 状态栏 -->
+        <Border Grid.Row="2" Background="White" CornerRadius="6" Padding="12,10" Margin="0,0,0,10" 
+                BorderBrush="#D0D7DE" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus" Text="正在连接云端服务器..." Foreground="#57606A" FontSize="12"/>
+                <TextBlock x:Name="TxtServerInfo" Grid.Column="1" Foreground="#8C959F" FontSize="11"/>
+            </Grid>
+        </Border>
+        
+        <!-- Loader 列表 -->
+        <Border Grid.Row="3" Background="White" CornerRadius="6" BorderBrush="#D0D7DE" BorderThickness="1">
+            <Grid>
+                <ListView x:Name="LvLoaders" Background="Transparent" BorderThickness="0" Foreground="#24292F"
+                          SelectionChanged="LvLoaders_SelectionChanged" MouseDoubleClick="LvLoaders_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="厂商" Width="85" DisplayMemberBinding="{Binding Vendor}"/>
+                            <GridViewColumn Header="芯片" Width="100" DisplayMemberBinding="{Binding ChipName}"/>
+                            <GridViewColumn Header="认证" Width="60" DisplayMemberBinding="{Binding AuthTypeText}"/>
+                            <GridViewColumn Header="版本" Width="60" DisplayMemberBinding="{Binding Version}"/>
+                            <GridViewColumn Header="大小" Width="70" DisplayMemberBinding="{Binding FileSizeText}"/>
+                            <GridViewColumn Header="D" Width="32" DisplayMemberBinding="{Binding DigestText}"/>
+                            <GridViewColumn Header="S" Width="32" DisplayMemberBinding="{Binding SignText}"/>
+                            <GridViewColumn Header="文件名" Width="260" DisplayMemberBinding="{Binding FileName}"/>
+                            <GridViewColumn Header="存储" Width="55" DisplayMemberBinding="{Binding StorageType}"/>
+                        </GridView>
+                    </ListView.View>
+                    
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Foreground" Value="#24292F"/>
+                            <Setter Property="Padding" Value="6,3"/>
+                            <Setter Property="Height" Value="32"/>
+                            <Setter Property="BorderBrush" Value="#EAEEF2"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#DDF4FF"/>
+                                    <Setter Property="Foreground" Value="#0969DA"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#F6F8FA"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+                
+                <!-- 加载中遮罩 -->
+                <Border x:Name="LoadingOverlay" Background="#E6FFFFFF" Visibility="Collapsed" CornerRadius="6">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="⏳" FontSize="36" Foreground="#0969DA" HorizontalAlignment="Center"/>
+                        <TextBlock Text="加载中..." Foreground="#57606A" Margin="0,10,0,0" FontSize="13"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <!-- 分页和下载进度 -->
+        <Grid Grid.Row="4" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 分页控件 -->
+            <StackPanel x:Name="PaginationPanel" Orientation="Horizontal">
+                <Button x:Name="BtnPrevPage" Content="◀" Width="32" Height="28" Click="BtnPrevPage_Click"
+                        IsEnabled="False" ToolTip="上一页">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#F6F8FA"/>
+                            <Setter Property="Foreground" Value="#57606A"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#D0D7DE"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="bg" Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                                <Setter Property="Foreground" Value="#8C959F"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <TextBlock x:Name="TxtPageInfo" Foreground="#57606A" VerticalAlignment="Center" Margin="12,0" FontSize="12"/>
+                <Button x:Name="BtnNextPage" Content="▶" Width="32" Height="28" Click="BtnNextPage_Click"
+                        IsEnabled="False" ToolTip="下一页">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#F6F8FA"/>
+                            <Setter Property="Foreground" Value="#57606A"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#D0D7DE"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="bg" Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                                <Setter Property="Foreground" Value="#8C959F"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+            
+            <!-- 下载进度 -->
+            <Grid Grid.Column="1" x:Name="ProgressPanel" Visibility="Collapsed" Margin="20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar x:Name="DownloadProgress" Height="8" Minimum="0" Maximum="100"
+                             Background="#EAEEF2" Foreground="#1F883D"/>
+                <TextBlock x:Name="TxtProgress" Grid.Column="1" Foreground="#57606A" VerticalAlignment="Center" 
+                           Margin="10,0,0,0" FontSize="12"/>
+            </Grid>
+            
+            <!-- 选中的Loader信息 -->
+            <StackPanel x:Name="SelectedInfo" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed"
+                        HorizontalAlignment="Center">
+                <TextBlock x:Name="TxtSelectedAuth" Foreground="#BC4C00" FontWeight="SemiBold" 
+                           VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock x:Name="TxtSelectedHint" Foreground="#57606A" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+            <!-- 缓存信息 -->
+            <TextBlock x:Name="TxtCacheInfo" Grid.Column="2" Foreground="#8C959F" FontSize="11" 
+                       VerticalAlignment="Center"/>
+        </Grid>
+        
+        <!-- 按钮区域 -->
+        <Grid Grid.Row="5" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 认证模式提示 -->
+            <Border x:Name="AuthHintPanel" Background="#DDF4FF" BorderBrush="#0969DA" BorderThickness="1" 
+                    CornerRadius="6" Padding="12,8" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="TxtAuthIcon" Text="🔐" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock x:Name="TxtAuthHint" Foreground="#0969DA" FontSize="12" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BtnDownload" Content="📥 下载并使用" Style="{StaticResource PrimaryButton}" 
+                        Click="BtnDownload_Click" IsEnabled="False" Margin="0,0,10,0" Height="36"/>
+                <Button Content="取消" Click="BtnCancel_Click" Padding="16,8" Height="36">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#F6F8FA"/>
+                            <Setter Property="Foreground" Value="#24292F"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#D0D7DE"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="bg" Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="bg" Property="Background" Value="#EAEEF2"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

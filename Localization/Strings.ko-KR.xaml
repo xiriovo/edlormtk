@@ -1,0 +1,149 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ============================================ -->
+    <!-- 한국어 / Korean / 韩语 -->
+    <!-- ============================================ -->
+    
+    <!-- 메인 윈도우 / Main Window -->
+    <sys:String x:Key="App.Title">MultiFlash TOOL</sys:String>
+    <sys:String x:Key="App.Subtitle">멀티플랫폼 안드로이드 플래시 도구</sys:String>
+    
+    <!-- 사이드바 네비게이션 / Sidebar Navigation -->
+    <sys:String x:Key="Nav.Qualcomm">퀄컴</sys:String>
+    <sys:String x:Key="Nav.MTK">미디어텍</sys:String>
+    <sys:String x:Key="Nav.Unisoc">유니속</sys:String>
+    <sys:String x:Key="Nav.AdbFastboot">ADB/Fastboot</sys:String>
+    <sys:String x:Key="Nav.Resources">리소스</sys:String>
+    <sys:String x:Key="Nav.Settings">설정</sys:String>
+    <sys:String x:Key="Nav.About">정보</sys:String>
+    
+    <!-- 공통 버튼 / Common Buttons -->
+    <sys:String x:Key="Btn.Start">시작</sys:String>
+    <sys:String x:Key="Btn.Stop">중지</sys:String>
+    <sys:String x:Key="Btn.Cancel">취소</sys:String>
+    <sys:String x:Key="Btn.OK">확인</sys:String>
+    <sys:String x:Key="Btn.Close">닫기</sys:String>
+    <sys:String x:Key="Btn.Browse">찾아보기...</sys:String>
+    <sys:String x:Key="Btn.Refresh">새로고침</sys:String>
+    <sys:String x:Key="Btn.Clear">지우기</sys:String>
+    <sys:String x:Key="Btn.Copy">복사</sys:String>
+    <sys:String x:Key="Btn.Save">저장</sys:String>
+    <sys:String x:Key="Btn.Load">불러오기</sys:String>
+    <sys:String x:Key="Btn.Connect">연결</sys:String>
+    <sys:String x:Key="Btn.Disconnect">연결 해제</sys:String>
+    <sys:String x:Key="Btn.Flash">플래시</sys:String>
+    <sys:String x:Key="Btn.Erase">지우기</sys:String>
+    <sys:String x:Key="Btn.Reset">초기화</sys:String>
+    <sys:String x:Key="Btn.Reboot">재부팅</sys:String>
+    <sys:String x:Key="Btn.SelectFile">파일 선택</sys:String>
+    <sys:String x:Key="Btn.SelectFolder">폴더 선택</sys:String>
+    
+    <!-- 장치 상태 / Device Status -->
+    <sys:String x:Key="Device.Connected">연결됨</sys:String>
+    <sys:String x:Key="Device.Disconnected">연결 안됨</sys:String>
+    <sys:String x:Key="Device.Waiting">장치 대기 중...</sys:String>
+    <sys:String x:Key="Device.NotFound">장치를 찾을 수 없음</sys:String>
+    <sys:String x:Key="Device.Detecting">감지 중...</sys:String>
+    
+    <!-- Qualcomm EDL -->
+    <sys:String x:Key="Qcom.Title">퀄컴 EDL 모드</sys:String>
+    <sys:String x:Key="Qcom.Loader">Firehose 로더</sys:String>
+    <sys:String x:Key="Qcom.SelectLoader">로더 선택</sys:String>
+    <sys:String x:Key="Qcom.AutoDetect">자동 감지</sys:String>
+    <sys:String x:Key="Qcom.Partitions">파티션 목록</sys:String>
+    <sys:String x:Key="Qcom.ReadPartition">파티션 읽기</sys:String>
+    <sys:String x:Key="Qcom.WritePartition">파티션 쓰기</sys:String>
+    <sys:String x:Key="Qcom.ErasePartition">파티션 지우기</sys:String>
+    
+    <!-- MediaTek MTK -->
+    <sys:String x:Key="MTK.Title">미디어텍 BROM 모드</sys:String>
+    <sys:String x:Key="MTK.AuthFile">인증 파일</sys:String>
+    <sys:String x:Key="MTK.ScatterFile">Scatter 파일</sys:String>
+    <sys:String x:Key="MTK.SelectScatter">Scatter 선택</sys:String>
+    <sys:String x:Key="MTK.Download">펌웨어 다운로드</sys:String>
+    <sys:String x:Key="MTK.FormatAll">전체 포맷</sys:String>
+    <sys:String x:Key="MTK.ReadBack">리드백</sys:String>
+    
+    <!-- Unisoc SPRD -->
+    <sys:String x:Key="Unisoc.Title">유니속 SPRD 모드</sys:String>
+    <sys:String x:Key="Unisoc.PacFile">PAC 펌웨어</sys:String>
+    <sys:String x:Key="Unisoc.SelectPac">PAC 파일 선택</sys:String>
+    <sys:String x:Key="Unisoc.Download">펌웨어 다운로드</sys:String>
+    <sys:String x:Key="Unisoc.ReadFlash">Flash 읽기</sys:String>
+    
+    <!-- ADB/Fastboot -->
+    <sys:String x:Key="Adb.Title">ADB / Fastboot 도구</sys:String>
+    <sys:String x:Key="Adb.Devices">장치 목록</sys:String>
+    <sys:String x:Key="Adb.Shell">Shell 명령</sys:String>
+    <sys:String x:Key="Adb.Install">APK 설치</sys:String>
+    <sys:String x:Key="Adb.Push">파일 보내기</sys:String>
+    <sys:String x:Key="Adb.Pull">파일 가져오기</sys:String>
+    <sys:String x:Key="Adb.Reboot">장치 재부팅</sys:String>
+    <sys:String x:Key="Adb.RebootBootloader">Bootloader로 재부팅</sys:String>
+    <sys:String x:Key="Adb.RebootRecovery">Recovery로 재부팅</sys:String>
+    <sys:String x:Key="Fastboot.Unlock">Bootloader 잠금 해제</sys:String>
+    <sys:String x:Key="Fastboot.Lock">Bootloader 잠금</sys:String>
+    <sys:String x:Key="Fastboot.FlashBoot">Boot 플래시</sys:String>
+    <sys:String x:Key="Fastboot.FlashRecovery">Recovery 플래시</sys:String>
+    
+    <!-- 설정 / Settings -->
+    <sys:String x:Key="Settings.Title">설정</sys:String>
+    <sys:String x:Key="Settings.Language">언어</sys:String>
+    <sys:String x:Key="Settings.Theme">테마</sys:String>
+    <sys:String x:Key="Settings.ThemeLight">라이트</sys:String>
+    <sys:String x:Key="Settings.ThemeDark">다크</sys:String>
+    <sys:String x:Key="Settings.ThemeAuto">시스템 설정</sys:String>
+    <sys:String x:Key="Settings.LogLevel">로그 레벨</sys:String>
+    <sys:String x:Key="Settings.AutoUpdate">자동 업데이트 확인</sys:String>
+    <sys:String x:Key="Settings.SaveLogs">로그 저장</sys:String>
+    
+    <!-- 정보 대화상자 / About Dialog -->
+    <sys:String x:Key="About.Title">MultiFlash TOOL 정보</sys:String>
+    <sys:String x:Key="About.Description">멀티플랫폼 안드로이드 플래시 도구</sys:String>
+    <sys:String x:Key="About.Developer">개발자</sys:String>
+    <sys:String x:Key="About.Contact">연락처</sys:String>
+    <sys:String x:Key="About.Donate">후원</sys:String>
+    <sys:String x:Key="About.DonateText">이 도구가 도움이 되셨다면 커피 한 잔 사주세요</sys:String>
+    <sys:String x:Key="About.DonateButton">💝 후원</sys:String>
+    <sys:String x:Key="About.License">라이선스</sys:String>
+    <sys:String x:Key="About.LicenseText">자유롭게 사용, 수정 및 배포</sys:String>
+    <sys:String x:Key="About.Copyright">© 2024-2026 xiriovo. All rights reserved.</sys:String>
+    
+    <!-- 후원 대화상자 / Donate Dialog -->
+    <sys:String x:Key="Donate.Title">후원</sys:String>
+    <sys:String x:Key="Donate.ThankYou">응원해 주셔서 감사합니다! 여러분의 후원이 큰 힘이 됩니다</sys:String>
+    <sys:String x:Key="Donate.WeChat">WeChat Pay</sys:String>
+    <sys:String x:Key="Donate.Alipay">Alipay</sys:String>
+    <sys:String x:Key="Donate.ScanToPay">QR코드 스캔</sys:String>
+    <sys:String x:Key="Donate.WalletAddress">지갑 주소</sys:String>
+    <sys:String x:Key="Donate.CopyAddress">주소 복사</sys:String>
+    <sys:String x:Key="Donate.Copied">복사됨!</sys:String>
+    <sys:String x:Key="Donate.ConfirmNetwork">네트워크를 확인하세요</sys:String>
+    <sys:String x:Key="Donate.Footer">여러분의 후원이 오픈소스 프로젝트의 발전을 지원합니다!</sys:String>
+    
+    <!-- 로그 메시지 / Log Messages -->
+    <sys:String x:Key="Log.Ready">준비됨</sys:String>
+    <sys:String x:Key="Log.Starting">시작 중...</sys:String>
+    <sys:String x:Key="Log.Completed">완료됨</sys:String>
+    <sys:String x:Key="Log.Failed">실패</sys:String>
+    <sys:String x:Key="Log.Error">오류</sys:String>
+    <sys:String x:Key="Log.Warning">경고</sys:String>
+    <sys:String x:Key="Log.Info">정보</sys:String>
+    
+    <!-- 진행 상황 / Progress -->
+    <sys:String x:Key="Progress.Preparing">준비 중...</sys:String>
+    <sys:String x:Key="Progress.Downloading">다운로드 중...</sys:String>
+    <sys:String x:Key="Progress.Flashing">플래시 중...</sys:String>
+    <sys:String x:Key="Progress.Verifying">검증 중...</sys:String>
+    <sys:String x:Key="Progress.Complete">완료</sys:String>
+    
+    <!-- 오류 메시지 / Error Messages -->
+    <sys:String x:Key="Error.NoDevice">장치가 감지되지 않음</sys:String>
+    <sys:String x:Key="Error.NoFile">파일을 선택하세요</sys:String>
+    <sys:String x:Key="Error.InvalidFile">잘못된 파일 형식</sys:String>
+    <sys:String x:Key="Error.ConnectionFailed">연결 실패</sys:String>
+    <sys:String x:Key="Error.OperationFailed">작업 실패</sys:String>
+    
+</ResourceDictionary>

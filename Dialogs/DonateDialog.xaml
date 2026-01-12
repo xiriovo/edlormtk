@@ -1,0 +1,253 @@
+<Window x:Class="tools.Dialogs.DonateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="💝 赞赏支持 / Donate" Height="700" Width="500"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="WeChatGreen" Color="#07C160"/>
+        <SolidColorBrush x:Key="AlipayBlue" Color="#1677FF"/>
+        <SolidColorBrush x:Key="CryptoOrange" Color="#F7931A"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#333333"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#666666"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+        
+        <!-- Tab 按钮样式 -->
+        <Style x:Key="TabButton" TargetType="RadioButton">
+            <Setter Property="Background" Value="#F5F5F5"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#00D4FF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E0E0E0"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="border" Property="Background" Value="#00B8E0"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- 复制按钮样式 -->
+        <Style x:Key="CopyButton" TargetType="Button">
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Border Background="White" CornerRadius="12" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="0" Opacity="0.2"/>
+        </Border.Effect>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- 标题栏 -->
+            <Border Grid.Row="0" CornerRadius="12,12,0,0" Padding="20,15" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF6B6B" Offset="0"/>
+                        <GradientStop Color="#FF8E53" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="💝" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="赞赏支持 / Donate" Foreground="White" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕" HorizontalAlignment="Right" Background="Transparent" Foreground="White"
+                            BorderThickness="0" FontSize="16" Width="30" Height="30" Cursor="Hand" Click="CloseButton_Click"/>
+                </Grid>
+            </Border>
+            
+            <!-- 内容区域 -->
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- 感谢语 - 多语言 -->
+                <TextBlock Grid.Row="0" TextAlignment="Center" Foreground="{StaticResource TextSecondary}" 
+                           FontSize="12" Margin="0,0,0,20" TextWrapping="Wrap" LineHeight="18">
+                    <Run Text="🇨🇳 感谢您的支持！您的每一份赞赏都是我持续更新的动力"/>
+                    <LineBreak/>
+                    <Run Text="🇺🇸 Thank you! Your support keeps me motivated ❤️" Foreground="#888888" FontSize="11"/>
+                </TextBlock>
+                
+                <!-- Tab 切换 -->
+                <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,20">
+                    <RadioButton x:Name="TabWeChat" Content="💚 WeChat" Style="{StaticResource TabButton}" 
+                                 IsChecked="True" Checked="Tab_Checked" Margin="0,0,5,0" ToolTip="微信赞赏"/>
+                    <RadioButton x:Name="TabAlipay" Content="💙 Alipay" Style="{StaticResource TabButton}" 
+                                 Checked="Tab_Checked" Margin="5,0,5,0" ToolTip="支付宝"/>
+                    <RadioButton x:Name="TabUSDT" Content="🪙 USDT" Style="{StaticResource TabButton}" 
+                                 Checked="Tab_Checked" Margin="5,0,5,0" ToolTip="TRC20 Network"/>
+                    <RadioButton x:Name="TabUSDC" Content="💎 USDC" Style="{StaticResource TabButton}" 
+                                 Checked="Tab_Checked" Margin="5,0,0,0" ToolTip="ERC20 Network"/>
+                </UniformGrid>
+                
+                <!-- 内容面板 -->
+                <Grid Grid.Row="2">
+                    <!-- 微信 WeChat -->
+                    <Border x:Name="PanelWeChat" Background="#F0FFF0" CornerRadius="8" Padding="20" BorderBrush="#C8E6C9" BorderThickness="1">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#07C160" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                <Run Text="微信赞赏码"/>
+                                <Run Text=" / WeChat Pay" FontSize="12" Foreground="#66BB6A"/>
+                            </TextBlock>
+                            <Border Background="White" CornerRadius="8" Padding="10" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <Image x:Name="ImgWeChat" Width="200" Height="200" Stretch="Uniform"/>
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextAlignment="Center">
+                                <Run Text="🇨🇳 微信扫码赞赏" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                <LineBreak/>
+                                <Run Text="Scan to donate via WeChat" FontSize="10" Foreground="#999999"/>
+                            </TextBlock>
+                            <TextBlock Text="昵称 / Name: 刷机专用" FontSize="11" Foreground="#999999" 
+                                       HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 支付宝 Alipay -->
+                    <Border x:Name="PanelAlipay" Background="#F0F7FF" CornerRadius="8" Padding="20" 
+                            BorderBrush="#BBDEFB" BorderThickness="1" Visibility="Collapsed">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#1677FF" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                <Run Text="支付宝收款码"/>
+                                <Run Text=" / Alipay" FontSize="12" Foreground="#64B5F6"/>
+                            </TextBlock>
+                            <Border Background="White" CornerRadius="8" Padding="10" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <Image x:Name="ImgAlipay" Width="200" Height="200" Stretch="Uniform"/>
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextAlignment="Center">
+                                <Run Text="🇨🇳 支付宝扫码赞赏" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                <LineBreak/>
+                                <Run Text="Scan to donate via Alipay" FontSize="10" Foreground="#999999"/>
+                            </TextBlock>
+                            <TextBlock Text="昵称 / Name: 昔日" FontSize="11" Foreground="#999999" 
+                                       HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- USDT TRC20 -->
+                    <Border x:Name="PanelUSDT" Background="#FFF8E1" CornerRadius="8" Padding="20" 
+                            BorderBrush="#FFE082" BorderThickness="1" Visibility="Collapsed">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#F7931A" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                <Run Text="USDT"/>
+                                <Run Text=" (TRC20 - TRON)" FontSize="12" Foreground="#FFB74D"/>
+                            </TextBlock>
+                            <Border Background="White" CornerRadius="8" Padding="15" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,10">
+                                        <Run Text="🔗 钱包地址"/>
+                                        <Run Text=" / Wallet Address" Foreground="#888888" FontSize="10"/>
+                                    </TextBlock>
+                                    <Border Background="#F5F5F5" CornerRadius="4" Padding="10">
+                                        <TextBlock x:Name="TxtUSDT" Text="TS5Q3e8dXmYGuwrdc8KcWTxksj91WRN1Fx" 
+                                                   FontSize="11" FontFamily="Consolas" Foreground="{StaticResource TextPrimary}"
+                                                   TextWrapping="Wrap"/>
+                                    </Border>
+                                    <Button Content="📋 复制 / Copy" Style="{StaticResource CopyButton}" 
+                                            HorizontalAlignment="Center" Margin="0,10,0,0" Click="CopyUSDT_Click"/>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextAlignment="Center">
+                                <Run Text="⚠️ 请确认网络 / Confirm Network:" FontSize="11" Foreground="#FF9800"/>
+                                <Run Text=" TRC20" FontSize="11" FontWeight="Bold" Foreground="#F57C00"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- USDC ERC20 -->
+                    <Border x:Name="PanelUSDC" Background="#E8F5E9" CornerRadius="8" Padding="20" 
+                            BorderBrush="#A5D6A7" BorderThickness="1" Visibility="Collapsed">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="#2775CA" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                <Run Text="USDC"/>
+                                <Run Text=" (ERC20 - Ethereum)" FontSize="12" Foreground="#64B5F6"/>
+                            </TextBlock>
+                            <Border Background="White" CornerRadius="8" Padding="15" BorderBrush="#E0E0E0" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,10">
+                                        <Run Text="🔗 钱包地址"/>
+                                        <Run Text=" / Wallet Address" Foreground="#888888" FontSize="10"/>
+                                    </TextBlock>
+                                    <Border Background="#F5F5F5" CornerRadius="4" Padding="10">
+                                        <TextBlock x:Name="TxtUSDC" Text="0x5eaa81f7bd55c6108ceecd6deef4984c5c86daa4" 
+                                                   FontSize="10" FontFamily="Consolas" Foreground="{StaticResource TextPrimary}"
+                                                   TextWrapping="Wrap"/>
+                                    </Border>
+                                    <Button Content="📋 复制 / Copy" Style="{StaticResource CopyButton}" 
+                                            HorizontalAlignment="Center" Margin="0,10,0,0" Click="CopyUSDC_Click"/>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextAlignment="Center">
+                                <Run Text="⚠️ 请确认网络 / Confirm Network:" FontSize="11" Foreground="#4CAF50"/>
+                                <Run Text=" ERC20" FontSize="11" FontWeight="Bold" Foreground="#388E3C"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                
+                <!-- 底部说明 -->
+                <TextBlock Grid.Row="3" Text="您的支持是开源项目持续发展的动力！Thank you for supporting open source! 🙏" 
+                           TextAlignment="Center" Foreground="#AAAAAA" FontSize="11" Margin="0,15,0,0" TextWrapping="Wrap"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

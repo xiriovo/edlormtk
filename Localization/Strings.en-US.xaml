@@ -1,0 +1,149 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!-- ============================================ -->
+    <!-- English (US) / 英语（美国） -->
+    <!-- ============================================ -->
+    
+    <!-- Main Window -->
+    <sys:String x:Key="App.Title">MultiFlash TOOL</sys:String>
+    <sys:String x:Key="App.Subtitle">Multi-Platform Android Flash Tool</sys:String>
+    
+    <!-- Sidebar Navigation -->
+    <sys:String x:Key="Nav.Qualcomm">Qualcomm</sys:String>
+    <sys:String x:Key="Nav.MTK">MediaTek</sys:String>
+    <sys:String x:Key="Nav.Unisoc">Unisoc</sys:String>
+    <sys:String x:Key="Nav.AdbFastboot">ADB/Fastboot</sys:String>
+    <sys:String x:Key="Nav.Resources">Resources</sys:String>
+    <sys:String x:Key="Nav.Settings">Settings</sys:String>
+    <sys:String x:Key="Nav.About">About</sys:String>
+    
+    <!-- Common Buttons -->
+    <sys:String x:Key="Btn.Start">Start</sys:String>
+    <sys:String x:Key="Btn.Stop">Stop</sys:String>
+    <sys:String x:Key="Btn.Cancel">Cancel</sys:String>
+    <sys:String x:Key="Btn.OK">OK</sys:String>
+    <sys:String x:Key="Btn.Close">Close</sys:String>
+    <sys:String x:Key="Btn.Browse">Browse...</sys:String>
+    <sys:String x:Key="Btn.Refresh">Refresh</sys:String>
+    <sys:String x:Key="Btn.Clear">Clear</sys:String>
+    <sys:String x:Key="Btn.Copy">Copy</sys:String>
+    <sys:String x:Key="Btn.Save">Save</sys:String>
+    <sys:String x:Key="Btn.Load">Load</sys:String>
+    <sys:String x:Key="Btn.Connect">Connect</sys:String>
+    <sys:String x:Key="Btn.Disconnect">Disconnect</sys:String>
+    <sys:String x:Key="Btn.Flash">Flash</sys:String>
+    <sys:String x:Key="Btn.Erase">Erase</sys:String>
+    <sys:String x:Key="Btn.Reset">Reset</sys:String>
+    <sys:String x:Key="Btn.Reboot">Reboot</sys:String>
+    <sys:String x:Key="Btn.SelectFile">Select File</sys:String>
+    <sys:String x:Key="Btn.SelectFolder">Select Folder</sys:String>
+    
+    <!-- Device Status -->
+    <sys:String x:Key="Device.Connected">Connected</sys:String>
+    <sys:String x:Key="Device.Disconnected">Disconnected</sys:String>
+    <sys:String x:Key="Device.Waiting">Waiting for device...</sys:String>
+    <sys:String x:Key="Device.NotFound">Device not found</sys:String>
+    <sys:String x:Key="Device.Detecting">Detecting...</sys:String>
+    
+    <!-- Qualcomm EDL -->
+    <sys:String x:Key="Qcom.Title">Qualcomm EDL Mode</sys:String>
+    <sys:String x:Key="Qcom.Loader">Firehose Loader</sys:String>
+    <sys:String x:Key="Qcom.SelectLoader">Select Loader</sys:String>
+    <sys:String x:Key="Qcom.AutoDetect">Auto Detect</sys:String>
+    <sys:String x:Key="Qcom.Partitions">Partition List</sys:String>
+    <sys:String x:Key="Qcom.ReadPartition">Read Partition</sys:String>
+    <sys:String x:Key="Qcom.WritePartition">Write Partition</sys:String>
+    <sys:String x:Key="Qcom.ErasePartition">Erase Partition</sys:String>
+    
+    <!-- MediaTek MTK -->
+    <sys:String x:Key="MTK.Title">MediaTek BROM Mode</sys:String>
+    <sys:String x:Key="MTK.AuthFile">Auth File</sys:String>
+    <sys:String x:Key="MTK.ScatterFile">Scatter File</sys:String>
+    <sys:String x:Key="MTK.SelectScatter">Select Scatter</sys:String>
+    <sys:String x:Key="MTK.Download">Download Firmware</sys:String>
+    <sys:String x:Key="MTK.FormatAll">Format All</sys:String>
+    <sys:String x:Key="MTK.ReadBack">Read Back</sys:String>
+    
+    <!-- Unisoc SPRD -->
+    <sys:String x:Key="Unisoc.Title">Unisoc SPRD Mode</sys:String>
+    <sys:String x:Key="Unisoc.PacFile">PAC Firmware</sys:String>
+    <sys:String x:Key="Unisoc.SelectPac">Select PAC File</sys:String>
+    <sys:String x:Key="Unisoc.Download">Download Firmware</sys:String>
+    <sys:String x:Key="Unisoc.ReadFlash">Read Flash</sys:String>
+    
+    <!-- ADB/Fastboot -->
+    <sys:String x:Key="Adb.Title">ADB / Fastboot Tools</sys:String>
+    <sys:String x:Key="Adb.Devices">Device List</sys:String>
+    <sys:String x:Key="Adb.Shell">Shell Command</sys:String>
+    <sys:String x:Key="Adb.Install">Install APK</sys:String>
+    <sys:String x:Key="Adb.Push">Push File</sys:String>
+    <sys:String x:Key="Adb.Pull">Pull File</sys:String>
+    <sys:String x:Key="Adb.Reboot">Reboot Device</sys:String>
+    <sys:String x:Key="Adb.RebootBootloader">Reboot to Bootloader</sys:String>
+    <sys:String x:Key="Adb.RebootRecovery">Reboot to Recovery</sys:String>
+    <sys:String x:Key="Fastboot.Unlock">Unlock Bootloader</sys:String>
+    <sys:String x:Key="Fastboot.Lock">Lock Bootloader</sys:String>
+    <sys:String x:Key="Fastboot.FlashBoot">Flash Boot</sys:String>
+    <sys:String x:Key="Fastboot.FlashRecovery">Flash Recovery</sys:String>
+    
+    <!-- Settings -->
+    <sys:String x:Key="Settings.Title">Settings</sys:String>
+    <sys:String x:Key="Settings.Language">Language</sys:String>
+    <sys:String x:Key="Settings.Theme">Theme</sys:String>
+    <sys:String x:Key="Settings.ThemeLight">Light</sys:String>
+    <sys:String x:Key="Settings.ThemeDark">Dark</sys:String>
+    <sys:String x:Key="Settings.ThemeAuto">Follow System</sys:String>
+    <sys:String x:Key="Settings.LogLevel">Log Level</sys:String>
+    <sys:String x:Key="Settings.AutoUpdate">Auto Check Updates</sys:String>
+    <sys:String x:Key="Settings.SaveLogs">Save Logs</sys:String>
+    
+    <!-- About Dialog -->
+    <sys:String x:Key="About.Title">About MultiFlash TOOL</sys:String>
+    <sys:String x:Key="About.Description">Multi-Platform Android Flash Tool</sys:String>
+    <sys:String x:Key="About.Developer">Developer</sys:String>
+    <sys:String x:Key="About.Contact">Contact</sys:String>
+    <sys:String x:Key="About.Donate">Support</sys:String>
+    <sys:String x:Key="About.DonateText">If this tool helps you, consider buying me a coffee</sys:String>
+    <sys:String x:Key="About.DonateButton">💝 Donate</sys:String>
+    <sys:String x:Key="About.License">License</sys:String>
+    <sys:String x:Key="About.LicenseText">Free to use, modify and distribute</sys:String>
+    <sys:String x:Key="About.Copyright">© 2024-2026 xiriovo. All rights reserved.</sys:String>
+    
+    <!-- Donate Dialog -->
+    <sys:String x:Key="Donate.Title">Support</sys:String>
+    <sys:String x:Key="Donate.ThankYou">Thank you for your support! Your donation keeps me motivated</sys:String>
+    <sys:String x:Key="Donate.WeChat">WeChat Pay</sys:String>
+    <sys:String x:Key="Donate.Alipay">Alipay</sys:String>
+    <sys:String x:Key="Donate.ScanToPay">Scan to Pay</sys:String>
+    <sys:String x:Key="Donate.WalletAddress">Wallet Address</sys:String>
+    <sys:String x:Key="Donate.CopyAddress">Copy Address</sys:String>
+    <sys:String x:Key="Donate.Copied">Copied!</sys:String>
+    <sys:String x:Key="Donate.ConfirmNetwork">Please confirm network</sys:String>
+    <sys:String x:Key="Donate.Footer">Your support keeps open source projects alive!</sys:String>
+    
+    <!-- Log Messages -->
+    <sys:String x:Key="Log.Ready">Ready</sys:String>
+    <sys:String x:Key="Log.Starting">Starting...</sys:String>
+    <sys:String x:Key="Log.Completed">Completed</sys:String>
+    <sys:String x:Key="Log.Failed">Failed</sys:String>
+    <sys:String x:Key="Log.Error">Error</sys:String>
+    <sys:String x:Key="Log.Warning">Warning</sys:String>
+    <sys:String x:Key="Log.Info">Info</sys:String>
+    
+    <!-- Progress -->
+    <sys:String x:Key="Progress.Preparing">Preparing...</sys:String>
+    <sys:String x:Key="Progress.Downloading">Downloading...</sys:String>
+    <sys:String x:Key="Progress.Flashing">Flashing...</sys:String>
+    <sys:String x:Key="Progress.Verifying">Verifying...</sys:String>
+    <sys:String x:Key="Progress.Complete">Complete</sys:String>
+    
+    <!-- Error Messages -->
+    <sys:String x:Key="Error.NoDevice">No device detected</sys:String>
+    <sys:String x:Key="Error.NoFile">Please select a file</sys:String>
+    <sys:String x:Key="Error.InvalidFile">Invalid file format</sys:String>
+    <sys:String x:Key="Error.ConnectionFailed">Connection failed</sys:String>
+    <sys:String x:Key="Error.OperationFailed">Operation failed</sys:String>
+    
+</ResourceDictionary>

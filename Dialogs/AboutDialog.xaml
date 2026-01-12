@@ -1,0 +1,314 @@
+<Window x:Class="tools.Dialogs.AboutDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="关于 MultiFlash TOOL" Height="680" Width="520"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <!-- 颜色定义 -->
+        <SolidColorBrush x:Key="AccentColor" Color="#00D4FF"/>
+        <SolidColorBrush x:Key="AccentColorDark" Color="#0099CC"/>
+        <SolidColorBrush x:Key="DonateColor" Color="#FF6B6B"/>
+        <SolidColorBrush x:Key="DonateHover" Color="#FF5252"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#333333"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#666666"/>
+        <SolidColorBrush x:Key="CardBg" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+        
+        <!-- 链接按钮样式 -->
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#10000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- 赞赏按钮样式 -->
+        <Style x:Key="DonateButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource DonateColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#FF6B6B" BlurRadius="15" ShadowDepth="0" Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource DonateHover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- 社交按钮样式 -->
+        <Style x:Key="SocialButton" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#F5F5F5"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Border Background="{StaticResource CardBg}" 
+            CornerRadius="12" 
+            BorderBrush="{StaticResource BorderColor}" 
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="0" Opacity="0.2"/>
+        </Border.Effect>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- 标题栏 -->
+            <Border Grid.Row="0" 
+                    CornerRadius="12,12,0,0"
+                    Padding="20,15"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#00D4FF" Offset="0"/>
+                        <GradientStop Color="#0099CC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <TextBlock Text="💡 关于 MultiFlash TOOL" 
+                               Foreground="White" 
+                               FontSize="18" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+                    <Button Content="✕" 
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="16"
+                            Width="30" Height="30"
+                            Cursor="Hand"
+                            Click="CloseButton_Click"/>
+                </Grid>
+            </Border>
+            
+            <!-- 内容区域 -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="25">
+                    
+                    <!-- Logo 和名称 -->
+                    <StackPanel HorizontalAlignment="Center" Margin="0,10,0,20">
+                        <TextBlock Text="🚀" FontSize="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="MultiFlash TOOL" 
+                                   FontSize="28" 
+                                   FontWeight="Bold" 
+                                   Foreground="{StaticResource AccentColor}"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,10,0,5"/>
+                        <TextBlock x:Name="TxtVersion"
+                                   Text="Version 1.0.0" 
+                                   FontSize="13" 
+                                   Foreground="{StaticResource TextSecondary}"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <!-- 描述 - 多语言 -->
+                    <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,20">
+                        <TextBlock TextWrapping="Wrap" 
+                                   Foreground="{StaticResource TextSecondary}"
+                                   FontSize="12"
+                                   LineHeight="20"
+                                   TextAlignment="Center">
+                            <Run Text="🇨🇳 多平台安卓刷机工具" FontWeight="SemiBold"/>
+                            <LineBreak/>
+                            <Run Text="🇺🇸 Multi-Platform Android Flash Tool"/>
+                            <LineBreak/>
+                            <Run Text="🇯🇵 マルチプラットフォームAndroidフラッシュツール"/>
+                            <LineBreak/>
+                            <Run Text="🇰🇷 멀티플랫폼 안드로이드 플래시 도구"/>
+                            <LineBreak/>
+                            <LineBreak/>
+                            <Run Text="Qualcomm EDL | MTK BROM | Unisoc SPRD | ADB Fastboot" Foreground="#888888" FontSize="11"/>
+                        </TextBlock>
+                    </Border>
+                    
+                    <!-- 开发者信息 - 多语言 -->
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,10">
+                        <Run Text="👨‍💻 开发者"/>
+                        <Run Text=" / Developer / 開発者 / 개발자" Foreground="#888888" FontSize="11"/>
+                    </TextBlock>
+                    
+                    <Border Background="#F8F9FA" CornerRadius="8" Padding="15" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextPrimary}">
+                                <Run Text="xiriovo"/>
+                            </TextBlock>
+                            <TextBlock FontSize="11" Foreground="{StaticResource TextSecondary}" Margin="0,5,0,0" TextWrapping="Wrap">
+                                <Run Text="🇨🇳 独立开发者"/>
+                                <Run Text=" | "/>
+                                <Run Text="🇺🇸 Independent Developer"/>
+                                <Run Text=" | "/>
+                                <Run Text="🇯🇵 個人開発者"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 联系方式 - 多语言 -->
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,10">
+                        <Run Text="📬 联系方式"/>
+                        <Run Text=" / Contact / 連絡先 / 연락처" Foreground="#888888" FontSize="11"/>
+                    </TextBlock>
+                    
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,20">
+                        <Button Style="{StaticResource SocialButton}" 
+                                Content="🌐 GitHub" 
+                                Click="GitHub_Click"
+                                ToolTip="https://github.com/xiriovo/edlormtk"/>
+                        <Button Style="{StaticResource SocialButton}" 
+                                Content="💬 QQ" 
+                                Click="QQ_Click"
+                                ToolTip="1708298587"/>
+                        <Button Style="{StaticResource SocialButton}" 
+                                Content="📧 Email" 
+                                Click="Email_Click"
+                                ToolTip="1708298587@qq.com"/>
+                    </WrapPanel>
+                    
+                    <!-- 联系详情 -->
+                    <Border Background="#F0F7FF" CornerRadius="8" Padding="15" Margin="0,0,0,20" BorderBrush="#CCE5FF" BorderThickness="1">
+                        <StackPanel>
+                            <Grid Margin="0,3">
+                                <TextBlock Text="GitHub:" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}"/>
+                                <TextBlock Text="github.com/xiriovo/edlormtk" HorizontalAlignment="Right" Foreground="{StaticResource AccentColorDark}"/>
+                            </Grid>
+                            <Grid Margin="0,3">
+                                <TextBlock Text="QQ:" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}"/>
+                                <TextBlock Text="1708298587" HorizontalAlignment="Right" Foreground="{StaticResource TextSecondary}"/>
+                            </Grid>
+                            <Grid Margin="0,3">
+                                <TextBlock Text="Email:" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}"/>
+                                <TextBlock Text="1708298587@qq.com" HorizontalAlignment="Right" Foreground="{StaticResource TextSecondary}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 赞赏区域 - 多语言 -->
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,10">
+                        <Run Text="☕ 赞赏支持"/>
+                        <Run Text=" / Donate / 寄付 / 기부" Foreground="#888888" FontSize="11"/>
+                    </TextBlock>
+                    
+                    <Border Background="#FFF5F5" CornerRadius="8" Padding="20" Margin="0,0,0,20" BorderBrush="#FFE0E0" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock TextAlignment="Center" Foreground="{StaticResource TextSecondary}" FontSize="12" 
+                                       Margin="0,0,0,15" TextWrapping="Wrap" LineHeight="18">
+                                <Run Text="🇨🇳 如果这个工具对你有帮助，欢迎请我喝杯咖啡"/>
+                                <LineBreak/>
+                                <Run Text="🇺🇸 If this tool helps you, buy me a coffee"/>
+                                <LineBreak/>
+                                <Run Text="🇯🇵 このツールが役立ったら、コーヒーをおごってください"/>
+                            </TextBlock>
+                            
+                            <Button Style="{StaticResource DonateButton}" 
+                                    Content="💝 赞赏 / Donate / 寄付"
+                                    HorizontalAlignment="Center"
+                                    Click="Donate_Click"/>
+                            
+                            <TextBlock TextAlignment="Center" Foreground="{StaticResource TextSecondary}" FontSize="10" 
+                                       Margin="0,15,0,0" TextWrapping="Wrap">
+                                <Run Text="您的支持是我持续更新的动力！"/>
+                                <LineBreak/>
+                                <Run Text="Your support keeps me going!" Foreground="#AAAAAA"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 开源协议 - 多语言 -->
+                    <Border Background="#F8F9FA" CornerRadius="8" Padding="15">
+                        <StackPanel>
+                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,8">
+                                <Run Text="📜 开源协议"/>
+                                <Run Text=" / License / ライセンス" Foreground="#888888" FontSize="10"/>
+                            </TextBlock>
+                            <TextBlock FontSize="12" Foreground="{StaticResource TextSecondary}">
+                                <Run Text="MIT License"/>
+                            </TextBlock>
+                            <TextBlock FontSize="10" Foreground="#999999" Margin="0,3,0,0" TextWrapping="Wrap">
+                                <Run Text="🇨🇳 自由使用、修改和分发"/>
+                                <Run Text=" | "/>
+                                <Run Text="🇺🇸 Free to use, modify and distribute"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 版权 -->
+                    <TextBlock Text="© 2024-2026 xiriovo. All rights reserved."
+                               FontSize="11"
+                               Foreground="#AAAAAA"
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,10"/>
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,197 @@
+<Window x:Class="tools.Dialogs.SettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="设置 / Settings" Height="400" Width="450"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="AccentColor" Color="#00D4FF"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#333333"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#666666"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+        
+        <!-- 语言选项样式 -->
+        <Style x:Key="LanguageRadioButton" TargetType="RadioButton">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="15,12"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{TemplateBinding Tag}" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+                                <Ellipse x:Name="checkMark" Grid.Column="2" Width="20" Height="20" 
+                                         Stroke="{StaticResource BorderColor}" StrokeThickness="2" Fill="Transparent"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="border" Property="Background" Value="#F0FAFF"/>
+                                <Setter TargetName="checkMark" Property="Fill" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="checkMark" Property="Stroke" Value="{StaticResource AccentColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#F8F8F8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Border Background="White" CornerRadius="12" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="#000000" BlurRadius="20" ShadowDepth="0" Opacity="0.2"/>
+        </Border.Effect>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- 标题栏 -->
+            <Border Grid.Row="0" CornerRadius="12,12,0,0" Padding="20,15" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#00D4FF" Offset="0"/>
+                        <GradientStop Color="#0099CC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⚙️" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="{DynamicResource Settings.Title}" Foreground="White" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="✕" HorizontalAlignment="Right" Background="Transparent" Foreground="White"
+                            BorderThickness="0" FontSize="16" Width="30" Height="30" Cursor="Hand" Click="CloseButton_Click"/>
+                </Grid>
+            </Border>
+            
+            <!-- 内容区域 -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20">
+                <StackPanel>
+                    <!-- 语言设置 -->
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,15">
+                        <Run Text="🌍"/>
+                        <Run Text=" "/>
+                        <Run Text="{DynamicResource Settings.Language}"/>
+                        <Run Text=" / Language" Foreground="#888888" FontSize="11"/>
+                    </TextBlock>
+                    
+                    <StackPanel x:Name="LanguagePanel">
+                        <RadioButton x:Name="LangZhCN" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇨🇳" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="简体中文" FontWeight="SemiBold"/>
+                                <TextBlock Text="Simplified Chinese" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton x:Name="LangEnUS" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇺🇸" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="English" FontWeight="SemiBold"/>
+                                <TextBlock Text="English (US)" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton x:Name="LangJaJP" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇯🇵" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="日本語" FontWeight="SemiBold"/>
+                                <TextBlock Text="Japanese" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton x:Name="LangKoKR" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇰🇷" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="한국어" FontWeight="SemiBold"/>
+                                <TextBlock Text="Korean" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton x:Name="LangRuRU" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇷🇺" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="Русский" FontWeight="SemiBold"/>
+                                <TextBlock Text="Russian" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton x:Name="LangEsES" Style="{StaticResource LanguageRadioButton}" 
+                                     Tag="🇪🇸" Checked="Language_Checked" GroupName="Language">
+                            <StackPanel>
+                                <TextBlock Text="Español" FontWeight="SemiBold"/>
+                                <TextBlock Text="Spanish" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    
+                    <!-- 系统语言信息 -->
+                    <Border Background="#F8F9FA" CornerRadius="6" Padding="12" Margin="0,15,0,0">
+                        <StackPanel>
+                            <TextBlock Text="ℹ️ System Language / 系统语言" FontSize="11" Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock x:Name="TxtSystemLanguage" Text="" FontSize="12" Foreground="{StaticResource TextPrimary}" Margin="0,5,0,0"/>
+                            <TextBlock Text="🔧 Current App Language / 当前应用语言" FontSize="11" Foreground="{StaticResource TextSecondary}" Margin="0,10,0,0"/>
+                            <TextBlock x:Name="TxtCurrentLanguage" Text="" FontSize="12" Foreground="#00D4FF" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <!-- 底部按钮 -->
+            <Border Grid.Row="2" Background="#F8F9FA" CornerRadius="0,0,12,12" Padding="20,15">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="✓ OK" Width="80" Height="32" Click="OK_Click" Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="bg" Background="{TemplateBinding Background}" CornerRadius="6" Padding="15,8">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="bg" Property="Background" Value="#00B8E0"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
