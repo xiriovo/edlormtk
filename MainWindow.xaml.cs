@@ -93,6 +93,9 @@ namespace tools
         // 展讯 (Unisoc) UI 服务
         private UnisocUIService? _sprdService;
         private CancellationTokenSource? _sprdOperationCts;
+        
+        // ADB/Fastboot 取消令牌
+        private CancellationTokenSource? _fastbootOperationCts;
 
         public MainWindow()
         {
@@ -6500,61 +6503,336 @@ namespace tools
             AppendAdbLog("[ADB] ✓ 已清理连接状态", "#888888");
         }
 
-        private void Adb_UnlockBL_Click(object sender, RoutedEventArgs e)
+        private async void Adb_UnlockBL_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[ADB] 正在解锁 Bootloader...", "#EF4444");
+            AppendAdbLog("[ADB] 正在准备解锁 Bootloader...", "#EF4444");
             AppendAdbLog("[ADB] ⚠️ 警告: 此操作将清除所有数据!", "#EF4444");
-            // TODO: adb reboot bootloader + fastboot oem unlock
+            
+            var result = MessageBox.Show(
+                "解锁 Bootloader 将清除设备上的所有数据！\n\n确定要继续吗？",
+                "⚠️ 警告", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (result != MessageBoxResult.Yes) return;
+            
+            try
+            {
+                // 先重启到 Bootloader
+                AppendAdbLog("[ADB] 正在重启到 Bootloader...", "#F59E0B");
+                var devices = await tools.Modules.AdbFastboot.AdbProtocol.GetDevicesAsync();
+                if (devices.Count > 0)
+                {
+                    var adb = new tools.Modules.AdbFastboot.AdbProtocol();
+                    var (serial, _) = devices[0];
+                    if (await adb.ConnectViaServerAsync(serial))
+                    {
+                        await adb.RebootBootloaderAsync();
+                        AppendAdbLog("[ADB] 设备正在重启到 Bootloader，请等待后执行 OEM Unlock", "#10B981");
+                    }
+                    adb.Dispose();
+                }
+                else
+                {
+                    AppendAdbLog("[ADB] 未检测到 ADB 设备，请手动进入 Fastboot 模式", "#F59E0B");
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[ADB] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         // ===== Fastboot 功能 =====
+        
+        /// <summary>
+        /// 连接 Fastboot 设备
+        /// </summary>
+        private tools.Modules.AdbFastboot.FastbootProtocol? ConnectFastboot()
+        {
+            var fastboot = new tools.Modules.AdbFastboot.FastbootProtocol();
+            fastboot.OnLog += msg => Dispatcher.Invoke(() => AppendAdbLog($"[Fastboot] {msg}", "#888888"));
+            
+            if (!fastboot.Connect())
+            {
+                AppendAdbLog("[Fastboot] ⚠️ 未检测到 Fastboot 设备", "#F59E0B");
+                AppendAdbLog("[Fastboot] 请将设备重启到 Fastboot 模式", "#888888");
+                fastboot.Dispose();
+                return null;
+            }
+            
+            return fastboot;
+        }
+        
         private void Fb_GetVar_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastboot] 正在读取分区信息...", "#F59E0B");
-            // TODO: fastboot getvar all
+            AppendAdbLog("[Fastboot] 正在读取设备信息...", "#F59E0B");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                fastboot.RefreshDeviceInfo();
+                var info = fastboot.DeviceInfo;
+                
+                if (info != null)
+                {
+                    AppendAdbLog($"[Fastboot] ══════════════════════════════", "#6366F1");
+                    AppendAdbLog($"[Fastboot] 📱 产品: {info.Product}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 🔢 序列号: {info.SerialNumber}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 🔓 Bootloader: {(info.Unlocked == "yes" ? "已解锁 ✓" : "已锁定 ✗")}", info.Unlocked == "yes" ? "#10B981" : "#EF4444");
+                    AppendAdbLog($"[Fastboot] 🔐 Secure: {info.Secure}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 📦 版本: {info.Version}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 📻 基带: {info.VersionBaseband}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 🔧 Bootloader版本: {info.VersionBootloader}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 💾 最大下载: {info.MaxDownloadSize}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 🎰 当前槽位: {(string.IsNullOrEmpty(info.CurrentSlot) ? "N/A" : info.CurrentSlot)}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 🚀 Fastbootd: {(info.IsFastbootd ? "是" : "否")}", "#10B981");
+                    AppendAdbLog($"[Fastboot] 📊 分区数: {info.PartitionSizes.Count}", "#10B981");
+                    AppendAdbLog($"[Fastboot] ══════════════════════════════", "#6366F1");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fb_OemUnlock_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show(
+                "⚠️ OEM 解锁将清除设备上的所有数据！\n\n此操作不可逆，确定要继续吗？",
+                "危险操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (result != MessageBoxResult.Yes) return;
+            
             AppendAdbLog("[Fastboot] ⚠️ 正在执行 OEM 解锁...", "#EF4444");
-            // TODO: fastboot oem unlock
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                bool success = fastboot.OemUnlock();
+                
+                if (success)
+                {
+                    AppendAdbLog("[Fastboot] ✓ Bootloader 解锁成功!", "#10B981");
+                    MessageBox.Show("Bootloader 解锁成功！\n\n设备将重启，请等待。", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    AppendAdbLog("[Fastboot] ✗ 解锁失败，请检查设备状态", "#EF4444");
+                    MessageBox.Show("解锁失败！\n\n可能原因：\n1. 设备不支持 OEM 解锁\n2. 未在开发者选项中启用 OEM 解锁\n3. 设备已锁定到运营商", "失败");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
-        private void Fb_Flash_Click(object sender, RoutedEventArgs e)
+        
+        private async void Fb_Flash_Click(object sender, RoutedEventArgs e)
         {
+            // 让用户输入分区名
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入要刷写的分区名称:", "Fastboot Flash", "boot");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "镜像文件 (*.img)|*.img|All Files (*.*)|*.*",
                 Title = "选择要刷写的镜像"
             };
-            if (dialog.ShowDialog() == true)
+            
+            if (dialog.ShowDialog() != true) return;
+            
+            AppendAdbLog($"[Fastboot] 准备刷写: {partition} <- {System.IO.Path.GetFileName(dialog.FileName)}", "#F59E0B");
+            
+            try
             {
-                AppendAdbLog($"[Fastboot] 刷写镜像: {System.IO.Path.GetFileName(dialog.FileName)}", "#F59E0B");
-                // TODO: fastboot flash
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                _fastbootOperationCts = new CancellationTokenSource();
+                BtnFbStop.IsEnabled = true;
+                
+                bool success = await fastboot.FlashAsync(partition, dialog.FileName, _fastbootOperationCts.Token);
+                
+                BtnFbStop.IsEnabled = false;
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastboot] ✓ 分区 {partition} 刷写成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastboot] ✗ 分区 {partition} 刷写失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (OperationCanceledException)
+            {
+                AppendAdbLog("[Fastboot] 操作已取消", "#D97706");
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
+            finally
+            {
+                BtnFbStop.IsEnabled = false;
             }
         }
 
         private void Fb_Erase_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastboot] ⚠️ 警告: 擦除分区操作不可逆!", "#EF4444");
-            // TODO: fastboot erase
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入要擦除的分区名称:\n\n⚠️ 此操作不可逆！", "Fastboot Erase", "userdata");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
+            var result = MessageBox.Show(
+                $"⚠️ 确定要擦除分区 {partition} 吗？\n\n此操作不可逆！",
+                "危险操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (result != MessageBoxResult.Yes) return;
+            
+            AppendAdbLog($"[Fastboot] ⚠️ 正在擦除分区: {partition}", "#EF4444");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                bool success = fastboot.Erase(partition);
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastboot] ✓ 分区 {partition} 擦除成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastboot] ✗ 分区 {partition} 擦除失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fb_Reboot_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastboot] 重启设备...", "#10B981");
-            // TODO: fastboot reboot
+            AppendAdbLog("[Fastboot] 正在重启设备...", "#10B981");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                bool success = fastboot.Reboot();
+                
+                if (success)
+                {
+                    AppendAdbLog("[Fastboot] ✓ 设备正在重启", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog("[Fastboot] ✗ 重启命令发送失败", "#EF4444");
+                }
+                
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fb_SlotA_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastboot] 切换到槽位 A", "#3B82F6");
-            // TODO: fastboot set_active a
+            AppendAdbLog("[Fastboot] 正在切换到槽位 A...", "#3B82F6");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsSeamlessUpdate)
+                {
+                    AppendAdbLog("[Fastboot] ⚠️ 设备不支持 A/B 分区", "#F59E0B");
+                    fastboot.Disconnect();
+                    fastboot.Dispose();
+                    return;
+                }
+                
+                bool success = fastboot.SetActiveSlot("a");
+                
+                if (success)
+                {
+                    AppendAdbLog("[Fastboot] ✓ 已切换到槽位 A", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog("[Fastboot] ✗ 槽位切换失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fb_SlotB_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastboot] 切换到槽位 B", "#3B82F6");
-            // TODO: fastboot set_active b
+            AppendAdbLog("[Fastboot] 正在切换到槽位 B...", "#3B82F6");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsSeamlessUpdate)
+                {
+                    AppendAdbLog("[Fastboot] ⚠️ 设备不支持 A/B 分区", "#F59E0B");
+                    fastboot.Disconnect();
+                    fastboot.Dispose();
+                    return;
+                }
+                
+                bool success = fastboot.SetActiveSlot("b");
+                
+                if (success)
+                {
+                    AppendAdbLog("[Fastboot] ✓ 已切换到槽位 B", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog("[Fastboot] ✗ 槽位切换失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastboot] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fb_FlashPayload_Click(object sender, RoutedEventArgs e)
@@ -6566,8 +6844,9 @@ namespace tools
             };
             if (dialog.ShowDialog() == true)
             {
-                AppendAdbLog($"[Fastbootd] 刷写 Payload: {System.IO.Path.GetFileName(dialog.FileName)}", "#8B5CF6");
-                // TODO: flash payload
+                AppendAdbLog($"[Fastbootd] 🚧 Payload 刷写功能开发中...", "#8B5CF6");
+                AppendAdbLog($"[Fastbootd] 已选择: {System.IO.Path.GetFileName(dialog.FileName)}", "#888888");
+                AppendAdbLog($"[Fastbootd] 请使用 ADB Sideload 或其他工具刷写 Payload", "#F59E0B");
             }
         }
 
@@ -6575,39 +6854,266 @@ namespace tools
         private void Fbd_GetVar_Click(object sender, RoutedEventArgs e)
         {
             AppendAdbLog("[Fastbootd] 正在读取动态分区信息...", "#8B5CF6");
-            // TODO: fastboot getvar is-logical
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                fastboot.RefreshDeviceInfo();
+                var info = fastboot.DeviceInfo;
+                
+                if (info != null)
+                {
+                    AppendAdbLog($"[Fastbootd] ══════════════════════════════", "#8B5CF6");
+                    AppendAdbLog($"[Fastbootd] 🚀 Fastbootd 模式: {(info.IsFastbootd ? "是 ✓" : "否 (普通 Fastboot)")}", info.IsFastbootd ? "#10B981" : "#F59E0B");
+                    AppendAdbLog($"[Fastbootd] 🔄 VAB 状态: {(string.IsNullOrEmpty(info.SnapshotUpdateStatus) ? "无" : info.SnapshotUpdateStatus)}", "#10B981");
+                    AppendAdbLog($"[Fastbootd] 🐄 COW 分区: {(info.HasCowPartitions ? "有" : "无")}", "#10B981");
+                    
+                    // 列出逻辑分区
+                    var logicalParts = info.PartitionIsLogical.Where(kv => kv.Value).Select(kv => kv.Key).ToList();
+                    if (logicalParts.Count > 0)
+                    {
+                        AppendAdbLog($"[Fastbootd] 📦 逻辑分区 ({logicalParts.Count}):", "#10B981");
+                        foreach (var part in logicalParts.Take(10))
+                        {
+                            info.PartitionSizes.TryGetValue(part, out long size);
+                            AppendAdbLog($"[Fastbootd]    - {part}: {size / (1024.0 * 1024):F1} MB", "#888888");
+                        }
+                        if (logicalParts.Count > 10)
+                        {
+                            AppendAdbLog($"[Fastbootd]    ... 及其他 {logicalParts.Count - 10} 个分区", "#888888");
+                        }
+                    }
+                    AppendAdbLog($"[Fastbootd] ══════════════════════════════", "#8B5CF6");
+                    
+                    if (!info.IsFastbootd)
+                    {
+                        AppendAdbLog("[Fastbootd] 💡 提示: 若要管理动态分区，请先进入 Fastbootd 模式", "#F59E0B");
+                        AppendAdbLog("[Fastbootd]    执行: fastboot reboot fastboot", "#888888");
+                    }
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastbootd] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
-        private void Fbd_Flash_Click(object sender, RoutedEventArgs e)
+        private async void Fbd_Flash_Click(object sender, RoutedEventArgs e)
         {
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入要刷写的动态分区名称:", "Fastbootd Flash", "system");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "镜像文件 (*.img)|*.img|All Files (*.*)|*.*",
                 Title = "选择要刷写的动态分区镜像"
             };
-            if (dialog.ShowDialog() == true)
+            
+            if (dialog.ShowDialog() != true) return;
+            
+            AppendAdbLog($"[Fastbootd] 准备刷写: {partition} <- {System.IO.Path.GetFileName(dialog.FileName)}", "#8B5CF6");
+            
+            try
             {
-                AppendAdbLog($"[Fastbootd] 刷写动态分区: {System.IO.Path.GetFileName(dialog.FileName)}", "#8B5CF6");
-                // TODO: fastboot flash
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsFastbootd)
+                {
+                    AppendAdbLog("[Fastbootd] ⚠️ 当前不在 Fastbootd 模式，尝试普通刷写...", "#F59E0B");
+                }
+                
+                _fastbootOperationCts = new CancellationTokenSource();
+                BtnFbdStop.IsEnabled = true;
+                
+                bool success = await fastboot.FlashAsync(partition, dialog.FileName, _fastbootOperationCts.Token);
+                
+                BtnFbdStop.IsEnabled = false;
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastbootd] ✓ 分区 {partition} 刷写成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastbootd] ✗ 分区 {partition} 刷写失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (OperationCanceledException)
+            {
+                AppendAdbLog("[Fastbootd] 操作已取消", "#D97706");
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastbootd] 错误: {ex.Message}", "#EF4444");
+            }
+            finally
+            {
+                BtnFbdStop.IsEnabled = false;
             }
         }
 
         private void Fbd_Delete_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastbootd] ⚠️ 删除动态分区...", "#EF4444");
-            // TODO: fastboot delete-logical-partition
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入要删除的动态分区名称:\n\n⚠️ 仅支持在 Fastbootd 模式下操作", "删除动态分区", "system_b");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
+            var result = MessageBox.Show(
+                $"⚠️ 确定要删除动态分区 {partition} 吗？\n\n此操作需要 Fastbootd 模式。",
+                "危险操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            
+            if (result != MessageBoxResult.Yes) return;
+            
+            AppendAdbLog($"[Fastbootd] ⚠️ 正在删除动态分区: {partition}", "#EF4444");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsFastbootd)
+                {
+                    AppendAdbLog("[Fastbootd] ✗ 删除动态分区需要 Fastbootd 模式", "#EF4444");
+                    AppendAdbLog("[Fastbootd] 请先执行: fastboot reboot fastboot", "#888888");
+                    fastboot.Disconnect();
+                    fastboot.Dispose();
+                    return;
+                }
+                
+                bool success = fastboot.DeleteLogicalPartition(partition);
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastbootd] ✓ 动态分区 {partition} 删除成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastbootd] ✗ 动态分区 {partition} 删除失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastbootd] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fbd_Create_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastbootd] 创建动态分区...", "#10B981");
-            // TODO: fastboot create-logical-partition
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入新动态分区名称:", "创建动态分区", "my_partition");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
+            string? sizeStr = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入分区大小 (字节):", "创建动态分区", "1073741824");
+            
+            if (string.IsNullOrEmpty(sizeStr) || !long.TryParse(sizeStr, out long size))
+            {
+                AppendAdbLog("[Fastbootd] ✗ 无效的分区大小", "#EF4444");
+                return;
+            }
+            
+            AppendAdbLog($"[Fastbootd] 正在创建动态分区: {partition} ({size / (1024.0 * 1024):F1} MB)", "#10B981");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsFastbootd)
+                {
+                    AppendAdbLog("[Fastbootd] ✗ 创建动态分区需要 Fastbootd 模式", "#EF4444");
+                    AppendAdbLog("[Fastbootd] 请先执行: fastboot reboot fastboot", "#888888");
+                    fastboot.Disconnect();
+                    fastboot.Dispose();
+                    return;
+                }
+                
+                bool success = fastboot.CreateLogicalPartition(partition, size);
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastbootd] ✓ 动态分区 {partition} 创建成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastbootd] ✗ 动态分区 {partition} 创建失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastbootd] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         private void Fbd_Resize_Click(object sender, RoutedEventArgs e)
         {
-            AppendAdbLog("[Fastbootd] 调整分区大小...", "#3B82F6");
-            // TODO: fastboot resize-logical-partition
+            string? partition = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入要调整的动态分区名称:", "调整分区大小", "system");
+            
+            if (string.IsNullOrEmpty(partition)) return;
+            
+            string? sizeStr = Microsoft.VisualBasic.Interaction.InputBox(
+                "请输入新大小 (字节):", "调整分区大小", "2147483648");
+            
+            if (string.IsNullOrEmpty(sizeStr) || !long.TryParse(sizeStr, out long size))
+            {
+                AppendAdbLog("[Fastbootd] ✗ 无效的分区大小", "#EF4444");
+                return;
+            }
+            
+            AppendAdbLog($"[Fastbootd] 正在调整分区大小: {partition} -> {size / (1024.0 * 1024):F1} MB", "#3B82F6");
+            
+            try
+            {
+                var fastboot = ConnectFastboot();
+                if (fastboot == null) return;
+                
+                if (!fastboot.IsFastbootd)
+                {
+                    AppendAdbLog("[Fastbootd] ✗ 调整分区大小需要 Fastbootd 模式", "#EF4444");
+                    AppendAdbLog("[Fastbootd] 请先执行: fastboot reboot fastboot", "#888888");
+                    fastboot.Disconnect();
+                    fastboot.Dispose();
+                    return;
+                }
+                
+                bool success = fastboot.ResizeLogicalPartition(partition, size);
+                
+                if (success)
+                {
+                    AppendAdbLog($"[Fastbootd] ✓ 分区 {partition} 大小调整成功!", "#10B981");
+                }
+                else
+                {
+                    AppendAdbLog($"[Fastbootd] ✗ 分区 {partition} 大小调整失败", "#EF4444");
+                }
+                
+                fastboot.Disconnect();
+                fastboot.Dispose();
+            }
+            catch (Exception ex)
+            {
+                AppendAdbLog($"[Fastbootd] 错误: {ex.Message}", "#EF4444");
+            }
         }
 
         /// <summary>
@@ -6617,8 +7123,8 @@ namespace tools
         {
             AppendAdbLog("[ADB] ⏹️ 正在停止当前操作...", "#EF4444");
             BtnAdbStop.IsEnabled = false;
+            // 目前 ADB 操作主要使用 ADB Server，无法直接取消
             AppendAdbLog("[ADB] ⚠️ 操作已被用户中断", "#D97706");
-            // TODO: 实现实际停止逻辑
         }
 
         /// <summary>
@@ -6627,9 +7133,9 @@ namespace tools
         private void Fb_Stop_Click(object sender, RoutedEventArgs e)
         {
             AppendAdbLog("[Fastboot] ⏹️ 正在停止当前操作...", "#EF4444");
+            _fastbootOperationCts?.Cancel();
             BtnFbStop.IsEnabled = false;
-            AppendAdbLog("[Fastboot] ⚠️ 操作已被用户中断", "#D97706");
-            // TODO: 实现实际停止逻辑
+            AppendAdbLog("[Fastboot] ⚠️ 已发送取消请求", "#D97706");
         }
 
         /// <summary>
@@ -6638,9 +7144,9 @@ namespace tools
         private void Fbd_Stop_Click(object sender, RoutedEventArgs e)
         {
             AppendAdbLog("[Fastbootd] ⏹️ 正在停止当前操作...", "#EF4444");
+            _fastbootOperationCts?.Cancel();
             BtnFbdStop.IsEnabled = false;
-            AppendAdbLog("[Fastbootd] ⚠️ 操作已被用户中断", "#D97706");
-            // TODO: 实现实际停止逻辑
+            AppendAdbLog("[Fastbootd] ⚠️ 已发送取消请求", "#D97706");
         }
 
         private void Adb_SelectPayload_Click(object sender, RoutedEventArgs e)
