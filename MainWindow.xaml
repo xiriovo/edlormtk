@@ -26,7 +26,7 @@
         <!-- 动画效果 -->
         <QuadraticEase x:Key="EaseOut" EasingMode="EaseOut"/>
         
-        <!-- ??????�?-->
+        <!-- 标题栏按钮样式 -->
         <Style x:Key="TitleBarButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="46"/>
             <Setter Property="Height" Value="32"/>
@@ -88,7 +88,7 @@
             <Setter Property="ToolTip" Value="刷新"/>
         </Style>
         
-        <!-- ??????�?-->
+        <!-- 标题栏按钮样式 -->
         <Style x:Key="SidebarButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="8,4"/>
@@ -122,7 +122,7 @@
             </Setter>
         </Style>
         
-        <!-- ????????? -->
+        <!-- 关闭按钮悬停样式 -->
         <Style x:Key="SidebarButtonActiveStyle" TargetType="Button" BasedOn="{StaticResource SidebarButtonStyle}">
             <Setter Property="Background">
                 <Setter.Value>
@@ -186,7 +186,7 @@
             </Setter>
         </Style>
         
-        <!-- ========== ??????�?(?????�? ========== -->
+        <!-- ========== 标题栏区域(含窗口控制) ========== -->
         
         <!-- 扁平进度条 - 基础样式 -->
         <Style x:Key="FlatProgressBar" TargetType="ProgressBar">
@@ -295,7 +295,7 @@
             </Setter>
         </Style>
         
-        <!-- RadioButton ?? - ???? -->
+        <!-- RadioButton 样式 - 存储类型 -->
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -321,7 +321,7 @@
         </Style>
     </Window.Resources>
 
-    <!-- ???? - ?????? -->
+    <!-- 主窗口 - 两栏布局 -->
     <Border Margin="10">
         <Border.Effect>
             <DropShadowEffect BlurRadius="20" 
@@ -330,7 +330,7 @@
                               Color="#000000"/>
         </Border.Effect>
 
-        <!-- ??�?- ???? -->
+        <!-- 侧边栏 - 导航菜单 -->
         <Border x:Name="MainBorder"
                 CornerRadius="8"
                 BorderBrush="#40000000"
@@ -338,20 +338,20 @@
                 ClipToBounds="True">
             
             <Grid>
-                <!-- ???? - ????? (10%??/90%???) -->
+                <!-- 主内容 - 两列布局 (10%侧边/90%内容) -->
                 <Border CornerRadius="8" Background="#E6F5F5F5"/>
                 
-                <!-- ????�?- ??????�?-->
+                <!-- 左侧栏 - 导航菜单区域 -->
                 <Image x:Name="BackgroundImage"
                        Stretch="UniformToFill"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Opacity="0"/>
                 
-                <!-- ?????�?- ????�?(????�?0%???�? -->
+                <!-- 右侧内容 - 动态页面(各功能模块内容) -->
                 <Border Background="#15FFFFFF" CornerRadius="8"/>
                 
-                <!-- ????�?- ??????�?-->
+                <!-- 左侧栏 - 导航菜单区域 -->
                 <Border x:Name="LoadingIndicator" 
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
@@ -370,7 +370,7 @@
                     </StackPanel>
                 </Border>
                 
-                <!-- ????�?- ????????�?-->
+                <!-- 右侧栏 - 日志和设备信息区域 -->
                 <Canvas x:Name="ClickEffectCanvas" 
                         IsHitTestVisible="False"
                         ClipToBounds="True"/>
@@ -397,12 +397,12 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- ??????�?-->
+                            <!-- 标题栏按钮样式 -->
                             <StackPanel Grid.Column="0" 
                                         Orientation="Horizontal" 
                                         VerticalAlignment="Center"
                                         Margin="12,0,0,0">
-                                <!-- ?? -->
+                                <!-- 表头 -->
                                 <Ellipse Width="16" Height="16" Margin="0,0,10,0">
                                     <Ellipse.Fill>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -438,12 +438,12 @@
                                         Click="RefreshButton_Click"
                                         ToolTip="刷新设备"/>
                                 
-                                <!-- ????? -->
+                                <!-- 最小化按钮 -->
                                 <Button x:Name="MinimizeButton"
                                         Style="{StaticResource TitleBarButtonStyle}"
                                         Content="&#xE921;"
                                         Click="MinimizeButton_Click"
-                                        ToolTip="???"/>
+                                        ToolTip="最小化"/>
                                 
                                 <!-- 最大化/还原按钮 -->
                                 <Button x:Name="MaximizeButton"
@@ -484,7 +484,7 @@
                                 
                                 <!-- 动画效果 -->
                                 <StackPanel Grid.Row="0" Margin="0,10,0,0">
-                                    <!-- ?�?Qualcomm -->
+                                    <!-- 高通 Qualcomm -->
                                     <Button x:Name="BtnQualcomm" 
                                             Style="{StaticResource SidebarButtonActiveStyle}"
                                             Click="SidebarButton_Click"
@@ -495,7 +495,7 @@
                                         </StackPanel>
                                     </Button>
                                     
-                                    <!-- ??�?MTK -->
+                                    <!-- 联发科 MTK -->
                                     <Button x:Name="BtnMTK" 
                                             Style="{StaticResource SidebarButtonStyle}"
                                             Click="SidebarButton_Click"
@@ -506,7 +506,7 @@
                                         </StackPanel>
                                     </Button>
                                     
-                                    <!-- ?? Unisoc -->
+                                    <!-- 展讯 Unisoc -->
                                     <Button x:Name="BtnSpreadtrum" 
                                             Style="{StaticResource SidebarButtonStyle}"
                                             Click="SidebarButton_Click"
@@ -528,7 +528,7 @@
                                         </StackPanel>
                                     </Button>
                                     
-                                    <!-- ?? Resources -->
+                                    <!-- 资源 Resources -->
                                     <Button x:Name="BtnResources" 
                                             Style="{StaticResource SidebarButtonStyle}"
                                             Click="SidebarButton_Click"
@@ -542,7 +542,7 @@
                                     <!-- 选项 -->
                                     <Border Height="1" Background="#20000000" Margin="15,10,15,10"/>
                                     
-                                    <!-- ?? Settings -->
+                                    <!-- 设置 Settings -->
                                     <Button x:Name="BtnSettings" 
                                             Style="{StaticResource SidebarButtonStyle}"
                                             Click="SettingsButton_Click">
@@ -552,7 +552,7 @@
                                         </StackPanel>
                                     </Button>
                                     
-                                    <!-- ?? About -->
+                                    <!-- 关于 About -->
                                     <Button x:Name="BtnAbout" 
                                             Style="{StaticResource SidebarButtonStyle}"
                                             Click="AboutButton_Click">
@@ -580,7 +580,7 @@
                                 Margin="0">
                             <!-- 工具按钮样式 -->
                             <Grid Margin="15">
-                                <!-- ?????�?-->
+                                <!-- 双击选择文件 -->
                                 <Grid x:Name="QualcommContent" Visibility="Visible">
                                 <Grid.ColumnDefinitions>
                                     <!-- 进度条 -->
@@ -589,7 +589,7 @@
                                     <ColumnDefinition Width="300"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <!-- ========== ????�?========== -->
+                                <!-- ========== 设备信息区 ========== -->
                                 <Grid Grid.Column="0" Margin="0,0,10,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -639,7 +639,7 @@
                                                     </TextBox>
                                                     <TextBlock x:Name="TxtSearchPlaceholder"
                                                                Grid.Column="0" 
-                                                               Text="?? ????..." 
+                                                               Text="搜索分区..." 
                                                                Foreground="#888888" 
                                                                FontSize="12"
                                                                Margin="10,0,0,0"
@@ -655,7 +655,7 @@
                                                 </Grid>
                                             </Border>
                                             
-                                            <!-- ?? -->
+                                            <!-- 表头 -->
                                             <Border Grid.Row="1" Background="#35000000" Padding="10,8">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
@@ -695,13 +695,13 @@
                                                                             <Trigger Property="IsMouseOver" Value="True">
                                                                                 <Setter Property="Background" Value="#18000000"/>
                                                                             </Trigger>
-                                                                            <!-- ?????? - ?? -->
+                                                                            <!-- 自定义文件 - 蓝色 -->
                                                                             <DataTrigger Binding="{Binding HasCustomFile}" Value="True">
                                                                                 <Setter Property="Background" Value="#2500D4FF"/>
                                                                                 <Setter Property="BorderBrush" Value="#5000D4FF"/>
                                                                                 <Setter Property="BorderThickness" Value="1"/>
                                                                             </DataTrigger>
-                                                                            <!-- ???? - ?? -->
+                                                                            <!-- 文件存在 - 绿色 -->
                                                                             <MultiDataTrigger>
                                                                                 <MultiDataTrigger.Conditions>
                                                                                     <Condition Binding="{Binding HasCustomFile}" Value="False"/>
@@ -711,7 +711,7 @@
                                                                                 <Setter Property="BorderBrush" Value="#5010B981"/>
                                                                                 <Setter Property="BorderThickness" Value="1"/>
                                                                             </MultiDataTrigger>
-                                                                            <!-- ???????? - ?? -->
+                                                                            <!-- 文件不存在 - 红色 -->
                                                                             <MultiDataTrigger>
                                                                                 <MultiDataTrigger.Conditions>
                                                                                     <Condition Binding="{Binding HasCustomFile}" Value="False"/>
@@ -728,8 +728,8 @@
                                                                 <Border.ToolTip>
                                                                     <StackPanel MaxWidth="400">
                                                                         <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="12" Foreground="#00D4FF"/>
-                                                                        <TextBlock Text="{Binding Location, StringFormat='??: {0}'}" FontSize="11" Foreground="#888"/>
-                                                                        <TextBlock Text="{Binding DisplayFilePath, StringFormat='??: {0}'}" FontSize="11" Foreground="#AAA" TextWrapping="Wrap"/>
+                                                                        <TextBlock Text="{Binding Location, StringFormat='位置: {0}'}" FontSize="11" Foreground="#888"/>
+                                                                        <TextBlock Text="{Binding DisplayFilePath, StringFormat='路径: {0}'}" FontSize="11" Foreground="#AAA" TextWrapping="Wrap"/>
                                                                         <TextBlock Text="📱" FontSize="10" Foreground="#666" Margin="0,4,0,0"/>
                                                                     </StackPanel>
                                                                 </Border.ToolTip>
@@ -748,7 +748,7 @@
                                                                     <TextBlock Grid.Column="2" Text="{Binding Name}" Foreground="#00D4FF" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
                                                                     <TextBlock Grid.Column="3" Text="{Binding FormattedSize}" Foreground="#4ADE80" FontWeight="SemiBold" FontSize="11" VerticalAlignment="Center"/>
                                                                     <TextBlock Grid.Column="4" Text="{Binding StartSectorHex}" Foreground="#888" FontSize="10" VerticalAlignment="Center" FontFamily="Consolas"/>
-                                                                    <!-- ?????�?-->
+                                                                    <!-- 双击选择文件 -->
                                                                     <TextBlock Grid.Column="5" Text="{Binding FileStatusText}" FontSize="10" VerticalAlignment="Center">
                                                                         <TextBlock.Style>
                                                                             <Style TargetType="TextBlock">
@@ -805,7 +805,7 @@
                                         </Grid>
                                     </Border>
                                     
-                                    <!-- ????�?- ?? -->
+                                    <!-- 操作按钮区 -->
                                     <Border Grid.Row="3" Margin="0,10,0,0" Background="#10000000" CornerRadius="6" Padding="12,10" BorderBrush="#15000000" BorderThickness="1">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -825,7 +825,7 @@
                                                          Height="22"
                                                          Style="{StaticResource ProgressBarSuccessStripe}"
                                                          VerticalAlignment="Center"/>
-                                            <!-- ????????????�?-->
+                                            <!-- 分区列表操作按钮区域 -->
                                             <TextBlock Grid.Column="2" x:Name="TxtProgressPercent" 
                                                        Text="" 
                                                        Visibility="Collapsed"
@@ -842,7 +842,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             
-                                            <!-- ????????? (??UFS) -->
+                                            <!-- 存储类型选择 (仅UFS) -->
                                             <Border Grid.Column="0" Background="#25000000" CornerRadius="6" Padding="3" Margin="0,0,12,0">
                                                 <StackPanel Orientation="Horizontal">
                                                     <RadioButton x:Name="RbEmmc" GroupName="Storage" Margin="0,0,2,0">
@@ -904,7 +904,7 @@
                                                 </StackPanel>
                                             </Border>
                                             
-                                            <!-- ??????�?-->
+                                            <!-- 标题栏按钮样式 -->
                                             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                                                 <Button Content="?GPT" 
                                                         Style="{StaticResource ButtonInfo}" 
@@ -1136,7 +1136,7 @@
                                         </Grid>
                                     </Border>
                                     
-                                    <!-- ??�?- ???? -->
+                                    <!-- 侧边栏 - 导航菜单 -->
                                     <Border Grid.Row="0" Background="#12000000" CornerRadius="6" Padding="10,8" BorderBrush="#18000000" BorderThickness="1">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -1144,9 +1144,9 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             
-                                            <!-- ??????? -->
+                                            <!-- 文件选择区 -->
                                             <StackPanel Grid.Column="0">
-                                                <!-- Loader �?-->
+                                                <!-- Loader 路径 -->
                                                 <Grid Margin="0,0,0,4">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="55"/>
@@ -1154,7 +1154,7 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="??�" Foreground="#555555" FontSize="11" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Loader" Foreground="#555555" FontSize="11" VerticalAlignment="Center"/>
                                                     <Border Grid.Column="1" Background="#15000000" CornerRadius="3" BorderBrush="#20000000" BorderThickness="1" Margin="6,0" Height="24">
                                                         <TextBox x:Name="TxtLoader" Background="Transparent" BorderThickness="0" Foreground="#444444" 
                                                                  CaretBrush="#444444" Padding="6,2" FontSize="10" VerticalContentAlignment="Center"/>
@@ -1211,7 +1211,7 @@
                                                     </Button>
                                                 </Grid>
                                                 
-                                                <!-- XML ????�?-->
+                                                <!-- XML 配置文件 -->
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="55"/>
@@ -1383,7 +1383,7 @@
                                     </Border>
                                 </Grid>
                                 
-                                <!-- ========== ????�?========== -->
+                                <!-- ========== 设备信息区 ========== -->
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -1406,7 +1406,7 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             
-                                            <!-- ???�?-->
+                                            <!-- 状态信息 -->
                                             <Grid Grid.Row="0" Margin="0,0,0,8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -1420,7 +1420,7 @@
                                                 </Border>
                                             </Grid>
                                             
-                                            <!-- ???? - ??�?-->
+                                            <!-- 设备信息 - 基本 -->
                                             <Grid Grid.Row="1" Margin="0,0,0,6">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
@@ -1436,12 +1436,12 @@
                                                     <TextBlock x:Name="TxtDeviceModel" Text="---" Foreground="#444444" FontSize="11" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2">
-                                                    <TextBlock Text="OTA??" Foreground="#888888" FontSize="10"/>
+                                                    <TextBlock Text="OTA配置" Foreground="#888888" FontSize="10"/>
                                                     <TextBlock x:Name="TxtDeviceOTA" Text="---" Foreground="#444444" FontSize="11"/>
                                                 </StackPanel>
                                             </Grid>
                                             
-                                            <!-- ???? - ??�?-->
+                                            <!-- 设备信息 - 基本 -->
                                             <Grid Grid.Row="2" Margin="0,0,0,8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
@@ -1460,15 +1460,15 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Grid.Column="0">
-                                                    <TextBlock Text="?? ??" Foreground="#888888" FontSize="10"/>
+                                                    <TextBlock Text="已用时间" Foreground="#888888" FontSize="10"/>
                                                     <TextBlock x:Name="TxtElapsedTime" Text="00:00" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="�???" Foreground="#888888" FontSize="10"/>
+                                                    <TextBlock Text="传输速度" Foreground="#888888" FontSize="10"/>
                                                     <TextBlock x:Name="TxtTransferSpeed" Text="0 MB/s" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2">
-                                                    <TextBlock Text="?? ??�" Foreground="#888888" FontSize="10"/>
+                                                    <TextBlock Text="已传输量" Foreground="#888888" FontSize="10"/>
                                                     <TextBlock x:Name="TxtTransferredSize" Text="0 MB" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                             </Grid>
@@ -1490,13 +1490,13 @@
                                             <!-- 进度条 -->
                                             <Border Grid.Row="0" Background="#15000000" CornerRadius="6,6,0,0" Padding="10,6">
                                                 <Grid>
-                                                    <TextBlock Text="?? ??" Foreground="#444444" FontWeight="SemiBold" FontSize="12"/>
+                                                    <TextBlock Text="操作日志" Foreground="#444444" FontWeight="SemiBold" FontSize="12"/>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                        <Button Content="选择" 
+                                                        <Button Content="复制" 
                                                                 Style="{StaticResource ButtonInfo.Small}"
                                                                 Click="CopyLog_Click"
                                                                 Margin="0,0,6,0"/>
-                                                        <Button Content="选择" 
+                                                        <Button Content="清除" 
                                                                 Style="{StaticResource ButtonDanger.Small}"
                                                                 Click="ClearLog_Click"/>
                                                     </StackPanel>
@@ -1547,7 +1547,7 @@
                                 </Grid>
                             </Grid>
                                 
-                                <!-- MTK???? - ??????? -->
+                                <!-- MTK面板 - 联发科设备模块 -->
                                 <Grid x:Name="MTKContent" Visibility="Collapsed">
                                     <Grid.ColumnDefinitions>
                                         <!-- 进度条 -->
@@ -1556,7 +1556,7 @@
                                         <ColumnDefinition Width="300"/>
                                     </Grid.ColumnDefinitions>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="0" Margin="0,0,10,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -1565,7 +1565,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- ??�?- ???? -->
+                                        <!-- 侧边栏 - 导航菜单 -->
                                         <Border Grid.Row="0" Background="#12000000" CornerRadius="6" Padding="10,8" BorderBrush="#18000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -1573,16 +1573,16 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 
-                                                <!-- ??????? -->
+                                                <!-- 文件选择区 -->
                                                 <StackPanel Grid.Column="0">
-                                                    <!-- DA �?-->
+                                                    <!-- DA 路径 -->
                                                     <Grid Margin="0,0,0,4">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="55"/>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="DA??" Foreground="#555555" FontSize="11" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="DA文件" Foreground="#555555" FontSize="11" VerticalAlignment="Center"/>
                                                         <Border Grid.Column="1" Background="#15000000" CornerRadius="3" BorderBrush="#20000000" BorderThickness="1" Margin="6,0" Height="24">
                                                             <TextBox x:Name="TxtMtkDA" Background="Transparent" BorderThickness="0" Foreground="#444444" 
                                                                      CaretBrush="#444444" Padding="6,2" FontSize="10" VerticalContentAlignment="Center"/>
@@ -1613,7 +1613,7 @@
                                                         </Button>
                                                     </Grid>
                                                     
-                                                    <!-- ??/??�?�?-->
+                                                    <!-- 固件/Preloader路径 -->
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="55"/>
@@ -1682,7 +1682,7 @@
                                                     </Grid>
                                                 </StackPanel>
                                                 
-                                                <!-- ????? -->
+                                                <!-- 操作模式 -->
                                                 <StackPanel Grid.Column="1" Margin="12,0,0,0">
                                                     <!-- 工具按钮样式 -->
                                                     <Border Background="#25000000" CornerRadius="4" Padding="2" Margin="0,0,0,4">
@@ -1750,7 +1750,7 @@
                                                                             <Setter.Value>
                                                                                 <ControlTemplate TargetType="RadioButton">
                                                                                     <Border x:Name="bg" Background="Transparent" CornerRadius="3" Padding="8,4" Cursor="Hand">
-                                                                                        <TextBlock x:Name="txt" Text="??�" FontSize="10" FontWeight="SemiBold" Foreground="#777777"/>
+                                                                                        <TextBlock x:Name="txt" Text="格式化" FontSize="10" FontWeight="SemiBold" Foreground="#777777"/>
                                                                                     </Border>
                                                                                     <ControlTemplate.Triggers>
                                                                                         <Trigger Property="IsChecked" Value="True">
@@ -1811,11 +1811,11 @@
                                                                 </Style>
                                                             </TextBox.Style>
                                                         </TextBox>
-                                                        <TextBlock x:Name="TxtMtkSearchPlaceholder" Grid.Column="0" Text="?? ????..." 
+                                                        <TextBlock x:Name="TxtMtkSearchPlaceholder" Grid.Column="0" Text="搜索分区..." 
                                                                    Foreground="#888888" FontSize="12" Margin="10,0,0,0" VerticalAlignment="Center"
                                                                    IsHitTestVisible="False"/>
                                                         
-                                                        <!-- ??/??????�?-->
+                                                        <!-- 启用/禁用保护分区 -->
                                                         <Button Grid.Column="1" Content="选择非保护" FontSize="10" Padding="8,4" Margin="5,0"
                                                                 Background="#2510B981" Foreground="#10B981" BorderThickness="0"
                                                                 Click="BtnMtkSelectUnprotected_Click" ToolTip="选择非保护分区(系统分区)">
@@ -1830,7 +1830,7 @@
                                                                 </Style>
                                                             </Button.Style>
                                                         </Button>
-                                                        <Button Grid.Column="2" Content="?? ??�" FontSize="10" Padding="8,4" Margin="0,0,5,0"
+                                                        <Button Grid.Column="2" Content="选择可下载" FontSize="10" Padding="8,4" Margin="0,0,5,0"
                                                                 Background="#25F59E0B" Foreground="#F59E0B" BorderThickness="0"
                                                                 Click="BtnMtkSelectProtected_Click" ToolTip="选择保护分区(NVRAM/EFS等)">
                                                             <Button.Style>
@@ -1863,7 +1863,7 @@
                                                     </Grid>
                                                 </Border>
                                                 
-                                                <!-- ?? -->
+                                                <!-- 表头 -->
                                                 <Border Grid.Row="1" Background="#35000000" Padding="10,8">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -1875,11 +1875,11 @@
                                                             <ColumnDefinition Width="*" MinWidth="120"/>
                                                         </Grid.ColumnDefinitions>
                                                         <CheckBox Grid.Column="0" x:Name="ChkMtkSelectAll" VerticalAlignment="Center" Click="ChkMtkSelectAll_Click"/>
-                                                        <TextBlock Grid.Column="1" Text="??�" Foreground="#555555" FontSize="10" FontWeight="SemiBold"/>
+                                                        <TextBlock Grid.Column="1" Text="分区名" Foreground="#555555" FontSize="10" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="2" Text="名称" Foreground="#555555" FontSize="10" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="3" Text="类型" Foreground="#555555" FontSize="10" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="4" Text="状态" Foreground="#555555" FontSize="10" FontWeight="SemiBold"/>
-                                                        <TextBlock Grid.Column="5" Text="???? (????)" Foreground="#D97706" FontSize="10" FontWeight="SemiBold"/>
+                                                        <TextBlock Grid.Column="5" Text="镜像文件 (双击选择)" Foreground="#D97706" FontSize="10" FontWeight="SemiBold"/>
                                                     </Grid>
                                                 </Border>
                                                 
@@ -1927,8 +1927,8 @@
                                                                     <Border.ToolTip>
                                                                         <StackPanel MaxWidth="400">
                                                                             <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="12" Foreground="#8B5CF6"/>
-                                                                            <TextBlock Text="{Binding StartAddressHex, StringFormat='????: {0}'}" FontSize="11" Foreground="#888"/>
-                                                                            <TextBlock Text="{Binding DisplayFilePath, StringFormat='??: {0}'}" FontSize="11" Foreground="#AAA" TextWrapping="Wrap"/>
+                                                                            <TextBlock Text="{Binding StartAddressHex, StringFormat='起始地址: {0}'}" FontSize="11" Foreground="#888"/>
+                                                                            <TextBlock Text="{Binding DisplayFilePath, StringFormat='路径: {0}'}" FontSize="11" Foreground="#AAA" TextWrapping="Wrap"/>
                                                                             <TextBlock Text="📱" FontSize="10" Foreground="#666" Margin="0,4,0,0"/>
                                                                         </StackPanel>
                                                                     </Border.ToolTip>
@@ -2008,17 +2008,17 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 
-                                                <!-- ???DA Server + Super/?? ?�?-->
+                                                <!-- 启动DA Server + Super/保护分区 -->
                                                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                    <Button Content="�?DA??�" Style="{StaticResource ButtonSuccess}" 
+                                                    <Button Content="启动DA服务" Style="{StaticResource ButtonSuccess}" 
                                                             Height="32" Width="85" FontSize="11" Click="MTK_DAServer_Click" Margin="0,0,6,0"/>
                                                     
-                                                    <!-- Super ???�?-->
+                                                    <!-- Super 分区开关 -->
                                                     <ToggleButton x:Name="TglMtkSuper" 
                                                                   Width="58" Height="32" Margin="0,0,4,0"
                                                                   Checked="MtkSuperPartition_Checked"
                                                                   Unchecked="MtkSuperPartition_Unchecked"
-                                                                  ToolTip="Super????: ????super.img, ??system/vendor????">
+                                                                  ToolTip="Super分区模式: 支持刷写super.img及system/vendor子分区">
                                                         <ToggleButton.Style>
                                                             <Style TargetType="ToggleButton">
                                                                 <Setter Property="Background" Value="#6B7280"/>
@@ -2048,7 +2048,7 @@
                                                         <TextBlock Text="Super" FontSize="11"/>
                                                     </ToggleButton>
                                                     
-                                                    <!-- ?????�?-->
+                                                    <!-- 双击选择文件 -->
                                                     <ToggleButton x:Name="TglMtkProtect" 
                                                                   Width="58" Height="32"
                                                                   Checked="MtkProtectPartition_Checked"
@@ -2084,7 +2084,7 @@
                                                     </ToggleButton>
                                                 </StackPanel>
                                                 
-                                                <!-- ??????�?-->
+                                                <!-- 标题栏按钮样式 -->
                                                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                                                     <Button Content="启动设备" Style="{StaticResource ButtonInfo}" 
                                                             Margin="0,0,6,0" Width="70" Height="32" Click="MTK_BootDevice_Click" ToolTip="启动设备"/>
@@ -2098,11 +2098,11 @@
                                                             Width="70" Height="32" Click="MTK_Stop_Click" ToolTip="停止" IsEnabled="False"/>
                                                 </StackPanel>
                                                 
-                                                <!-- ??????�?-->
+                                                <!-- 标题栏按钮样式 -->
                                                 <Border Grid.Column="2" Background="#25000000" CornerRadius="4" Padding="4,3">
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="重启:" Foreground="#666666" FontSize="10" VerticalAlignment="Center" Margin="4,0,6,0"/>
-                                                        <Button Content="选择" ToolTip="提示" Click="MTK_RebootSystem_Click">
+                                                        <Button Content="系统" ToolTip="重启到系统" Click="MTK_RebootSystem_Click">
                                                             <Button.Style>
                                                                 <Style TargetType="Button">
                                                                     <Setter Property="Background" Value="#22C55E"/>
@@ -2156,7 +2156,7 @@
                                                                 </Style>
                                                             </Button.Style>
                                                         </Button>
-                                                        <Button Content="选择" ToolTip="提示" Click="MTK_RebootRecovery_Click">
+                                                        <Button Content="Recovery" ToolTip="重启到Recovery" Click="MTK_RebootRecovery_Click">
                                                             <Button.Style>
                                                                 <Style TargetType="Button">
                                                                     <Setter Property="Background" Value="#3B82F6"/>
@@ -2187,7 +2187,7 @@
                                             </Grid>
                                         </Border>
                                         
-                                        <!-- ????�?- ?? -->
+                                        <!-- 操作按钮区 -->
                                         <Border Grid.Row="3" Margin="0,10,0,0" Background="#10000000" CornerRadius="6" Padding="12,10" BorderBrush="#15000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -2202,14 +2202,14 @@
                                         </Border>
                                     </Grid>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- MTK?????? -->
+                                        <!-- MTK设备信息区 -->
                                         <Border Grid.Row="0" Background="#12000000" CornerRadius="6" BorderBrush="#20000000" BorderThickness="1" Padding="12" Margin="0,0,0,10">
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -2219,7 +2219,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ???�?-->
+                                                <!-- 状态信息 -->
                                                 <Grid Grid.Row="0" Margin="0,0,0,8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
@@ -2233,7 +2233,7 @@
                                                     </Border>
                                                 </Grid>
                                                 
-                                                <!-- ???? - ??�?-->
+                                                <!-- 设备信息 - 基本 -->
                                                 <Grid Grid.Row="1" Margin="0,0,0,6">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -2254,13 +2254,13 @@
                                                     </StackPanel>
                                                 </Grid>
                                                 
-                                                <!-- ???? - ??�?-->
+                                                <!-- 设备信息 - 基本 -->
                                                 <Grid Grid.Row="2" Margin="0,0,0,8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel>
-                                                        <TextBlock Text="DA??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="DA版本" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtMtkDAVer" Text="---" Foreground="#444444" FontSize="11" TextTrimming="CharacterEllipsis"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -2273,22 +2273,22 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0">
-                                                        <TextBlock Text="?? ??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已用时间" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtMtkElapsedTime" Text="00:00" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="�???" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="传输速度" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtMtkTransferSpeed" Text="0 MB/s" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="2">
-                                                        <TextBlock Text="?? ??�" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已传输量" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtMtkTransferredSize" Text="0 MB" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </Grid>
                                         </Border>
                                         
-                                        <!-- MTK??�?-->
+                                        <!-- MTK日志区 -->
                                         <Border Grid.Row="1" Background="#12000000" CornerRadius="6" BorderBrush="#20000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -2341,7 +2341,7 @@
                                     </Grid>
                                 </Grid>
                                 
-                                <!-- ==================== ?????? ==================== -->
+                                <!-- ==================== 展讯面板 ==================== -->
                                 <Grid x:Name="SpreadtrumContent" Visibility="Collapsed">
                                     <Grid.ColumnDefinitions>
                                         <!-- 进度条 -->
@@ -2350,7 +2350,7 @@
                                         <ColumnDefinition Width="300"/>
                                     </Grid.ColumnDefinitions>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="0" Margin="0,0,10,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -2359,7 +2359,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- ??�?- PAC??/FDL?? -->
+                                        <!-- 配置区 - PAC固件/FDL路径 -->
                                         <Border Grid.Row="0" Background="#12000000" CornerRadius="6" Padding="10,8" BorderBrush="#18000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -2368,14 +2368,14 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- PAC ??�?-->
+                                                <!-- PAC 固件选择 -->
                                                 <Grid Grid.Row="0" Margin="0,0,0,4">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="70"/>
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="PAC??" Foreground="#555555" FontSize="11" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="PAC固件" Foreground="#555555" FontSize="11" VerticalAlignment="Center" FontWeight="SemiBold"/>
                                                     <Border Grid.Column="1" Background="#15000000" CornerRadius="3" BorderBrush="#20000000" BorderThickness="1" Margin="6,0" Height="24">
                                                         <TextBox x:Name="TxtSprdPac" Background="Transparent" BorderThickness="0" Foreground="#444444" 
                                                                  CaretBrush="#444444" Padding="6,2" FontSize="10" VerticalContentAlignment="Center"/>
@@ -2406,7 +2406,7 @@
                                                     </Button>
                                                 </Grid>
                                                 
-                                                <!-- FDL1/FDL2 �?-->
+                                                <!-- FDL1/FDL2 路径 -->
                                                 <Grid Grid.Row="1" Margin="0,0,0,4">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="35"/>
@@ -2496,10 +2496,10 @@
                                                     
                                                     <!-- 动画效果 -->
                                                     <StackPanel Orientation="Horizontal">
-                                                        <CheckBox x:Name="ChkSprdKeepNV" Content="??NV" Foreground="#10B981" FontSize="9" VerticalAlignment="Center" Margin="0,0,12,0" IsChecked="True" FontWeight="SemiBold"/>
+                                                        <CheckBox x:Name="ChkSprdKeepNV" Content="保留NV" Foreground="#10B981" FontSize="9" VerticalAlignment="Center" Margin="0,0,12,0" IsChecked="True" FontWeight="SemiBold"/>
                                                         <CheckBox x:Name="ChkSprdAutoReboot" Content="绕过认证" Foreground="#666666" FontSize="9" VerticalAlignment="Center" Margin="0,0,12,0" IsChecked="True"/>
-                                                        <CheckBox x:Name="ChkSprdRepartition" Content="??�" Foreground="#666666" FontSize="9" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                                                        <CheckBox x:Name="ChkSprdRsaBypass" Content="RSA??" Foreground="#666666" FontSize="9" VerticalAlignment="Center" Checked="ChkSprdRsaBypass_Changed" Unchecked="ChkSprdRsaBypass_Changed"/>
+                                                        <CheckBox x:Name="ChkSprdRepartition" Content="重分区" Foreground="#666666" FontSize="9" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                                        <CheckBox x:Name="ChkSprdRsaBypass" Content="RSA绕过" Foreground="#666666" FontSize="9" VerticalAlignment="Center" Checked="ChkSprdRsaBypass_Changed" Unchecked="ChkSprdRsaBypass_Changed"/>
                                                     </StackPanel>
                                                     
                                                     <!-- 工具按钮样式 -->
@@ -2603,7 +2603,7 @@
                                                     <RowDefinition Height="*"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ?? -->
+                                                <!-- 表头 -->
                                                 <Border Grid.Row="0" Background="#30000000" CornerRadius="6,6,0,0" Padding="10,8">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -2615,8 +2615,8 @@
                                                             <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
                                                         <CheckBox Grid.Column="0" VerticalAlignment="Center" Click="Sprd_SelectAllPartitions_Click" ToolTip="固件路径"/>
-                                                        <TextBlock Grid.Column="1" Text="??ID" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
-                                                        <TextBlock Grid.Column="2" Text="??�" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
+                                                        <TextBlock Grid.Column="1" Text="分区ID" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
+                                                        <TextBlock Grid.Column="2" Text="大小" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="3" Text="名称" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="4" Text="名称" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
                                                         <TextBlock Grid.Column="5" Text="名称" Foreground="#555555" FontSize="12" FontWeight="SemiBold"/>
@@ -2662,41 +2662,41 @@
                                                 
                                                 <!-- 关闭按钮样式 -->
                                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonInfo}" 
-                                                            Height="30" Width="65" FontSize="11" Click="Sprd_Identify_Click" ToolTip="????"/>
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonSuccess}" 
-                                                            Height="30" Width="65" FontSize="11" Margin="5,0,0,0" Click="Sprd_ReadPartitionTable_Click" ToolTip="固件路径"/>
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonInfo}" 
-                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ExtractPac_Click" ToolTip="PAC ??"/>
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonSuccess}" 
-                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ReadPartition_Click" ToolTip="??????"/>
-                                                    <Button Content="??�?FRP" Style="{StaticResource ButtonWarning}" 
-                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_EraseFrp_Click" ToolTip="??FRP??"/>
-                                                    <Button Content="??�???" Style="{StaticResource ButtonWarning}" 
-                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ErasePartition_Click" ToolTip="????"/>
-                                                    <Button Content="�???" Style="{StaticResource ButtonPrimary}" 
-                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_Flash_Click" ToolTip="????"/>
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonDanger}" 
-                                                            Height="30" Width="65" FontSize="11" Margin="5,0,0,0" Click="Sprd_Stop_Click" ToolTip="????"/>
+                                                    <Button Content="识别设备" Style="{StaticResource ButtonInfo}" 
+                                                            Height="30" Width="65" FontSize="11" Click="Sprd_Identify_Click" ToolTip="识别设备"/>
+                                                    <Button Content="读取分区" Style="{StaticResource ButtonSuccess}" 
+                                                            Height="30" Width="65" FontSize="11" Margin="5,0,0,0" Click="Sprd_ReadPartitionTable_Click" ToolTip="读取分区表"/>
+                                                    <Button Content="解包PAC" Style="{StaticResource ButtonInfo}" 
+                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ExtractPac_Click" ToolTip="解包PAC固件"/>
+                                                    <Button Content="备份分区" Style="{StaticResource ButtonSuccess}" 
+                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ReadPartition_Click" ToolTip="备份选中分区"/>
+                                                    <Button Content="擦除FRP" Style="{StaticResource ButtonWarning}" 
+                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_EraseFrp_Click" ToolTip="擦除FRP锁"/>
+                                                    <Button Content="擦除分区" Style="{StaticResource ButtonWarning}" 
+                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_ErasePartition_Click" ToolTip="擦除分区"/>
+                                                    <Button Content="开始刷写" Style="{StaticResource ButtonPrimary}" 
+                                                            Margin="5,0,0,0" Width="65" Height="30" FontSize="11" Click="Sprd_Flash_Click" ToolTip="开始刷写"/>
+                                                    <Button Content="停止操作" Style="{StaticResource ButtonDanger}" 
+                                                            Height="30" Width="65" FontSize="11" Margin="5,0,0,0" Click="Sprd_Stop_Click" ToolTip="停止操作"/>
                                                 </StackPanel>
                                                 
                                                 <!-- 关闭按钮样式 -->
                                                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,0">
-                                                    <Button Content="?? ?IMEI" Style="{StaticResource ButtonInfo}" 
-                                                            Width="70" Height="28" FontSize="10" Click="Sprd_ReadImei_Click" ToolTip="IMEI"/>
-                                                    <Button Content="?? ?IMEI" Style="{StaticResource ButtonInfo}" 
-                                                            Margin="5,0,0,0" Width="70" Height="28" FontSize="10" Click="Sprd_WriteImei_Click" ToolTip="IMEI"/>
-                                                    <Button Content="?? ??" Style="{StaticResource ButtonSuccess}" 
-                                                            Margin="5,0,0,0" Width="60" Height="28" FontSize="10" Click="Sprd_Reboot_Click" ToolTip="????"/>
-                                                    <Button Content="�???" Style="{StaticResource ButtonWarning}" 
-                                                            Margin="5,0,0,0" Width="60" Height="28" FontSize="10" Click="Sprd_PowerOff_Click" ToolTip="????"/>
+                                                    <Button Content="读取IMEI" Style="{StaticResource ButtonInfo}" 
+                                                            Width="70" Height="28" FontSize="10" Click="Sprd_ReadImei_Click" ToolTip="读取IMEI"/>
+                                                    <Button Content="写入IMEI" Style="{StaticResource ButtonInfo}" 
+                                                            Margin="5,0,0,0" Width="70" Height="28" FontSize="10" Click="Sprd_WriteImei_Click" ToolTip="写入IMEI"/>
+                                                    <Button Content="重启设备" Style="{StaticResource ButtonSuccess}" 
+                                                            Margin="5,0,0,0" Width="60" Height="28" FontSize="10" Click="Sprd_Reboot_Click" ToolTip="重启设备"/>
+                                                    <Button Content="关机" Style="{StaticResource ButtonWarning}" 
+                                                            Margin="5,0,0,0" Width="60" Height="28" FontSize="10" Click="Sprd_PowerOff_Click" ToolTip="关机"/>
                                                     <Button Content="选择非保护" Style="{StaticResource ButtonDanger}" 
-                                                            Margin="5,0,0,0" Width="80" Height="28" FontSize="10" Click="Sprd_FactoryReset_Click" ToolTip="??????"/>
+                                                            Margin="5,0,0,0" Width="80" Height="28" FontSize="10" Click="Sprd_FactoryReset_Click" ToolTip="恢复出厂设置"/>
                                                 </StackPanel>
                                             </Grid>
                                         </Border>
                                         
-                                        <!-- ????�?- ?? -->
+                                        <!-- 操作按钮区 -->
                                         <Border Grid.Row="3" Margin="0,10,0,0" Background="#10000000" CornerRadius="6" Padding="12,10" BorderBrush="#15000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -2711,7 +2711,7 @@
                                         </Border>
                                     </Grid>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -2729,7 +2729,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ???�?-->
+                                                <!-- 状态信息 -->
                                                 <Grid Grid.Row="0" Margin="0,0,0,8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
@@ -2743,7 +2743,7 @@
                                                     </Border>
                                                 </Grid>
                                                 
-                                                <!-- ???? - ??�?-->
+                                                <!-- 设备信息 - 基本 -->
                                                 <Grid Grid.Row="1" Margin="0,0,0,6">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -2755,16 +2755,16 @@
                                                         <TextBlock x:Name="TxtSprdChip" Text="---" Foreground="#444444" FontSize="11" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="FDL?�" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="FDL状态" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdFdlStatus" Text="---" Foreground="#444444" FontSize="11" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="2">
-                                                        <TextBlock Text="Diag??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="Diag端口" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdDiagChannel" Text="---" Foreground="#444444" FontSize="11"/>
                                                     </StackPanel>
                                                 </Grid>
                                                 
-                                                <!-- ???? - ??�?-->
+                                                <!-- 设备信息 - 基本 -->
                                                 <Grid Grid.Row="2" Margin="0,0,0,8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
@@ -2775,7 +2775,7 @@
                                                         <TextBlock x:Name="TxtSprdTimeout" Text="5000ms" Foreground="#444444" FontSize="11"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="USB??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="USB端口" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdUsbPort" Text="---" Foreground="#444444" FontSize="11"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -2788,15 +2788,15 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0">
-                                                        <TextBlock Text="?? ??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已用时间" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdElapsedTime" Text="00:00" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="�???" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="传输速度" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdTransferSpeed" Text="0 MB/s" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="2">
-                                                        <TextBlock Text="?? ??�" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已传输量" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtSprdTransferredSize" Text="0 MB" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                 </Grid>
@@ -2810,7 +2810,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
-                                                <TextBlock Grid.Row="0" Text="?? ????" Foreground="#444444" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,8"/>
+                                                <TextBlock Grid.Row="0" Text="展讯诊断命令" Foreground="#444444" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,8"/>
                                                 <Grid Grid.Row="1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto"/>
@@ -2845,10 +2845,10 @@
                                                 <!-- 进度条 -->
                                                 <Border Grid.Row="0" Background="#15000000" CornerRadius="6,6,0,0" Padding="10,6">
                                                     <Grid>
-                                                        <TextBlock Text="?? ????" Foreground="#444444" FontWeight="SemiBold" FontSize="12"/>
+                                                        <TextBlock Text="展讯诊断命令" Foreground="#444444" FontWeight="SemiBold" FontSize="12"/>
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                            <Button Content="选择" Style="{StaticResource ButtonInfo.Small}" Click="CopySprdLog_Click" Margin="0,0,6,0"/>
-                                                            <Button Content="选择" Style="{StaticResource ButtonDanger.Small}" Click="ClearSprdLog_Click"/>
+                                                            <Button Content="复制" Style="{StaticResource ButtonInfo.Small}" Click="CopySprdLog_Click" Margin="0,0,6,0"/>
+                                                            <Button Content="清除" Style="{StaticResource ButtonDanger.Small}" Click="ClearSprdLog_Click"/>
                                                         </StackPanel>
                                                     </Grid>
                                                 </Border>
@@ -2887,7 +2887,7 @@
                                     </Grid>
                                 </Grid>
                                 
-                                <!-- ==================== ADB Fastboot ???? ==================== -->
+                                <!-- ==================== ADB Fastboot 面板 ==================== -->
                                 <Grid x:Name="ADBContent" Visibility="Collapsed">
                                     <Grid.ColumnDefinitions>
                                         <!-- 进度条 -->
@@ -2896,7 +2896,7 @@
                                         <ColumnDefinition Width="300"/>
                                     </Grid.ColumnDefinitions>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="0" Margin="0,0,10,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -2906,7 +2906,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- ???? + ?? -->
+                                        <!-- 模式选择 + 操作 -->
                                         <Border Grid.Row="0" Background="#12000000" CornerRadius="6" Padding="10,8" BorderBrush="#18000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -2915,10 +2915,10 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 
-                                                <!-- ??????�?-->
+                                                <!-- 标题栏按钮样式 -->
                                                 <Border Background="#25000000" CornerRadius="4" Padding="3">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <RadioButton x:Name="RbAdbMode" GroupName="AdbFbMode" IsChecked="True" ToolTip="ADB ??" Checked="AdbFbMode_Changed">
+                                                        <RadioButton x:Name="RbAdbMode" GroupName="AdbFbMode" IsChecked="True" ToolTip="ADB 模式" Checked="AdbFbMode_Changed">
                                                             <RadioButton.Style>
                                                                 <Style TargetType="RadioButton">
                                                                     <Setter Property="Template">
@@ -2946,7 +2946,7 @@
                                                                 </Style>
                                                             </RadioButton.Style>
                                                         </RadioButton>
-                                                        <RadioButton x:Name="RbFastbootMode" GroupName="AdbFbMode" ToolTip="Fastboot ??" Checked="AdbFbMode_Changed">
+                                                        <RadioButton x:Name="RbFastbootMode" GroupName="AdbFbMode" ToolTip="Fastboot 模式" Checked="AdbFbMode_Changed">
                                                             <RadioButton.Style>
                                                                 <Style TargetType="RadioButton">
                                                                     <Setter Property="Template">
@@ -2974,7 +2974,7 @@
                                                                 </Style>
                                                             </RadioButton.Style>
                                                         </RadioButton>
-                                                        <RadioButton x:Name="RbFastbootdMode" GroupName="AdbFbMode" ToolTip="Fastbootd ??" Checked="AdbFbMode_Changed">
+                                                        <RadioButton x:Name="RbFastbootdMode" GroupName="AdbFbMode" ToolTip="Fastbootd 模式" Checked="AdbFbMode_Changed">
                                                             <RadioButton.Style>
                                                                 <Style TargetType="RadioButton">
                                                                     <Setter Property="Template">
@@ -3005,7 +3005,7 @@
                                                     </StackPanel>
                                                 </Border>
                                                 
-                                                <!-- ????�??? -->
+                                                <!-- 搜索设备框 -->
                                                 <Grid Grid.Column="1" Margin="12,0">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
@@ -3015,19 +3015,19 @@
                                                     <Border Grid.Column="1" Background="#15000000" CornerRadius="3" BorderBrush="#20000000" BorderThickness="1" Height="26">
                                                         <TextBox x:Name="TxtAdbFilter" Background="Transparent" BorderThickness="0" Foreground="#444444" 
                                                                  CaretBrush="#444444" Padding="8,2" FontSize="11" VerticalContentAlignment="Center" 
-                                                                 Tag="????�?.."/>
+                                                                 Tag="搜索设备..."/>
                                                     </Border>
                                                 </Grid>
                                                 
-                                                <!-- ????? -->
+                                                <!-- 操作模式 -->
                                                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                                                     <CheckBox x:Name="ChkAdbShowLogs" Content="绕过认证" Foreground="#666666" FontSize="10" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                                    <CheckBox x:Name="ChkAdbIgnoreUnknown" Content="??????" Foreground="#666666" FontSize="10" VerticalAlignment="Center"/>
+                                                    <CheckBox x:Name="ChkAdbIgnoreUnknown" Content="忽略未知设备" Foreground="#666666" FontSize="10" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Grid>
                                         </Border>
                                         
-                                        <!-- ????? (Basic Properties) -->
+                                        <!-- 基本属性 (Basic Properties) -->
                                         <Border Grid.Row="1" Background="#10000000" CornerRadius="6" Padding="10,8" Margin="0,8,0,0" BorderBrush="#15000000" BorderThickness="1">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -3059,7 +3059,7 @@
                                                     <TextBlock x:Name="TxtAdbInFastbootd" Text="---" Foreground="#444444" FontSize="10"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="5">
-                                                    <TextBlock Text="???�" Foreground="#888888" FontSize="9"/>
+                                                    <TextBlock Text="设备型号" Foreground="#888888" FontSize="9"/>
                                                     <TextBlock x:Name="TxtAdbUpdateStatus" Text="---" Foreground="#444444" FontSize="10"/>
                                                 </StackPanel>
                                             </Grid>
@@ -3073,7 +3073,7 @@
                                                     <RowDefinition Height="*"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ?? -->
+                                                <!-- 表头 -->
                                                 <Border Grid.Row="0" Background="#30000000" CornerRadius="6,6,0,0" Padding="10,8">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -3128,7 +3128,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ADB ??�?-->
+                                                <!-- ADB 命令输入 -->
                                                 <StackPanel x:Name="AdbButtonsPanel" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                                                     <Button Content="查看设备" Style="{StaticResource ButtonInfo}" Width="85" Height="30" Click="Adb_Devices_Click" ToolTip="列出已连接设备" Margin="0,0,6,0"/>
                                                     <Button Content="列出分区" Style="{StaticResource ButtonWarning}" Width="85" Height="30" Click="Adb_ListPartitions_Click" ToolTip="列出分区信息" Margin="0,0,6,0"/>
@@ -3178,7 +3178,7 @@
                                         </Border>
                                     </Grid>
                                     
-                                    <!-- ========== ????�?========== -->
+                                    <!-- ========== 设备信息区 ========== -->
                                     <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -3195,7 +3195,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 
-                                                <!-- ???�?-->
+                                                <!-- 状态信息 -->
                                                 <Grid Grid.Row="0" Margin="0,0,0,8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
@@ -3204,17 +3204,17 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Border x:Name="AdbDeviceStatusIndicator" Width="10" Height="10" CornerRadius="5" Background="#EF4444" Margin="0,0,8,0" VerticalAlignment="Center"/>
                                                     <TextBlock Grid.Column="1" x:Name="TxtAdbDeviceStatus" Text="未连接" Foreground="#555555" FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                                    <Button Grid.Column="2" Content="选择" Style="{StaticResource ButtonDanger.Small}" Click="Adb_Disconnect_Click"/>
+                                                    <Button Grid.Column="2" Content="断开" Style="{StaticResource ButtonDanger.Small}" Click="Adb_Disconnect_Click"/>
                                                 </Grid>
                                                 
-                                                <!-- ??ID -->
+                                                <!-- 设备ID -->
                                                 <Grid Grid.Row="1" Margin="0,0,0,6">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0">
-                                                        <TextBlock Text="??ID" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="分区ID" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtAdbDeviceId" Text="---" Foreground="#444444" FontSize="11" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
@@ -3231,22 +3231,22 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0">
-                                                        <TextBlock Text="?? ??" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已用时间" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtAdbElapsedTime" Text="00:00" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="�???" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="传输速度" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtAdbTransferSpeed" Text="0 MB/s" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                     <StackPanel Grid.Column="2">
-                                                        <TextBlock Text="?? ??�" Foreground="#888888" FontSize="10"/>
+                                                        <TextBlock Text="已传输量" Foreground="#888888" FontSize="10"/>
                                                         <TextBlock x:Name="TxtAdbTransferredSize" Text="0 MB" Foreground="#444444" FontSize="12" FontWeight="SemiBold"/>
                                                     </StackPanel>
                                                 </Grid>
                                             </Grid>
                                         </Border>
                                         
-                                        <!-- Payload ???? -->
+                                        <!-- Payload 刷写区 -->
                                         <Border Grid.Row="1" Background="#12000000" CornerRadius="6" BorderBrush="#20000000" BorderThickness="1" Padding="12" Margin="0,0,0,10">
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -3277,7 +3277,7 @@
                                                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtPayloadVersion" Text="---" Foreground="#444444" FontSize="10"/>
                                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="名称" Foreground="#888888" FontSize="10" Margin="0,2,0,0"/>
                                                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtPayloadSize" Text="---" Foreground="#444444" FontSize="10" Margin="0,2,0,0"/>
-                                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="??�" Foreground="#888888" FontSize="10" Margin="0,2,0,0"/>
+                                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="大小" Foreground="#888888" FontSize="10" Margin="0,2,0,0"/>
                                                     <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtPayloadTimestamp" Text="---" Foreground="#444444" FontSize="10" Margin="0,2,0,0"/>
                                                 </Grid>
                                             </Grid>
@@ -3336,7 +3336,7 @@
                                     </Grid>
                                 </Grid>
                                 
-                                <!-- ==================== ?????? - ????�?==================== -->
+                                <!-- ==================== 资源面板 - 固件下载 ==================== -->
                                 <Grid x:Name="ResourcesContent" Visibility="Collapsed">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -3379,7 +3379,7 @@
                                                              Background="Transparent" BorderThickness="0"
                                                              Foreground="#333" FontSize="12" VerticalContentAlignment="Center"
                                                              KeyDown="BrowserUrl_KeyDown"/>
-                                                    <Button Grid.Column="1" Content="选择" Width="45" Height="22"
+                                                    <Button Grid.Column="1" Content="前往" Width="45" Height="22"
                                                             Click="BrowserGo_Click" Background="#3000D4FF" 
                                                             BorderThickness="0" Foreground="#0099CC" FontSize="11"/>
                                                 </Grid>
